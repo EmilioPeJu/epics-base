@@ -4,6 +4,8 @@ include $(TOP)/configure/CONFIG
 
 # Installation directory
 
+INSTALL_LOCATION = $(EPICS_BASE)
+
 TEMPLATES_DIR = makeBaseApp
 
 # Diamond modifications to files which exist
