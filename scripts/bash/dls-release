@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# release script
+# $Revision$
+# $Author$
+
+# Arguments
+# $1 name of module
+# $2 version string to release as
+
+function usage() {
+    echo "$(basename $0) <module name> <release version number> [--bugfix <branch name>]"
+}
+
+BUGFIX=0
+RELEASE_AREAS="R3.14.7"
+
+if [ $# -ne 2 -a $# -ne 4 ]; then
+    usage
+    exit
+fi
+
+SOURCE=trunk/support/$1
+
+if [ $# -eq 4 ]; then
+    if [ $3 != "--bugfix" ]; then
+	usage
+	exit
+    else
+	BUGFIX=1
+	SOURCE=branches/support/$1/$4
+    fi
+fi
+
+if [ "x$SVN_ROOT" == "x" ]; then
+    echo "SVN_ROOT environment variable must be set"
+    exit
+fi
+
+# Check for existence of this module in various places in the repository
+svn list $SVN_ROOT/diamond/trunk/support/$1 >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "Repository doesn't contain the $1 module. Sorry!"
+    exit;
+fi
+
+svn list $SVN_ROOT/diamond/release/support/$1 >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    svn mkdir $SVN_ROOT/diamond/release/support/$1 -m "Created $1 release area"
+fi
+
+svn list $SVN_ROOT/diamond/release/support/$1/$2 >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "Repository already contains the $2 release of $1"
+    echo "Please choose a different name"
+    exit
+fi
+
+if [ $BUGFIX -eq 1 ]; then
+    svn list $SVN_ROOT/diamond/branches/support/$1/$4 >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+	echo "Repository does not contain the $4 branch of $1"
+	exit
+    fi
+    
+    # Could check here that the release number contains the original branch point
+    # as a substring, e.g. 1-2 => 1-2-1
+    # Something like:
+    # ORIGIN=$(svn propget dls:bugfix-origin $SVN_ROOT/diamond/branches/support/$1/$4)
+    # echo $2 | grep $ORIGIN
+fi
+
+
+echo "Releasing $1 at version $2"
+svn copy $SVN_ROOT/diamond/$SOURCE $SVN_ROOT/diamond/release/support/$1/$2 -m "Release of $1 $2"
+for i in $RELEASE_AREAS; do
+    echo "Exporting to $i/prod ..."
+    (cd /home/diamond; mkdir -p $i/prod/support/$1)
+    svn export --quiet $SVN_ROOT/diamond/release/support/$1/$2 /home/diamond/$i/prod/support/$1/$2
+    echo "Building release"
+    (cd /home/diamond/$i/prod/support/$1/$2; make) > /dev/null
+done
+

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# list branches script
+# $Revision$
+# $Author$
+
+# Arguments
+# $1 name of module
+
+function usage() {
+    echo "$(basename $0) <module name>"
+}
+
+if [ $# -ne 1 ]; then
+    usage
+    exit
+fi
+
+SOURCE=trunk/support/$1
+
+if [ "x$SVN_ROOT" == "x" ]; then
+    echo "SVN_ROOT environment variable must be set"
+    exit
+fi
+
+# Check for existence of this module in various places in the repository
+svn list $SVN_ROOT/diamond/trunk/support/$1 >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "Repository doesn't contain the $1 module. Sorry!"
+    exit;
+fi
+
+BRANCHES=$(svn list $SVN_ROOT/diamond/branches/support/$1 2> /dev/null)
+if [ $? -ne 0 ]; then
+    echo "No branches for $1"
+else
+    echo "Module $1 has the following branches:"
+    echo "$BRANCHES" | sed -e 's#/##g'
+fi

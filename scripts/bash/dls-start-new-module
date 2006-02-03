@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# start-new-module script
+# $Revision$
+# $Author$
+
+# Arguments
+# $1 name of module
+# $2 template to create module with
+
+function usage() {
+    echo "$(basename $0) <module name> <template>"
+}
+
+if [ $# != 2 ]; then
+    usage
+    exit
+fi
+
+if [ "x$SVN_ROOT" == "x" ]; then
+    echo "SVN_ROOT environment variable must be set"
+    exit
+fi
+
+# Check for existence of this module in various places in the repository
+svn list $SVN_ROOT/diamond/release/support/$1 >/dev/null 2>&1
+REL_OK=$?
+svn list $SVN_ROOT/diamond/vendor/support/$1 >/dev/null 2>&1
+VEND_OK=$?
+svn list $SVN_ROOT/diamond/trunk/support/$1 >/dev/null 2>&1
+TRUNK_OK=$?
+
+if [ $REL_OK -eq 0 -o $VEND_OK -eq 0 -o $TRUNK_OK -eq 0 ]; then
+    echo "Repository already contains the $1 module. Sorry!"
+    exit;
+fi
+
+if svn info >&/dev/null; then
+    echo "Currently in a working copy under revision control!"
+    echo "Please move to another directory and try again"
+    exit
+fi
+
+if [ -e $1 ]; then
+    echo "$1 already exists in this directory."
+    echo "Please choose another name or move elsewhere"
+    exit
+fi
+
+echo "Making clean directory structure for $1"
+# Check that the template is valid for makeBaseApp
+APP_TYPES=$(makeBaseApp.pl -l | awk '/^\t/ {print} /iocBoot types/ {exit}')
+if echo $APP_TYPES | grep $2 >/dev/null; then
+    :
+else
+    echo "Not a valid application template! Please try again"
+    makeBaseApp.pl -l
+    exit
+fi
+
+# Main structure is OK, do it
+mkdir $1
+cd $1
+makeBaseApp.pl -t $2 $1
+# Now check whether to make the iocBoot dir as well
+IOC_TYPES=$(makeBaseApp.pl -l | awk '/^\t/ {if (IOC) print} /iocBoot types/ {IOC=1}')
+if echo $IOC_TYPES | grep $2 >/dev/null; then
+    makeBaseApp.pl -i -t $2 $1
+fi
+cd ..
+
+svn import --quiet $1 $SVN_ROOT/diamond/trunk/support/$1 -m "Initial structure of new $1 module"
+
+rm -rf $1
+
+echo "Checking out trunk..."
+svn checkout --quiet $SVN_ROOT/diamond/trunk/support/$1
+
+echo
+echo "Please now edit configure/RELEASE to put in correct paths for dependencies"
+echo " you can also add dependencies in $1App/src/Makefile and $1App/Db/Makefile"
+echo " if appropriate"
+

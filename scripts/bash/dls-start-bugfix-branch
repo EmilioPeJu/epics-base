@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# start-bugfix-branch
+# $Revision$
+# $Author$
+
+# Arguments
+# $1 name of module
+# $2 release to bugfix
+# $3 name of branch to be created
+
+function usage() {
+    echo "$(basename $0) <module name> <release to branch> <branch name>"
+}
+
+if [ $# != 3 ]; then
+    usage
+    exit
+fi
+
+if [ "x$SVN_ROOT" == "x" ]; then
+    echo "SVN_ROOT environment variable must be set"
+    exit
+fi
+
+# Check for existence of this module in various places in the repository
+svn list $SVN_ROOT/diamond/release/support/$1/$2 >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "Repository doesn't contain a release \'$2\' of the $1 module. Sorry!"
+    exit
+fi
+
+if [ -e $3 ]; then
+    echo "$3 already exists in this directory."
+    echo "Please choose another name or move elsewhere"
+    exit
+fi
+
+# Check that the branch name at least contains the release it's derived from
+if echo "$3" | grep "$2"; then
+    :
+else
+    echo "It is recommended that the bugfix branch name contains the release name"
+    exit
+fi
+
+svn list $SVN_ROOT/diamond/branches/support/$1 >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "Creating $1 branches area"
+    svn mkdir $SVN_ROOT/diamond/branches/support/$1 -m "Created $1 branches area"
+fi
+
+echo "Creating bugfix branch of $1 called $3"
+# Create the branch
+svn copy $SVN_ROOT/diamond/release/support/$1/$2 $SVN_ROOT/diamond/branches/support/$1/$3 -m "Created branch: $1/$3"
+
+echo "Checking out working directory..."
+svn checkout --quiet $SVN_ROOT/diamond/branches/support/$1/$3
+
+echo
+echo "Created a working directory from this new branch: $3"
+

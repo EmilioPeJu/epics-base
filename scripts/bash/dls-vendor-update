@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Subversion support script: vendor-update
+# $Revision$
+# $Author$
+
+# Arguments
+# $1 path to import
+# $2 module name
+# $3 old vendor version number
+# $4 new vendor version number
+
+function usage() {
+    echo "$(basename $0) <path to import> <module name> <old vendor version> <new vendor version>"
+}
+
+if [ $# != 4 ]; then
+    usage
+    exit
+fi
+
+if [ "x$SVN_ROOT" == "x" ]; then
+    echo "SVN_ROOT environment variable must be set"
+    exit
+fi
+
+# Check for existence of this module in various places in the repository
+svn list $SVN_ROOT/diamond/vendor/support/$2 >/dev/null 2>&1
+VEND_MISSING=$?
+svn list $SVN_ROOT/diamond/trunk/support/$2 >/dev/null 2>&1
+TRUNK_MISSING=$?
+
+if [ $VEND_MISSING -ne 0 -o $TRUNK_MISSING -ne 0 ]; then
+    echo "Repository does not contain the $2 module. Sorry!"
+    exit
+fi
+
+svn list $SVN_ROOT/diamond/vendor/support/$2/$3 >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "Repository does not contain the $2 vendor revision $3. Sorry!"
+    exit
+fi
+
+svn list $SVN_ROOT/diamond/vendor/support/$2/$4 >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "Repository already contains the $2 vendor revision $4. Sorry!"
+    exit
+fi
+
+DIFFS=`svn diff $SVN_ROOT/diamond/vendor/support/$2/$3 $SVN_ROOT/diamond/vendor/support/$2/current`
+if [ -n "$DIFFS" ]; then
+    echo "Vendor current branch of $2 is not at revision $3. Sorry!"
+    exit
+fi
+
+echo "Importing $2 from $1 to update from version $3 to $4"
+/home/pnd56/svn_load_dirs -t $4 $SVN_ROOT/diamond/vendor/support/$2 current $1
+
+echo
+echo
+echo "You probably now want to merge this update into the trunk."
+echo "Do this by checking out the trunk, and running:"
+echo "svn merge $SVN_ROOT/diamond/vendor/support/$2/$3 \\"
+echo "          $SVN_ROOT/diamond/vendor/support/$2/$4 \\"
+echo "          <working dir>"
