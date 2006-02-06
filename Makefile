@@ -8,16 +8,6 @@ INSTALL_LOCATION = $(EPICS_BASE)
 
 TEMPLATES_DIR = makeBaseApp
 
-# Diamond modifications to files which exist
-# in "makeBaseApp/top/configure".
-# Since "makeDlsApp" is built after "makeBaseApp" during
-# the EPICS build, the Diamond versions will be installed
-# in the templates directory.
-
-TEMPLATES += top/configure/CONFIG_APP
-TEMPLATES += top/configure/RELEASE
-TEMPLATES += top/configure/RULES
-
 # "dlsApp" and "dlsBoot" are empty template directories
 # which just contain Makefiles
 
