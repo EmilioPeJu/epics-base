@@ -19,8 +19,15 @@ $(INSTALL_DATA)/%: ../%
 	@$(INSTALL_PRODUCT) -d -m 555 $< $(INSTALL_DATA)
 
 # Create a .boot file from a .src file
-%.boot: ../%.src
+%.boot: ../%.src $(wildcard $(TOP)/configure/RELEASE $(TOP)/configure/RELEASE.private)
 	$(MSI) $(SYS_BOOT_FLAGS) $(USR_BOOT_FLAGS) $< > $@
+
+# Create an edm startup file from a .eds file
+%: ../%.eds $(wildcard $(TOP)/configure/RELEASE $(TOP)/configure/RELEASE.private)
+	$(RM) $@
+	echo \#!/bin/sh > $@
+	echo export EDMDATAFILES=$(SYS_EDM_PATHS) >> $@
+	cat $< >> $@
 
 # Create a .boot file from a .cmd file (deprecated)
 %.boot: ../%.cmd
