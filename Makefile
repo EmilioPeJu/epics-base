@@ -21,7 +21,7 @@ TEMPLATES += top/dlsApp/opi/symbol/Makefile
 
 TEMPLATES += top/dlsBoot/Makefile
 TEMPLATES += top/dlsBoot/ioc/Makefile@Common
-TEMPLATES += top/dlsBoot/ioc/st.src@Common
+TEMPLATES += top/dlsBoot/ioc/st_APPNAME_.src@Common
 TEMPLATES += top/dlsBoot/ioc/README@Common
 
 # "dlsExampleApp" and "dlsExampleBoot" are the standard
@@ -48,7 +48,7 @@ TEMPLATES += top/dlsExampleApp/src/_APPNAME_Main.cpp
 
 TEMPLATES += top/dlsExampleBoot/Makefile
 TEMPLATES += top/dlsExampleBoot/ioc/Makefile@Common
-TEMPLATES += top/dlsExampleBoot/ioc/st.src@Common
+TEMPLATES += top/dlsExampleBoot/ioc/st_APPNAME_.src@Common
 TEMPLATES += top/dlsExampleBoot/ioc/README@Common
 
 # Extra Diamond Rules
