@@ -335,7 +335,7 @@ sub checkRelease {
 sub msiPaths {
     my @includes = grep !/^TEMPLATE_TOP$/, @apps;
 
-    print "-MINSTALL=\"$macros{TOP}\"";
+    print "-MINSTALL=\"".abs_path($macros{TOP})."\"";
 
     foreach my $app (grep !/^TOP$/, @includes) {
       if (-d $macros{$app}) {
@@ -359,7 +359,7 @@ sub msiIncludes {
 sub vdctPaths {
     my @includes = grep !/^TEMPLATE_TOP$/, @apps;
 
-    print "-DEPICS_DB_INCLUDE_PATH=.:$macros{TOP}/dbd:$macros{TOP}/db";
+    print "-DEPICS_DB_INCLUDE_PATH=.:".abs_path($macros{TOP})."/dbd:".abs_path($macros{TOP})."/db";
 
     foreach my $app (grep !/^TOP$/, @includes) {
       print ":$macros{$app}/dbd:$macros{$app}/db" if (-d $macros{$app});
@@ -369,7 +369,7 @@ sub vdctPaths {
 sub dataPaths {
     my @includes = grep !/^TEMPLATE_TOP$/, @apps;
 
-    print "$macros{TOP}/data";
+    print abs_path($macros{TOP})."/data";
 
     foreach my $app (grep !/^TOP$/, @includes) {
       print ":$macros{$app}/data" if (-d $macros{$app});

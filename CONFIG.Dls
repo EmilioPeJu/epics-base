@@ -5,16 +5,16 @@ INSTALL_DATA = $(INSTALL_LOCATION)/data
 INSTALL_DATAS = $(DATA:%= $(INSTALL_DATA)/%)
 
 # Define some boot flags for startup script substitutions
-vxWorks_ONLY='\# Commented out VxWorks command: '
-Linux_ONLY=  '\# Commented out Linux command: '
-RTEMS_ONLY=  '\# Commented out RTEMS command: '
+vxWorks_ONLY="\# Commented out VxWorks command: "
+Linux_ONLY=  "\# Commented out Linux command: "
+RTEMS_ONLY=  "\# Commented out RTEMS command: "
 $(OS_CLASS)_ONLY=
 
-SYS_BOOT_FLAGS =  -MARCH=$(T_A) $(shell $(EPICS_BASE_HOST_BIN)/convertDlsRelease.pl -T$(shell cd $(TOP); pwd) msiPaths)
+SYS_BOOT_FLAGS =  -MARCH=$(T_A) $(shell $(PERL) $(EPICS_BASE_HOST_BIN)/convertDlsRelease.pl -T$(TOP) msiPaths)
 SYS_BOOT_FLAGS += -MVXWORKS_ONLY=$(vxWorks_ONLY)
 SYS_BOOT_FLAGS += -MLINIX_ONLY=$(Linux_ONLY)
 SYS_BOOT_FLAGS += -MRTEMS_ONLY=$(RTEMS_ONLY)
 
-SYS_MSI_INCLUDES += $(shell $(EPICS_BASE_HOST_BIN)/convertDlsRelease.pl -T$(shell cd $(TOP); pwd) msiIncludes)
+SYS_MSI_INCLUDES += $(shell $(PERL) $(EPICS_BASE_HOST_BIN)/convertDlsRelease.pl -T$(TOP) msiIncludes)
 
-SYS_EDM_PATHS +=  .:$(shell $(EPICS_BASE_HOST_BIN)/convertDlsRelease.pl -T$(shell cd $(TOP); pwd) dataPaths)
+SYS_EDM_PATHS +=  .:$(shell $(PERL) $(EPICS_BASE_HOST_BIN)/convertDlsRelease.pl -T$(TOP) dataPaths)
