@@ -2,6 +2,8 @@ TOP=../..
 
 include $(TOP)/configure/CONFIG
 
+TARGETS += $(SCRIPTS)
+
 # Installation directory
 
 INSTALL_LOCATION = $(EPICS_BASE)
@@ -56,38 +58,45 @@ TEMPLATES += top/dlsExampleBoot/ioc/README@Common
 CONFIGS += CONFIG.Dls
 CONFIGS += RULES.Dls
 
-# Extra Diamond script
+# Perl scripts
 
-SCRIPTS_HOST += convertDlsRelease.pl
-
-# Diamond Subversion scripts
+SCRIPTS += convertDlsRelease.pl
 
 # Python scripts (new)
 
-SCRIPTS_HOST += scripts/python/dls-checkout-module.py
-SCRIPTS_HOST += scripts/python/dls-list-branches.py
-SCRIPTS_HOST += scripts/python/dls-list-modules.py
-SCRIPTS_HOST += scripts/python/dlsPyLib.py
-SCRIPTS_HOST += scripts/python/dls-release.py
-SCRIPTS_HOST += scripts/python/dls-signalparse.py
-SCRIPTS_HOST += scripts/python/dls-start-bugfix-branch.py
-SCRIPTS_HOST += scripts/python/dls-start-feature-branch.py
-#SCRIPTS_HOST += scripts/python/dls-start-new-module.py
-#SCRIPTS_HOST += scripts/python/dls-sync-from-trunk.py
-#SCRIPTS_HOST += scripts/python/dls-vendor-import.py
-#SCRIPTS_HOST += scripts/python/dls-vendor-update.py
-SCRIPTS_HOST += scripts/python/dlsxmlexcelparser.py
+SCRIPTS += dls-checkout-module.py
+SCRIPTS += dls-list-branches.py
+SCRIPTS += dls-list-modules.py
+SCRIPTS += dlsPyLib.py
+SCRIPTS += dls-release.py
+SCRIPTS += dls-signalparse.py
+SCRIPTS += dls-start-bugfix-branch.py
+SCRIPTS += dls-start-feature-branch.py
+#SCRIPTS += dls-start-new-module.py
+#SCRIPTS += dls-sync-from-trunk.py
+#SCRIPTS += dls-vendor-import.py
+#SCRIPTS += dls-vendor-update.py
+SCRIPTS += dlsxmlexcelparser.py
 
 # Bash scripts (old)
 
-#SCRIPTS_HOST += scripts/bash/dls-list-branches
-#SCRIPTS_HOST += scripts/bash/dls-list-modules
-#SCRIPTS_HOST += scripts/bash/dls-release
-#SCRIPTS_HOST += scripts/bash/dls-start-bugfix-branch
-#SCRIPTS_HOST += scripts/bash/dls-start-feature-branch
-SCRIPTS_HOST += scripts/bash/dls-start-new-module
-SCRIPTS_HOST += scripts/bash/dls-sync-from-trunk
-SCRIPTS_HOST += scripts/bash/dls-vendor-import
-SCRIPTS_HOST += scripts/bash/dls-vendor-update
+#SCRIPTS += dls-list-branches
+#SCRIPTS += dls-list-modules
+#SCRIPTS += dls-release
+#SCRIPTS += dls-start-bugfix-branch
+#SCRIPTS += dls-start-feature-branch
+SCRIPTS += dls-start-new-module
+SCRIPTS += dls-sync-from-trunk
+SCRIPTS += dls-vendor-import
+SCRIPTS += dls-vendor-update
 
 include $(TOP)/configure/RULES
+
+% : ../scripts/bash/%
+	$(CP) $< $@
+
+% : ../scripts/perl/%
+	$(CP) $< $@
+
+% : ../scripts/python/%
+	$(CP) $< $@
