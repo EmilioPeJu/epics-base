@@ -47,6 +47,9 @@ TEMPLATES += top/dlsExampleApp/src/sncExample.dbd
 TEMPLATES += top/dlsExampleApp/src/dbSubExample.c
 TEMPLATES += top/dlsExampleApp/src/dbSubExample.dbd
 TEMPLATES += top/dlsExampleApp/src/_APPNAME_Main.cpp
+TEMPLATES += top/dlsExampleApp/opi/Makefile
+TEMPLATES += top/dlsExampleApp/opi/edl/Makefile
+TEMPLATES += top/dlsExampleApp/opi/symbol/Makefile
 
 TEMPLATES += top/dlsExampleBoot/Makefile
 TEMPLATES += top/dlsExampleBoot/ioc/Makefile@Common

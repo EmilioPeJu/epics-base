@@ -26,35 +26,35 @@ include $(TOP)/configure/CONFIG
 # Build an IOC Application
 # ------------------------
 
-#PROD_IOC = _APPNAME_
+PROD_IOC = _APPNAME_
 
 # _APPNAME_.dbd will be installed into <top>/dbd
-#DBD += _APPNAME_.dbd
+DBD += _APPNAME_.dbd
 
 # _APPNAME_.dbd will be created from these files
-#_APPNAME__DBD += base.dbd
+_APPNAME__DBD += base.dbd
 #_APPNAME__DBD += xxx.dbd
 
 # _APPNAME__registerRecordDeviceDriver.cpp will be created
 # _APPNAME_.dbd
-#_APPNAME__SRCS += _APPNAME__registerRecordDeviceDriver.cpp
+_APPNAME__SRCS += _APPNAME__registerRecordDeviceDriver.cpp
 
 # These two lines are needed for non-vxWorks builds, such as Linux
-#_APPNAME__SRCS_DEFAULT += _APPNAME_Main.cpp
-#_APPNAME__SRCS_vxWorks += -nil-
+_APPNAME__SRCS_DEFAULT += _APPNAME_Main.cpp
+_APPNAME__SRCS_vxWorks += -nil-
 
 # Add locally compiled object code
 #_APPNAME__SRCS +=
 
 # The following adds object code from base/src/vxWorks
-#_APPNAME__OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
+_APPNAME__OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
 
 # This line says that this IOC Application depends on the
 # xxx Support Module
 #_APPNAME__LIBS += xxx
 
 # We need to link this IOC Application against the EPICS Base libraries
-#_APPNAME__LIBS += $(EPICS_BASE_IOC_LIBS)
+_APPNAME__LIBS += $(EPICS_BASE_IOC_LIBS)
 
 # ---------------------------------------------------
 
