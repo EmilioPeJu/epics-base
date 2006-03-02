@@ -9,6 +9,8 @@ IOC application. It checks to see if <name> exists in
 the repository. If it does not exist, this script runs
 "makeBaseApp", using the "dls" template, to create the
 support module or IOC application in the current directory.
+For IOC applications, the "opi" directory is removed and
+the Makefile modified accordingly.
 The resulting directory structure is then imported into
 the repository, the users local copy is deleted and the
 new support module or IOC application is checked out of
