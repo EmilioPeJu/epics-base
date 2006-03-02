@@ -1,101 +1,142 @@
 #!/usr/bin/env python2.4
-#
-# Author: Andy Foster
-#
+
+"""
+dls-start-new-module.py [-i] <name>
+Author: Andy Foster
+
+This script is used to start a new support module or
+IOC application. It checks to see if <name> exists in
+the repository. If it does not exist, this script runs
+"makeBaseApp", using the "dls" template, to create the
+support module or IOC application in the current directory.
+The resulting directory structure is then imported into
+the repository, the users local copy is deleted and the
+new support module or IOC application is checked out of
+the repository, leaving the user with a working copy.
+
+The -i flag is used to specify an IOC application.
+For an IOC application <name> is expected to be of
+the form "Beamline/Technical Area/IOC number"
+i.e. BL02I/VA/03. The IOC number can be omitted, in
+which case, it defaults to "01".
+"""
 
 import os, shutil, pysvn, sys
-from optparse import OptionParser
-
-def pathcheck(client, path):
-    try:
-        junk = client.ls(path)
-        ret  = 1
-    except pysvn._pysvn.ClientError:
-        ret  = 0
-    return ret
-
-def workingCopy(client):
-    try:
-      info = client.info('.')
-      ret  = 1
-    except pysvn._pysvn.ClientError:
-      ret  = 0
-    return ret
-
+from   optparse import OptionParser
+from   dlsPyLib import *
 
 def main():
-    parser = OptionParser("usage: %prog [options] module-name")
-    parser.add_option("-i", "--ioc", action="store_true", dest="ioc",
-                      help="start new ioc application, not support module")
-    (options, args) = parser.parse_args()
-    if len(args) != 1:
-      parser.error("incorrect number of arguments")
+  parser = OptionParser("usage: %prog [-i] <name>")
+  parser.add_option("-i", "--ioc", action="store_true", dest="ioc",
+                    help="start new IOC application")
+  (options, args) = parser.parse_args()
+  if len(args) != 1:
+    parser.error("incorrect number of arguments")
 
-    # Check the SVN_ROOT environment variable
-    try:
-        prefix = os.environ['SVN_ROOT']+'/diamond'
-    except KeyError:
-        print "SVN_ROOT environment variable must be set"
-        sys.exit()
+  # Check the SVN_ROOT environment variable
+  prefix = checkSVN_ROOT()
+  if not prefix:
+    sys.exit()
 
-    source = 'support/'+args[0]
-    if options.ioc:
-        source = 'ioc/'+args[0]
- 
-    # Create an object to interact with subversion
-    subversion = pysvn.Client()
+  cols = args[0].split('/')
 
-    # Check for existence of this module in release, vendor and trunk in the repository
-    error = pathcheck( subversion, os.path.join(prefix,'release',source) )
-    if error:
-      print prefix+'/release/'+source+' already exists'
+  if options.ioc:
+    if len(cols) < 2 or cols[1] == '':
+      print "Technical Area must be non-blank"
+      sys.exit()
+    beamLine      = cols[0]
+    technicalArea = cols[1]
+    if len(cols) == 3 and cols[2] != '':
+      iocNumber = cols[2]
+    else:
+      iocNumber = '01'
+
+    svnBlToCreate  = 'ioc/' + beamLine
+    svnAppToCreate = svnBlToCreate + '/' + technicalArea
+    diskDir        = beamLine + '/' + technicalArea
+    appName        = beamLine + '-' + technicalArea + '-' + 'IOC' + '-' + iocNumber
+  else:
+    svnAppToCreate = 'support/' + cols[0]
+    diskDir        = cols[0]
+    appName        = cols[0]
+
+  # Create an object to interact with subversion
+  subversion = pysvn.Client()
+
+  # Check for existence of this module in release, vendor and trunk in the repository
+  exists = pathcheck( subversion, os.path.join(prefix,'release',svnAppToCreate) )
+  if exists:
+    print prefix + '/release/' + svnAppToCreate + ' already exists'
+    sys.exit()
+  else:
+    exists = pathcheck( subversion, os.path.join(prefix,'vendor',svnAppToCreate) )
+    if exists:
+      print prefix + '/vendor/' + svnAppToCreate + ' already exists'
       sys.exit()
     else:
-      error = pathcheck( subversion, os.path.join(prefix,'vendor',source) )
-      if error:
-        print prefix+'/vendor/'+source+' already exists'
+      exists = pathcheck( subversion, os.path.join(prefix,'trunk',svnAppToCreate) )
+      if exists:
+        print prefix + '/trunk/' + svnAppToCreate + ' already exists'
         sys.exit()
-      else:
-        error = pathcheck( subversion, os.path.join(prefix,'trunk',source) )
-        if error:
-          print prefix+'/trunk/'+source+' already exists'
-          sys.exit()
 
-    error = workingCopy( subversion )
-    if error:
-      print 'Currently in a working copy under revision control, please move'
-      print 'to another directory and try again'
-      sys.exit()
+  error = workingCopy( subversion )
+  if error:
+    print 'Currently in a working copy under revision control, please move'
+    print 'to another directory and try again'
+    sys.exit()
 
-    if os.path.isdir(args[0]):
-      print args[0] + ' already exists in this directory.'
-      print 'Please choose another name or move elsewhere'
-      sys.exit()
+  if os.path.isdir(diskDir):
+    print diskDir + ' already exists in this directory.'
+    print 'Please choose another name or move elsewhere'
+    sys.exit()
 
-    print 'Making clean directory structure for ' + args[0]
+  print 'Making clean directory structure for ' + diskDir
 
-    os.mkdir(args[0])
-    os.chdir(args[0])
-    command = 'makeBaseApp.pl -t diamond ' + args[0]
+  currentDir = os.getcwd()
+  baseStr    = './'
+  for ss in diskDir.split('/'):
+    baseStr = os.path.join( baseStr, ss )
+    stat    = os.access(baseStr, os.F_OK)
+    if not stat:
+      os.mkdir(baseStr)
+
+  os.chdir(diskDir)
+
+  command = 'makeBaseApp.pl -t dls ' + appName
+  os.system(command)
+
+  if options.ioc:
+    command = 'makeBaseApp.pl -i -t dls ' + appName
     os.system(command)
+    # IOC applications do not need the "opi" directory
+    # Choose the appropriate Makefile
+    os.chdir( appName + 'App' )
+    os.remove( 'Makefile.support' )
+    os.rename( 'Makefile.ioc', 'Makefile' )
+    shutil.rmtree('opi')
+  else:
+    os.chdir( appName + 'App' )
+    os.remove( 'Makefile.ioc' )
+    os.rename( 'Makefile.support', 'Makefile' )
 
-    if options.ioc:
-      command = 'makeBaseApp.pl -i -t diamond ' + args[0]
-      os.system(command)
+  os.chdir(currentDir)
 
-    os.chdir('..')
-    print 'Import ' +args[0]+ ' into ' +os.path.join(prefix,'trunk',source)
-    subversion.import_( args[0], os.path.join(prefix,'trunk',source), 
-                        'Initial structure of new ' +args[0], recurse=True )
-    shutil.rmtree(args[0])
-    print 'checkout ' +args[0]+ ' from ' +os.path.join(prefix,'trunk',source)
-    subversion.checkout(os.path.join(prefix, 'trunk', source), args[0])
+  print 'Import ' + diskDir + ' into ' + os.path.join(prefix,'trunk',svnAppToCreate)
 
-    print
-    print 'Please now edit "' +args[0]+ '/configure/RELEASE" to put in correct'
-    print 'paths for dependencies.'
-    print 'You can also add dependencies to "' +args[0]+ '/' +args[0]+ 'App/src/Makefile"'
-    print 'and "' +args[0]+ '/' +args[0]+ 'App/Db/Makefile" if appropriate.'
+  subversion.import_( diskDir, os.path.join(prefix,'trunk',svnAppToCreate),
+                        'Initial structure of new ' + diskDir, recurse=True )
+
+  shutil.rmtree(diskDir)
+
+  print 'checkout ' + diskDir + ' from ' + os.path.join(prefix,'trunk',svnAppToCreate)
+
+  subversion.checkout(os.path.join(prefix, 'trunk', svnAppToCreate), diskDir)
+
+  print
+  print 'Please now edit "' + diskDir + '/configure/RELEASE" to put in correct paths for dependencies.'
+  print 'You can also add dependencies to "' + diskDir + '/' + appName + 'App/src/Makefile"'
+  print 'and "' + diskDir + '/' + appName + 'App/Db/Makefile" if appropriate.'
+
 
 if __name__ == "__main__":
   main()
