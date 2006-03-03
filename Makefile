@@ -13,8 +13,7 @@ TEMPLATES_DIR = makeBaseApp
 # "dlsApp" and "dlsBoot" are empty template directories
 # which just contain Makefiles
 
-TEMPLATES += top/dlsApp/Makefile.ioc
-TEMPLATES += top/dlsApp/Makefile.support
+TEMPLATES += top/dlsApp/Makefile
 TEMPLATES += top/dlsApp/Db/Makefile
 TEMPLATES += top/dlsApp/src/Makefile
 TEMPLATES += top/dlsApp/src/_APPNAME_Main.cpp

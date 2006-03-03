@@ -9,8 +9,7 @@ IOC application. It checks to see if <name> exists in
 the repository. If it does not exist, this script runs
 "makeBaseApp", using the "dls" template, to create the
 support module or IOC application in the current directory.
-For IOC applications, the "opi" directory is removed and
-the Makefile modified accordingly.
+For IOC applications, the "opi" directory is removed.
 The resulting directory structure is then imported into
 the repository, the users local copy is deleted and the
 new support module or IOC application is checked out of
@@ -113,13 +112,7 @@ def main():
     # IOC applications do not need the "opi" directory
     # Choose the appropriate Makefile
     os.chdir( appName + 'App' )
-    os.remove( 'Makefile.support' )
-    os.rename( 'Makefile.ioc', 'Makefile' )
     shutil.rmtree('opi')
-  else:
-    os.chdir( appName + 'App' )
-    os.remove( 'Makefile.ioc' )
-    os.rename( 'Makefile.support', 'Makefile' )
 
   os.chdir(currentDir)
 
