@@ -81,6 +81,7 @@ SCRIPTS += dls-start-new-module.py
 #SCRIPTS += dls-vendor-update.py
 SCRIPTS += dlsxmlexcelparser.py
 SCRIPTS += dlsedmtable.py
+SCRIPTS += dlsGenerateEdmVacuumGui.py
 
 # Bash scripts (old)
 
