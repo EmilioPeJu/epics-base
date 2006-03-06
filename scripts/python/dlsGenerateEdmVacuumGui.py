@@ -20,6 +20,7 @@
 #				- added support for empty and comment rows.
 #				- first version released to makeDlsApp subversion.
 #				- renamed to dlsGenerateEdmVacuumGui.py
+#				- removed prefix in fron of valve to support FE valves.
 #
 
 
@@ -186,7 +187,7 @@ def gen_edm_vac(spreadSheetData):
 					
 				if len(row) >= rowIndex['VALVE']:
 					if row[rowIndex['VALVE']]:
-						edmTable.fillCellContent("valveSymbol", {"<DEVICE>": prefix + row[rowIndex['VALVE']]})
+						edmTable.fillCellContent("valveSymbol", {"<DEVICE>": row[rowIndex['VALVE']]})
 						
 				edmTable.nextCell()
 	return
