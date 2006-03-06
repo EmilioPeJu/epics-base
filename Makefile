@@ -80,6 +80,7 @@ SCRIPTS += dls-start-new-module.py
 #SCRIPTS += dls-vendor-import.py
 #SCRIPTS += dls-vendor-update.py
 SCRIPTS += dlsxmlexcelparser.py
+SCRIPTS += dlsedmtable.py
 
 # Bash scripts (old)
 
