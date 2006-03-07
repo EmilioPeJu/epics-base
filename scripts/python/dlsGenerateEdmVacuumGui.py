@@ -22,6 +22,9 @@
 #				- renamed to dlsGenerateEdmVacuumGui.py
 #				- removed prefix in fron of valve to support FE valves.
 #
+# Ver. 1.5 -  06.03.2006 (TMC)
+#				- titlebar now added using dls_generate_edm_titlebar
+#				- FUDGE: added output directory
 
 
 import sys, optparse, re
@@ -29,8 +32,9 @@ from optparse import OptionParser
 from dlsedmtable import edmTableBuilder					# The module that contain the table-API
 #from vacuumCellObjects import *							# The file where the EDM objects are defined
 from dlsxmlexcelparser import *
+from dls_generate_edm_titlebar import *
 
-def gen_edm_vac(spreadSheetData):
+def gen_edm_vac(spreadSheetData,out_dir="."):
 
 	# create the temperature-table object at offset 0, 0 with 10 pixels between rows and columns.
 	edmTable = edmTableBuilder(0,0,10,10)
@@ -105,12 +109,17 @@ def gen_edm_vac(spreadSheetData):
 							edmTable.fillCellContent("beWindowTitle", {"<TITLE>": "Be Window"})
 							edmTable.nextCell()
 
-						# Create an EDM screen where the table will fit exactly
-#						print "tablesize: " + str(edmTable.tableTemplate['screenSizeX']) + "x" +  str(edmTable.tableTemplate['screenSizeY'])
-#						print "CellPointer: " + str(edmTable.cellPointer['x']) + "x" +  str(edmTable.cellPointer['y'])
+							# Create an EDM screen where the table will fit exactly
+	#						print "tablesize: " + str(edmTable.tableTemplate['screenSizeX']) + "x" +  str(edmTable.tableTemplate['screenSizeY'])
+	#						print "CellPointer: " + str(edmTable.cellPointer['x']) + "x" +  str(edmTable.cellPointer['y'])
 						print "Writing screen to file: " + outputFile
-						edmTable.writeEdmScreenAuto(outputFile)
-
+						edmTable.writeEdmScreenAuto(out_dir+"/"+outputFile)
+						if outputFile.find("OH")>-1:
+							text = "Optics Hutch "+outputFile[outputFile.find("OH")+2]
+						if outputFile.find("EH")>-1:
+							text = "Experiment Hutch "+outputFile[outputFile.find("OH")+2]							
+						titlebar(out_dir+"/"+outputFile,colour="green",htype=1,buttonText="$(dom)",headerText=text +" Vacuum Summary",tooltipFilename="generic-tooltip")
+	
 						tmpCellTemplate = edmTable.cellTemplate.copy()
 						tmpTableTemplate = edmTable.tableTemplate.copy()
 						edmTable = edmTableBuilder(0,0,10,10)
@@ -187,7 +196,11 @@ def gen_edm_vac(spreadSheetData):
 					
 				if len(row) >= rowIndex['VALVE']:
 					if row[rowIndex['VALVE']]:
-						edmTable.fillCellContent("valveSymbol", {"<DEVICE>": row[rowIndex['VALVE']]})
+						if row[rowIndex['VALVE']].upper().find("WIND")>-1:
+							edmTable.fillCellContent("beWindow", {})
+							edmTable.fillCellContent("beWindowTitle", {"<TITLE>": row[rowIndex['VALVE']]})
+						else:
+							edmTable.fillCellContent("valveSymbol", {"<DEVICE>": row[rowIndex['VALVE']]})
 						
 				edmTable.nextCell()
 	return
