@@ -32,7 +32,7 @@ $(INSTALL_DATA)/%: %
 	$(RM) $@
 	echo \#!/bin/sh > $@
 	echo export EDMDATAFILES=$(SYS_EDM_PATHS) >> $@
-	echo INSTALL=$(shell cd $(INSTALL_LOCATION); pwd) >> $@
+	echo EDM_MACRO_DIR=$(shell cd $(EDM_MACRO_DIR); pwd) >> $@
 	cat $< >> $@
 
 # Create a .boot file from a .cmd file (deprecated)
