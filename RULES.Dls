@@ -48,11 +48,11 @@ simulation_%.db : %.db
 # flatten any vdb files into a template file
 $(COMMON_DIR)/%.template: %.vdb $(VDB_DEPS)
 	@echo "Flattening $< to produce $@ " 
-	@flatdb $< $@ 
+	flatdb $< $@ 
 
 $(COMMON_DIR)/%.db: ../%.vdb $(VDB_DEPS)
 	@echo "Flattening $< to produce $@ " 
-	@flatdb $< $@ 
+	flatdb $< $@ 
 
 # translate a dbTemplate style substitution file.
 $(COMMON_DIR)/%.db$(RAW): ../%.substitutions $(USES_TEMPLATE)
