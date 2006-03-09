@@ -52,7 +52,6 @@ def gen_Db_sim(table,D,filename):
 		ioc = D.ioc
 	else:
 		print "No IOC specified, defaulting to: "+ioc
-	smode = 0 # 0 for sim, 1 for real
 	initsim=temp_defaults.get('min')
 	outfile = D.filef(filename)
 	
@@ -67,7 +66,7 @@ def gen_Db_sim(table,D,filename):
 file %s\n{
 pattern { device,desc,units,min,max,minsim,maxsim,incsim,initsim }\n""" % (template1))
 	for row in table:
-		if D.rowtype(row) == "normal" and not int(D.lookup(row,"NTEMP"))==0 and D.lookup(row,"SMODE")[:3].upper()=="SIM":
+		if D.rowtype(row) == "normal" and not int(D.lookup(row,"NTEMP"))==0:
 			out_row=D.insert_quotes(row)
 			outfile.write("#%s temperature sensors\n" % D.lookup(out_row,'P'))
 			i=1
@@ -90,7 +89,7 @@ pattern { device,desc,units,min,max,minsim,maxsim,incsim,initsim }\n""" % (templ
 	outfile.write("""}\n\nfile %s\n{
 pattern { device, desc, znam, onam, zsv, osv }\n""" % template2)
 	for row in table:
-		if D.rowtype(row) == "normal" and not int(D.lookup(row,"NFLOW"))==0 and D.lookup(row,"SMODE")[:3].upper()=="SIM":
+		if D.rowtype(row) == "normal" and not int(D.lookup(row,"NFLOW"))==0:
 			out_row=D.insert_quotes(row)
 			outfile.write("#%s water flow sensors\n" % D.lookup(out_row,'P'))
 			i=1
@@ -113,7 +112,7 @@ pattern { device, desc, znam, onam, zsv, osv }\n""" % template2)
 	outfile.write("""}\n\nfile %s\n{
 pattern { device,desc,units,min,max,minsim,maxsim,incsim,initsim }\n""" % template3)	
 	for row in table:
-		if D.rowtype(row) == "normal" and not int(D.lookup(row,"NCURR"))==0 and D.lookup(row,"SMODE")[:3].upper()=="SIM":
+		if D.rowtype(row) == "normal" and not int(D.lookup(row,"NCURR"))==0:
 			out_row=D.insert_quotes(row)
 			outfile.write("#%s currents\n" % D.lookup(out_row,'P'))
 			i=1

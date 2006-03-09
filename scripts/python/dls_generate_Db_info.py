@@ -48,7 +48,7 @@ def gen_Db_info(table,D,filename):
 #{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
 
 file %s\n{
-pattern { device,shortname,description,nflow,ntemp,ncurr,mtype,BL_CONFIG}\n""" % (template1))
+pattern { P,SHORTNAME,DESCRIPTION,NFLOW,NTEMP,NCURR,MTYPE,BL_CONFIG}\n""" % (template1))
 	for row in table:
 		if D.rowtype(row)=="normal":
 			out_row=D.insert_quotes(row)
@@ -63,7 +63,7 @@ pattern { device,shortname,description,nflow,ntemp,ncurr,mtype,BL_CONFIG}\n""" %
 										  D.lookup(out_row, 'MTYPE'), \
 										  D.lookup(out_row, 'BL_CONFIG')))
 	outfile.write("""}\n\nfile %s\n{
-pattern { device, calc, inpa, inpb, inpc, inpd, inpe, inpf, inpg, inph, inpi, inpj, inpk, inpl }\n""" % template2)
+pattern { P, CALC, INPA, INPB, INPC, INPD, INPE, INPF, INPG, INPH, INPI, INPJ, INPK, INPL }\n""" % template2)
 	for row in table:
 		if D.rowtype(row)=="normal":
 			out_row=D.insert_quotes(row)

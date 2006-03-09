@@ -22,6 +22,8 @@ class table_handler:
 	prefix_row = []
 	def_row = []
 	edm_row = []
+	unsubbed_edm_row = []
+	subbed_edm_row = []
 	files = {}
 	extra_lookup = {}
 	unsubbed_names = {}
@@ -70,6 +72,8 @@ class table_handler:
 			if dodefaction:
 				# create edm_row
 				self.edm_row = self.trim(row)
+				self.unsubbed_edm_row = self.edm_row[:]
+				self.subbed_edm_row = [""]*len(self.edm_row)
 			return "edm"
 		elif row[0][:6]=='PREFIX':
 			self.bugprint("Found PREFIX row")
@@ -78,7 +82,7 @@ class table_handler:
 				self.prefix_row = self.trim(row)
 				self.name_dict = {}
 				i = 0
-				while i<len(row) and i<len(self.name_row):
+				while i<len(self.name_row):
 					self.name_dict[self.name_row[i]]=(i,self.safeindex(self.prefix_row,i),self.safeindex(self.def_row,i))
 					i +=1		
 			return "prefix"
@@ -87,9 +91,9 @@ class table_handler:
 			if dodefaction:
 				# create name_dict with new def row
 				self.def_row = self.trim(row)
-				self.name_dict = {}
-				i = 0
-				while i<len(row) and i<len(self.name_row):
+				self.name_dict = {"NAME": (0,"","")}
+				i = 1
+				while i<len(self.name_row):
 					self.name_dict[self.name_row[i]]=(i,self.safeindex(self.prefix_row,i),self.safeindex(self.def_row,i))
 					i +=1
 			return "default"	
@@ -148,17 +152,20 @@ class table_handler:
 
 	# lookup list generates a text string from the row if the header exists in the header row
 	#	if edm_subs is set then substitute '""' for "''"
-	def lookuplist(self,row,header_row="",edm_subs=True):
+	def lookuplist(self,row,header_row="",edm_subs=True,base_macro_devices=[]):
 		if not header_row:
 			header_row = self.edm_row
 		i = 0
 		out_text = ""
 		while i < len(row):
-			if self.safeindex(header_row,i) and row[i]:
+			if self.safeindex(header_row,i) and row[i] and not header_row[i][:4]=="EDM_":
 				cell = row[i]
 				if edm_subs and cell=='""':
 					cell = "''"
 				out_text = out_text + header_row[i] + "=" + cell + ","
+				if row[0][:3] not in base_macro_devices:
+					self.unsubbed_edm_row[i]=""
+					self.subbed_edm_row[i]=self.edm_row[i]
 			i += 1
 		return out_text[:len(out_text)-1]
 
@@ -223,4 +230,7 @@ class table_handler:
 		i = len(row)-1
 		while row[i]=="":
 			i-=1
-		return row[:i+1]
+		if row[0][:6]=="PREFIX" or row[0][:4]=="EDM_" or row[0][:7]=="DEFAULT":
+			return [""]+row[1:i+1]
+		else:
+			return row[:i+1]

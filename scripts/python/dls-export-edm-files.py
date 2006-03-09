@@ -90,6 +90,9 @@ def main():
 	print """-----------------------------------------------------------------------------
 Creating edm files from: %s
 -----------------------------------------------------------------------------""" % xml
+	if options.dir and not os.path.isdir(out_dir):
+		bugprint("Making directory: "+out_dir)
+		os.mkdir(out_dir)
 	if options.overview:
 		shutil.copy("../"+dom+overview_in,out_dir+"/"+dom+overview_out)
 	for name,table in data.tables:
@@ -97,9 +100,6 @@ Creating edm files from: %s
 		if name.find(" ")>-1:
 			errorprint("Sheet names must not contain spaces: %s" % name)
 		if name==mo_table_name:
-			if options.dir and not os.path.isdir(out_dir):
-				bugprint("Making directory: "+out_dir)
-				os.mkdir(out_dir)
 			if options.macro:
 				bugprint("Creating EDM macro substitution files")
 				gen_edm_macros(table,Table_handler)

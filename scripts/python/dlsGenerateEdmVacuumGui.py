@@ -114,10 +114,16 @@ def gen_edm_vac(spreadSheetData,out_dir="."):
 	#						print "CellPointer: " + str(edmTable.cellPointer['x']) + "x" +  str(edmTable.cellPointer['y'])
 						print "Writing screen to file: " + outputFile
 						edmTable.writeEdmScreenAuto(out_dir+"/"+outputFile)
+						text = outputFile
 						if outputFile.find("OH")>-1:
 							text = "Optics Hutch "+outputFile[outputFile.find("OH")+2]
 						if outputFile.find("EH")>-1:
-							text = "Experiment Hutch "+outputFile[outputFile.find("OH")+2]							
+							text = "Experiment Hutch "+outputFile[outputFile.find("EH")+2]	
+						if outputFile.find("EE")>-1:
+							text = "Experimental Enclosure "+outputFile[outputFile.find("EE")+2]							
+						if outputFile.find("BE")>-1:
+							text = "Branchline Enclosure "+outputFile[outputFile.find("BE")+2]							
+						
 						titlebar(out_dir+"/"+outputFile,colour="green",htype=1,buttonText="$(dom)",headerText=text +" Vacuum Summary",tooltipFilename="generic-tooltip")
 	
 						tmpCellTemplate = edmTable.cellTemplate.copy()

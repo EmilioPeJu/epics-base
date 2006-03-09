@@ -13,8 +13,8 @@ from dlsxmlparserfunctions import table_handler
 ####################
 # suffix for temp, flow, overview input and output suffixes
 out_dir="."
-sim_suffix="-sim.substitutions.autogen"
-info_suffix="-info.substitutions.autogen"
+sim_suffix=".sim.substitutions.autogen"
+info_suffix=".0info.substitutions.autogen"
 subst_suffix=".substitutions.autogen"
 mo_table_name="!GUI-MO"
 
@@ -97,7 +97,7 @@ Creating Db files from: %s
 		elif name[:1]=="!" and not name[:4]=="!GUI":	
 			if options.subst:
 				bugprint("Creating substitution file "+name)
-				gen_Db_subst(table,mo_table,Table_handler,ioc+'-'+name[1:]+subst_suffix)
+				gen_Db_subst(table,mo_table,Table_handler,ioc+'.'+name[1:]+subst_suffix)
 	
 	# close output files
 	Table_handler.closef()
