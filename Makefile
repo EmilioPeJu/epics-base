@@ -70,6 +70,7 @@ SCRIPTS += convertDlsRelease.pl
 SCRIPTS += dls-checkout-module.py
 SCRIPTS += dls-list-branches.py
 SCRIPTS += dls-list-modules.py
+SCRIPTS += dls-list-releases.py
 SCRIPTS += dlsPyLib.py
 SCRIPTS += dls-release.py
 SCRIPTS += dls-signalparse.py
