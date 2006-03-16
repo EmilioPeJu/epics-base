@@ -113,7 +113,7 @@ def main():
   subversion.copy( os.path.join(prefix, srcDir), os.path.join(prefix, relDir, args[1]) )
 
   # Check for the existence of the correct directory tree on disk, into which
-  # the release should be exported. If the directory tree is not present, create it.
+  # the release should be checked out. If the directory tree is not present, create it.
 
   baseStr = '/'
   prodDir = os.path.join( '/home/diamond', epicsVer, 'prod', diskDir, args[0] )
@@ -123,11 +123,12 @@ def main():
     if not stat:
       os.mkdir(baseStr)
 
-  subversion.export( os.path.join(prefix,relDir,args[1]), os.path.join(baseStr,args[1]) )
+#  subversion.export(  os.path.join(prefix,relDir, args[1]),       os.path.join(baseStr,args[1]) )
+  subversion.checkout(os.path.join(prefix,relDir, args[1]), os.path.join(baseStr,args[1]) )
 
   print 'Building release...'
   stat = os.chdir(os.path.join(baseStr,args[1]))
-  os.system('make')
+#  os.system('make')
 
 if __name__ == "__main__":
   main()
