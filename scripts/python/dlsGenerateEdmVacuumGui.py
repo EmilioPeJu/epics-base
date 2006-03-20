@@ -152,7 +152,7 @@ def gen_edm_vac(spreadSheetData,out_dir="."):
 					edmTable.fillCellContent("RGAtitle", {"<TITLE>": row[rowIndex['RGA']]})
 					
 				if row[rowIndex['IMG']]:	
-					edmTable.fillCellContent("gaugeRelatedDisplay", {"<DOMAIN>": "BL16B", "<ID>": row[rowIndex['GID']], "<GCTRL_DEVICE>": prefix + row[rowIndex['GCTRL']]})
+					edmTable.fillCellContent("gaugeRelatedDisplay", {"<DOMAIN>": "BL16B", "<ID>": row[rowIndex['GID']], "<GCTLR_DEVICE>": prefix + row[rowIndex['GCTLR']]})
 					
 					edmTable.fillCellContent("PIRGstub", {})
 					edmTable.fillCellContent("PIRGpipe", {})
@@ -203,6 +203,9 @@ def gen_edm_vac(spreadSheetData,out_dir="."):
 				if len(row) >= rowIndex['VALVE']:
 					if row[rowIndex['VALVE']]:
 						if row[rowIndex['VALVE']].upper().find("WIND")>-1:
+							edmTable.fillCellContent("beWindow", {})
+							edmTable.fillCellContent("beWindowTitle", {"<TITLE>": row[rowIndex['VALVE']]})
+						elif row[rowIndex['VALVE']].upper().find("APER")>-1:
 							edmTable.fillCellContent("beWindow", {})
 							edmTable.fillCellContent("beWindowTitle", {"<TITLE>": row[rowIndex['VALVE']]})
 						else:
@@ -526,7 +529,7 @@ menuLabel {
 }
 symbols {
   0 "dom=<DOMAIN>, id=<ID>"
-  1 "device=<GCTRL_DEVICE>"
+  1 "device=<GCTLR_DEVICE>"
 }
 endObjectProperties
 '''
