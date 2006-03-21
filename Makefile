@@ -65,6 +65,10 @@ CONFIGS += RULES.Dls
 
 SCRIPTS += convertDlsRelease.pl
 
+# DLS private copy of svn_load_dirs (because it disappeared from the subversion distribution)
+
+SCRIPTS += dls-svn_load_dirs
+
 # Python scripts (new)
 
 SCRIPTS += dls-checkout-module.py
