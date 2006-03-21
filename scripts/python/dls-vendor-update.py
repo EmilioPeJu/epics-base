@@ -76,7 +76,7 @@ def main():
     print 'Importing: '+args[1]+' from: '+args[0]
     print 'to update from version: '+args[2]+' to version: '+args[3]
 
-    command1 = '/home/pnd56/svn_load_dirs -t '+args[3]
+    command1 = 'dls-svn_load_dirs -t '+args[3]
     command2 = os.path.join(prefix,'vendor',source)+' current '+args[0]
     command  = command1 + ' ' + command2
     os.system(command)
