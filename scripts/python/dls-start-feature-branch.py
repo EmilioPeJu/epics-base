@@ -149,9 +149,8 @@ def main():
       print 'change directories and run:'
       print 'svn checkout '+os.path.join(prefix,'branches',source,args[1])
   else:
-    print 'This is not an SVN working directory'
-    print 'To create a working directory from this new branch, run:'
-    print 'svn checkout '+os.path.join(prefix,'branches',source,args[1])
+    print 'Checking out: ' + os.path.join(prefix,'branches',source,args[1]) + '...'
+    subversion.checkout(os.path.join(prefix,'branches',source,args[1]), args[1])
 
 if __name__ == "__main__":
   main()
