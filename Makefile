@@ -81,7 +81,7 @@ SCRIPTS += dls-signalparse.py
 SCRIPTS += dls-start-bugfix-branch.py
 SCRIPTS += dls-start-feature-branch.py
 SCRIPTS += dls-start-new-module.py
-#SCRIPTS += dls-sync-from-trunk.py
+SCRIPTS += dls-sync-from-trunk.py
 #SCRIPTS += dls-vendor-import.py
 #SCRIPTS += dls-vendor-update.py
 
@@ -114,7 +114,7 @@ SCRIPTS += dls-subst-to-csv.py
 #SCRIPTS += dls-start-bugfix-branch
 #SCRIPTS += dls-start-feature-branch
 #SCRIPTS += dls-start-new-module
-SCRIPTS += dls-sync-from-trunk
+#SCRIPTS += dls-sync-from-trunk
 SCRIPTS += dls-vendor-import
 SCRIPTS += dls-vendor-update
 
