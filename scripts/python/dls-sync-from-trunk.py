@@ -1,87 +1,93 @@
 #!/usr/bin/env python2.4
 
-# dls-sync-from-trunk [-i]
-# Converted to Python by: Andy Foster
+"""
+dls-sync-from-trunk.py
+Converted to Python by: Andy Foster
+ 
+This script will syncronise a local working copy of a feature
+branch, for a support module or IOC application, with the latest
+version on the trunk. Note that the current directory must be a
+local working copy of the featuer branch. The first time this
+script is run, it will update the local working copy with the
+changes committed to trunk since the feature branch was created.
+After this, it will update the local working copy with the changes
+committed to trunk since the last time this script was run.
 
-import os, pysvn, sys, shutil
-from optparse import OptionParser
+No changes are made to the repository as a result of running this
+script. The only changes will be to files in the local working
+copy of the branch. All changes in the local working copy should
+be checked and any conflicts resolved. These changes then need to
+be committed back to the feature branch.
 
+The script takes no arguments!
 
-def workingCopy(client):
-    try:
-      entry = client.info('.')
-      ret   = entry
-    except pysvn._pysvn.ClientError:
-      ret   = 0
-    return ret
+"""
 
+import os, shutil, pysvn, sys
+from   dlsPyLib import *
 
 def main():
-    parser = OptionParser("usage: %prog [-i]")
-    parser.add_option("-i", "--ioc", action="store_true", dest="ioc",
-                      help="Synchronise working copy of a branch with the trunk")
-    (options, args) = parser.parse_args()
-    if len(args) != 0
-      parser.error("There are no arguments to this script")
 
-    # Check the SVN_ROOT environment variable
-    try:
-      prefix = os.environ['SVN_ROOT']+'/diamond'
-    except KeyError:
-      print "SVN_ROOT environment variable must be set"
-      sys.exit()
+  # Check the SVN_ROOT environment variable
+  prefix = checkSVN_ROOT()
+  if not prefix:
+    sys.exit()
 
-    if options.ioc:
-      source = 'ioc/'
+  # Create an object to interact with subversion
+  subversion = pysvn.Client()
+
+  # Check that we are currently in a working copy of a branch
+  # Extract the module name and the branch name
+  isWC = workingCopy(subversion)
+  if isWC:
+    line = isWC.url
+    if line.find('branches') >= 0:
+      L           = line.split('/')
+      L[len(L)-1] = ''
+      K           = '/'.join(L)
     else:
-      source = 'support/'
-
-    # Create an object to interact with subversion
-    subversion = pysvn.Client()
-
-    # Check that we are currently in a working copy of a branch
-    # Extract the module name and the branch name
-    entry = workingCopy(subversion)
-    if entry:
-      line = entry.url
-      if line.find('branches') >= 0:
-        ll         = line.split('/')
-        moduleName = ll[len(ll)-2]
-        branchName = ll[len(ll)-1]
-      else:
-        parser.error('You must run this script in a working copy of a feature branch')
-        sys.exit()
-    else:
-      parser.error('You must run this script in a working copy of a feature branch')
+      print 'You must run this script in a working copy of a feature branch'
       sys.exit()
+  else:
+    print 'You must run this script in a working copy of a feature branch'
+    sys.exit()
 
-    prop_list = subversion.propget( 'dls:synced-from-trunk', 
-                                    os.path.join(prefix,'branches',source,branchName), 
-                                    pysvn.Revision(pysvn.opt_revision_kind.head), 
-                                    False )
-    if not prop_list:
-      print 'The "dls:synced-from-trunk" property is not set for this branch'
-      sys.exit()
+  prop_list = subversion.propget( 'dls:synced-from-trunk', '.',
+                                   pysvn.Revision(pysvn.opt_revision_kind.working), False )
+  if not prop_list:
+    print 'The "dls:synced-from-trunk" property is not set for this branch'
+    sys.exit()
 
-    merge_from = prop_list[os.path.join(prefix,'branches',source,branchName)]
-    if not merge_from:
-      print 'Merge revision information not available'
-      sys.exit()
-    
-    subversion.merge( os.path.join(prefix,'trunk',source,moduleName), merge_from,
-                      os.path.join(prefix,'trunk',source,moduleName), HEAD,
-                      '.', False, True )
+  merge_from = prop_list['']
+  if not merge_from:
+    print 'Merge revision information not available'
+    sys.exit()
 
-    # Checkout the latest version of the module from the trunk to find out
-    # the number of HEAD
-    tempdir        = /tmp/svn
-    subversion.checkout( os.path.join(prefix,'trunk',source,moduleName), tempdir )
-    entry          = subversion.info(tempdir)
-    trunk_revision = entry.revision.number
-    shutil.rmtree(tempdir)
+  print 'merging from version = ' + merge_from + ' to HEAD'
 
-    # Update the "dls:synced-from-trunk" property which tells us how far up the trunk
-    # we have merged into this branch.
+  subversion.merge( K.replace('branches','trunk'),
+                    pysvn.Revision( pysvn.opt_revision_kind.number, merge_from ),
+                    K.replace('branches','trunk'),
+                    pysvn.Revision( pysvn.opt_revision_kind.head ), 
+                    '.', True, True )
 
-    subversion.propset( 'dls:synced-from-trunk', trunk_revision, '.',
-                        pysvn.Revision(pysvn.opt_revision_kind.working), False )
+  # Checkout the latest version of the module from the trunk to find out
+  # the new number of HEAD
+
+  tempdir        = '/tmp/svn'
+  subversion.checkout( K.replace('branches','trunk'), tempdir )
+  entry          = subversion.info(tempdir)
+  trunk_revision = entry.revision.number
+  shutil.rmtree(tempdir)
+
+  # Update the "dls:synced-from-trunk" property which tells us how far up the trunk
+  # we have merged into this branch.
+
+  print 'Set new HEAD version number in branch = ', trunk_revision
+
+  subversion.propset( 'dls:synced-from-trunk', str(trunk_revision), '.',
+                      pysvn.Revision(pysvn.opt_revision_kind.working), False )
+  print 'Finished...'
+
+if __name__ == "__main__":
+  main()
