@@ -128,7 +128,7 @@ def main():
 
   print 'Building release...'
   stat = os.chdir(os.path.join(baseStr,args[1]))
-#  os.system('make')
+  os.system('make')
 
 if __name__ == "__main__":
   main()
