@@ -33,6 +33,7 @@ def gen_Db_info(table,D,filename):
 	# initialise #
 	##############
 	ioc = "BLxxI-XX-IOC-01"
+	index = 0
 	if D.ioc:
 		ioc = D.ioc
 	else:
@@ -48,12 +49,12 @@ def gen_Db_info(table,D,filename):
 #{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
 
 file %s\n{
-pattern { P,SHORTNAME,DESCRIPTION,NFLOW,NTEMP,NCURR,MTYPE,BL_CONFIG}\n""" % (template1))
+pattern { P,SHORTNAME,DESCRIPTION,NFLOW,NTEMP,NCURR,MTYPE,BL_SECTION,BL_ORDER}\n""" % (template1))
 	for row in table:
 		if D.rowtype(row)=="normal":
 			out_row=D.insert_quotes(row)
 			# write the GUI info fields
-			outfile.write("#%s info fields\n\t{ %s, %s, %s, %s, %s, %s, %s, %s }\n" % \
+			outfile.write("#%s info fields\n\t{ %s, %s, %s, %s, %s, %s, %s, %s, %s }\n" % \
 										( D.lookup(out_row, 'P'), D.lookup(out_row, 'P'),\
 										  D.lookup(out_row, 'NAME'), \
 										  D.lookup(out_row, 'DESCRIPTION'), \
@@ -61,7 +62,8 @@ pattern { P,SHORTNAME,DESCRIPTION,NFLOW,NTEMP,NCURR,MTYPE,BL_CONFIG}\n""" % (tem
 										  limit(D.lookup(out_row, 'NTEMP'),ntemplim), \
 										  limit(D.lookup(out_row, 'NCURR'),ncurrlim), \
 										  D.lookup(out_row, 'MTYPE'), \
-										  D.lookup(out_row, 'BL_CONFIG')))
+										  D.lookup(out_row, 'BL_SECTION'),str(index)))
+		index += 1
 	outfile.write("""}\n\nfile %s\n{
 pattern { P, CALC, INPA, INPB, INPC, INPD, INPE, INPF, INPG, INPH, INPI, INPJ, INPK, INPL }\n""" % template2)
 	for row in table:

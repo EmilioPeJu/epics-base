@@ -116,7 +116,7 @@ pattern { device,desc,units,min,max,minsim,maxsim,incsim,initsim }\n""" % templa
 			out_row=D.insert_quotes(row)
 			outfile.write("#%s currents\n" % D.lookup(out_row,'P'))
 			i=1
-			if D.lookup(out_row,"CT")=="BPM":
+			if int(D.lookup(out_row,"NCURR"))>3:
 				outfile.write("\t{ %s, %s, %s, %s, %s, %s, %s, %s, %s }\n" % \
 											( D.lookup(out_row, 'P')+":POS:Y",'"BPM Y position"',"mm",-2,2,-2,2,0.1,0.4 ))
 				outfile.write("\t{ %s, %s, %s, %s, %s, %s, %s, %s, %s }\n" % \
