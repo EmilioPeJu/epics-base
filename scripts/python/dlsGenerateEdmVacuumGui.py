@@ -27,7 +27,7 @@
 #				- FUDGE: added output directory
 
 
-import sys, optparse, re
+import sys, optparse, re, os
 from optparse import OptionParser
 from dlsedmtable import edmTableBuilder					# The module that contain the table-API
 #from vacuumCellObjects import *							# The file where the EDM objects are defined
@@ -113,6 +113,9 @@ def gen_edm_vac(spreadSheetData,out_dir="."):
 	#						print "tablesize: " + str(edmTable.tableTemplate['screenSizeX']) + "x" +  str(edmTable.tableTemplate['screenSizeY'])
 	#						print "CellPointer: " + str(edmTable.cellPointer['x']) + "x" +  str(edmTable.cellPointer['y'])
 						print "Writing screen to file: " + outputFile
+						if os.path.isfile(out_dir+"/"+outputFile):
+							os.remove(out_dir+"/"+outputFile)
+							print "Replaced "+outputFile
 						edmTable.writeEdmScreenAuto(out_dir+"/"+outputFile)
 						text = outputFile
 						if outputFile.find("OH")>-1:

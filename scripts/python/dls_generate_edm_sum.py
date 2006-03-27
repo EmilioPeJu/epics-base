@@ -93,6 +93,9 @@ def gen_edm_sum(xml_table,D,filename,dom,title,vtype="temp",aspectratio=0.65):
 	screenProperties = screenProperties.replace('#<SCREEN_TITLE>#',dom+" - "+title)
 	
 	# Finally write the screen to a file
+	if os.path.isfile(D.out_dir+"/"+filename):
+		os.remove(D.out_dir+"/"+filename)
+		D.bugprint("Replaced "+filename)
 	table.writeEdmScreen(D.out_dir+"/"+filename, screenProperties)
 
 	# Now add a header and exit button to this file

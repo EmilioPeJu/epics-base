@@ -98,6 +98,9 @@ Creating edm files from: %s
 	if options.overview:
 		for f in os.listdir(in_dir):
 			if f.find(overview_in_str)>-1 and f.find(".edl")>-1 and f.find(".edl~")==-1:
+				if os.path.isfile(out_dir+"/"+f.replace(overview_in_str,overview_out_str)):
+					os.remove(out_dir+"/"+f.replace(overview_in_str,overview_out_str))
+					bugprint("Replaced "+f.replace(overview_in_str,overview_out_str))
 				overview_files.append(f.replace(overview_in_str,overview_out_str))
 				shutil.copy(in_dir+"/"+f,out_dir+"/"+f.replace(overview_in_str,overview_out_str))
 	for name,table in data.tables:

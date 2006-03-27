@@ -180,8 +180,8 @@ class table_handler:
 	def filef(self,filename,readonly=True):
 		if not self.files.has_key(filename):
 			if os.path.isfile(self.out_dir+"/"+filename):
-				os.rename(self.out_dir+"/"+filename,self.out_dir+"/"+filename+".bak")
-				print "Backed up "+filename+" to "+filename+".bak"
+				os.remove(self.out_dir+"/"+filename)
+				self.bugprint("Replaced "+filename)
 			out_file = open (self.out_dir+"/"+filename,"w")
 			self.files[filename] = (out_file,filename,readonly)
 			return out_file
