@@ -80,6 +80,10 @@ def main():
         print os.path.join(prefix,'trunk',source) + ' already exists'
         sys.exit()
 
+  if not os.path.isdir(args[0]):
+    print args[0] + ' does not exist!'
+    sys.exit()
+
   if os.path.isdir(dirOnDisk):
     print 'Cannot checkout to: "' + dirOnDisk + '"' + ' as this directory already exists'
     sys.exit()
