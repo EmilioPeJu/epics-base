@@ -92,6 +92,7 @@ SCRIPTS += dls_generate_edm_autofill.py
 SCRIPTS += dls_generate_edm_macros.py
 SCRIPTS += dls_generate_edm_sum.py
 SCRIPTS += dls_generate_edm_titlebar.py
+SCRIPTS += dls_generate_edm_vac.py
 
 SCRIPTS += dls-export-Db-files.py
 SCRIPTS += dls_generate_Db_info.py
@@ -101,7 +102,6 @@ SCRIPTS += dls_generate_Db_subst.py
 SCRIPTS += dlsxmlparserfunctions.py
 SCRIPTS += dlsxmlexcelparser.py
 SCRIPTS += dlsedmtable.py
-SCRIPTS += dlsGenerateEdmVacuumGui.py
 
 SCRIPTS += dls-csv-to-subst.py
 SCRIPTS += dls-subst-to-csv.py
