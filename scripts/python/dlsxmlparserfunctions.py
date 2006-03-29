@@ -119,6 +119,9 @@ class table_handler:
 	def lookup(self,row,key,dict="",emptyval=""):
 		if not dict:
 			dict = self.name_dict
+		if not dict.has_key(key):
+			self.bugprint("Can't find "+key+" in "+str(row))
+			return emptyval
 		params = dict.get(key)
 		output = ""
 		if not params and key == "P":

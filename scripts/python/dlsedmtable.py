@@ -150,10 +150,10 @@ class edmTableBuilder:
 			
 		# Insert the correct x and y coordinates for the object in question...
 		substitutionStr = "x " + str(self.cellPointer['x'] + self.cellTemplate[objName][1])
-		regexp = re.compile(r'^[xX].*', re.MULTILINE)
+		regexp = re.compile(r'^[xX] .*', re.MULTILINE)
 		tmpObjString = regexp.sub(substitutionStr, tmpObjString)
 		substitutionStr = "y " + str(self.cellPointer['y'] + self.cellTemplate[objName][2])
-		regexp = re.compile(r'^[yY].*', re.MULTILINE)
+		regexp = re.compile(r'^[yY] .*', re.MULTILINE)
 		tmpObjString = regexp.sub(substitutionStr, tmpObjString)
 			
 		# Add the newly expanded object to the cell content:

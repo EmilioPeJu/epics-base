@@ -77,25 +77,29 @@ def gen_edm_vac(table,D):
 	edmTable.addObjectType("PIRGsymbol", PIRGsymbol, 50, 80);
 	edmTable.addObjectType("PIRGstub", stub, 30, 92);
 	edmTable.addObjectType("PIRGpipe", pipe, 30, 92);
-	edmTable.addObjectType("PIRGvalue", textMonitor, 45, 120);
+	edmTable.addObjectType("PIRGvalue", textMonitor, 30, 120);
 	edmTable.addObjectType("IMGtitle", title, 50, 140);
 	edmTable.addObjectType("IMGsymbol", IMGsymbol, 50, 150);
 	edmTable.addObjectType("IMGstub", stub, 30, 162);
 	edmTable.addObjectType("IMGpipe", pipe, 30, 162);
-	edmTable.addObjectType("IMGvalue", textMonitor, 45, 190);
-	edmTable.addObjectType("GaugeValue", specialTextMonitor, 45, 210);
+	edmTable.addObjectType("IMGvalue", textMonitor, 30, 190);
+	edmTable.addObjectType("GaugeValue", specialTextMonitor, 25, 210);
 	edmTable.addObjectType("pumpStub", pumpStub, 30, 242);
-	edmTable.addObjectType("pumpSymbol", pumpSymbol, 20, 260);
-	edmTable.addObjectType("pumptitle", title, 20, 295);
-	edmTable.addObjectType("pumpvalue", textMonitor, 20, 310);
+	edmTable.addObjectType("pumpSymbol", pumpSymbol, 20, 280);
+	edmTable.addObjectType("pumptitle", title, 17, 315);
+	edmTable.addObjectType("pumpvalue", textMonitor, 5, 330);
 	edmTable.addObjectType("valveSymbol", valveSymbol, 0, 215);
-	edmTable.addObjectTypeSpecial("vaSpace", vaSpace, 21, 232);
+	edmTable.addObjectTypeSpecial("vaSpace", vaSpace, 21, 230);
 	edmTable.addObjectType("window", window, 0, 215);
-	edmTable.addObjectType("windowTitle", title, 0, 260);
-	edmTable.addObjectType("aperture", window, 0, 215);
-	edmTable.addObjectType("apertureTitle", title, 0, 260);
-#	edmTable.addObjectType("leftWall", wall, 0, 0);
-#	edmTable.addObjectType("rightWall", wall, 30, 0);
+	edmTable.addObjectType("windowTitle", title, 0, 265);
+	edmTable.addObjectType("aperture", aperture, 0, 215);
+	edmTable.addObjectType("apertureTitle", title, 0, 265);
+	edmTable.addObjectType("topLeftWall", topwall, 5, 0);
+	edmTable.addObjectType("bottomLeftWall", bottomwall, 5, 260);
+	edmTable.addObjectType("topRightWall", topwall, 97, 0);
+	edmTable.addObjectType("bottomRightWall", bottomwall, 97, 260);
+	edmTable.addObjectType("topMidWall", topwall, 57, 0);
+	edmTable.addObjectType("bottomMidWall", bottomwall, 57, 260);
 	edmTable.tableTemplate['cellborder'] = False	# Don't want borders around each cell.
 	edmTable.tableTemplate['maxnumrows'] = 1		# Define how many rows can max be in one column.
 
@@ -159,6 +163,12 @@ def gen_edm_vac(table,D):
 				edmTable.fillCellContent("pumpSymbol", {"<DEVICE>": prefix + rowIONP})
 				edmTable.fillCellContent("pumptitle", {"<TITLE>": rowIONP})
 				edmTable.fillCellContent("pumpvalue", {"<DEVICE>": prefix + rowIONP + ":P"})
+			# add space
+			rowSPACE=D.lookup(row,"SPACE")
+			if rowSPACE:
+				vaSpaceLength = edmTable.tableTemplate['cellwidth'] - 20 + edmTable.tableTemplate['colspacing']
+				cellWidth = edmTable.tableTemplate['cellwidth'] + edmTable.tableTemplate['colspacing']
+				edmTable.fillCellContent("vaSpace", {"<SPACE>": prefix + rowSPACE, "<WIDTH>": str(vaSpaceLength+spaces[rowSPACE]*cellWidth-1)})
 			# add VALVE
 			rowVALVE=D.lookup(row,"VALVE")
 			if rowVALVE:
@@ -170,12 +180,16 @@ def gen_edm_vac(table,D):
 					edmTable.fillCellContent("apertureTitle", {"<TITLE>": rowVALVE})
 				else:
 					edmTable.fillCellContent("valveSymbol", {"<DEVICE>": rowVALVE})
-			# add space
-			rowSPACE=D.lookup(row,"SPACE")
-			if rowSPACE:
-				vaSpaceLength = edmTable.tableTemplate['cellwidth'] - 20 + edmTable.tableTemplate['colspacing']
-				cellWidth = edmTable.tableTemplate['cellwidth'] + edmTable.tableTemplate['colspacing']
-				edmTable.fillCellContent("vaSpace", {"<SPACE>": prefix + rowSPACE, "<WIDTH>": str(vaSpaceLength+spaces[rowSPACE]*cellWidth-1)})
+			rowWALL=D.lookup(row,"WALL")
+			if rowWALL.upper()=="LEFT":
+				edmTable.fillCellContent("topLeftWall", {})
+				edmTable.fillCellContent("bottomLeftWall", {})
+			if rowWALL.upper()=="RIGHT":
+				edmTable.fillCellContent("topRightWall", {})
+				edmTable.fillCellContent("bottomRightWall", {})
+			if rowWALL.upper()=="MID":
+				edmTable.fillCellContent("topMidWall", {})
+				edmTable.fillCellContent("bottomMidWall", {})
 			edmTable.nextCell()
 			D.bugprint("New Cell")
 
@@ -495,7 +509,7 @@ minor 0
 release 0
 x 154
 y 158
-w 70
+w 50
 h 140
 fgColor index 53
 bgColor index 0
@@ -635,7 +649,7 @@ release 0
 x 130
 y 342
 w 8
-h 22
+h 42
 lineColor index 35
 fill
 fillColor index 35
@@ -643,19 +657,37 @@ lineWidth 0
 endObjectProperties
 '''
 
-wall = '''# (Rectangle)
+topwall = '''# (Rectangle)
 object activeRectangleClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 1185
-y 95
-w 15
-h <HEIGHT>
-lineColor index 63
+x 0
+y 0
+w 10
+h 210
+lineColor index 14
 fill
-fillColor index 48
+fillColor index 13
+lineWidth 0
+endObjectProperties
+'''
+
+bottomwall='''# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 260
+w 10
+h 65
+lineColor index 14
+fill
+fillColor index 13
+lineWidth 0
 endObjectProperties
 '''
 
@@ -801,75 +833,33 @@ fillColor index 25
 endObjectProperties
 '''
 aperture = '''
-# (Lines)
-object activeLineClass
-beginObjectProperties
-major 4
-minor 0
-release 1
-x 170
-y 130
-w 20
-h 10
-lineColor index 25
-fill
-fillColor index 25
-numPoints 4
-xPoints {
-  0 170
-  1 190
-  2 180
-  3 170
-}
-yPoints {
-  0 130
-  1 130
-  2 140
-  3 130
-}
-endObjectProperties
-
-# (Lines)
-object activeLineClass
-beginObjectProperties
-major 4
-minor 0
-release 1
-x 170
-y 160
-w 20
-h 10
-lineColor index 25
-fill
-fillColor index 25
-numPoints 4
-xPoints {
-  0 170
-  1 190
-  2 180
-  3 170
-}
-yPoints {
-  0 170
-  1 170
-  2 160
-  3 170
-}
-endObjectProperties
-
-# (Rectangle)
-object activeRectangleClass
+# (Symbol)
+object activeSymbolClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 170
-y 147
-w 20
-h 6
-lineColor index 35
-fill
-fillColor index 15
+x 252
+y 190
+w 21
+h 40
+file "symbols-vacuum-aperture-symbol.edl"
+numStates 2
+minValues {
+  0 -1
+  1 0
+}
+maxValues {
+  0 0
+  1 1
+}
+controlPvs {
+  0 ""
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
 endObjectProperties
 '''
 
