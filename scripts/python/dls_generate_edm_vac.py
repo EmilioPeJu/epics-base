@@ -1,45 +1,73 @@
-#!/usr/bin/env python
+#!/bin/env python
 #
-#	exportVacuumGui.py
-#	
-#	Ulrik Pedersen @ Diamond - March 2006
+#	Based on exportVacuumGui.py written by Ulrik Pedersen @ Diamond - March 2006
 #
-#	Version 1.0 - 	03.03.2006
-#					released to /home/up45/bin/scripts
-#
-#	Version 1.1 - 	03.03.2006
-#					removed annoying output.
-#
-#	Ver. 1.2 - 	06.03.2006 (UKP)
-#				- Added graceful exit and stderr output when file error occurs.
-#
-#	Ver. 1.3 -	06.03.2006 (UKP)
-#				- Moved all VacuumCellObjects into this file.
-#				
-#	Ver. 1.4 -	06.03.2006 (UKP)
-#				- added support for empty and comment rows.
-#				- first version released to makeDlsApp subversion.
-#				- renamed to dlsGenerateEdmVacuumGui.py
-#				- removed prefix in fron of valve to support FE valves.
-#
-# Ver. 1.5 -  06.03.2006 (TMC)
-#				- titlebar now added using dls_generate_edm_titlebar
-#				- FUDGE: added output directory
+#	Version 1.0 - 	29.03.2006
+#					updated to use dlsxmlparserfunctions
 
-
-import sys, optparse, re, os
+import sys, re, os
 from optparse import OptionParser
 from dlsedmtable import edmTableBuilder					# The module that contain the table-API
-#from vacuumCellObjects import *							# The file where the EDM objects are defined
 from dlsxmlexcelparser import *
 from dls_generate_edm_titlebar import *
+from dlsxmlparserfunctions import table_handler
 
-def gen_edm_vac(spreadSheetData,out_dir="."):
+##########
+# Global #
+##########
+filename = ""
+# create the temperature-table object at offset 0, 0 with 10 pixels between rows and columns.
+edmTable = edmTableBuilder(0,0,10,10)
 
-	# create the temperature-table object at offset 0, 0 with 10 pixels between rows and columns.
-	edmTable = edmTableBuilder(0,0,10,10)
+def complete_screen(D,new_filename):
+	global filename
+	global edmTable
+	if filename:
+		# print the existing table to file and start a new file
+		print "Wrote: "+filename
+		if os.path.isfile(D.out_dir+"/"+filename):
+			os.remove(D.out_dir+"/"+filename)
+			D.bugprint("Replaced "+filename)
+		edmTable.writeEdmScreenAuto(D.out_dir+"/"+filename)
+		hutchText = filename
+		if filename.find("OH")>-1:
+			hutchText = "Optics Hutch "+filename[filename.find("OH")+2].replace(".","-")
+		if filename.find("EH")>-1:
+			hutchText = "Experiment Hutch "+filename[filename.find("EH")+2].replace(".","-")	
+		if filename.find("EE")>-1:
+			hutchText = "Experimental Enclosure "+filename[filename.find("EE")+2].replace(".","-")							
+		if filename.find("BE")>-1:
+			hutchText = "Branchline Enclosure "+filename[filename.find("BE")+2].replace(".","-")							
+		# add titlebar to screen					
+		titlebar(D.out_dir+"/"+filename,colour="green",htype=1,buttonText="$(dom)",headerText=hutchText +" Vacuum Summary",tooltipFilename="generic-tooltip")
+		# start new file	
+		if new_filename:
+			filename = new_filename
+			tmpCellTemplate = edmTable.cellTemplate.copy()
+			tmpTableTemplate = edmTable.tableTemplate.copy()
+			edmTable = edmTableBuilder(0,0,10,10)
+			edmTable.cellTemplate = tmpCellTemplate
+			edmTable.tableTemplate = tmpTableTemplate
+			edmTable.nextCell()
+			D.bugprint("New Cell")
+	else:
+		# If this is the first file, just set the filename
+		filename = new_filename
 
+
+def gen_edm_vac(table,D):
+	##############
+	# initialise #
+	##############
+	spaces = {}
+	last_space = ""
+
+
+	####################
+	# hardcoded fields #
+	####################
 	# Define the vacuum cell template:
+	global edmTable
 	edmTable.addObjectType("RGAtitle", title, 50, 0);
 	edmTable.addObjectType("RGAsymbol", RGAsymbol, 50, 10);
 	edmTable.addObjectType("RGAstub", stub, 30, 22);
@@ -62,161 +90,116 @@ def gen_edm_vac(spreadSheetData,out_dir="."):
 	edmTable.addObjectType("pumpvalue", textMonitor, 20, 310);
 	edmTable.addObjectType("valveSymbol", valveSymbol, 0, 215);
 	edmTable.addObjectTypeSpecial("vaSpace", vaSpace, 21, 232);
-	edmTable.addObjectType("beWindow", beWindow, 0, 215);
-	edmTable.addObjectType("beWindowTitle", title, 0, 260);
-
+	edmTable.addObjectType("window", window, 0, 215);
+	edmTable.addObjectType("windowTitle", title, 0, 260);
+	edmTable.addObjectType("aperture", window, 0, 215);
+	edmTable.addObjectType("apertureTitle", title, 0, 260);
+#	edmTable.addObjectType("leftWall", wall, 0, 0);
+#	edmTable.addObjectType("rightWall", wall, 30, 0);
 	edmTable.tableTemplate['cellborder'] = False	# Don't want borders around each cell.
 	edmTable.tableTemplate['maxnumrows'] = 1		# Define how many rows can max be in one column.
 
 	# Get ready to fill in the content of each cell...
 	edmTable.nextCell()
+	D.bugprint("New Cell")
 
-	header = True
-	hutchNumber = 0
-	rowIndex = {}
-#	print "here!"
-	for name, table in spreadSheetData.tables:
-		if name == "!GUI-VA":
-#			print "Parsing sheet: " + name
-			for i, row in enumerate(table):
-				
-				#ignore empty rows
-				if len(row) == 0:
-					continue
-#				print "+++++++++ " + row[0] +" len: " + str(len(row))
-				
-				# Ignore comments (check if the first row starts with a #)
-				if re.compile(r'^[\#].*').match(row[0]):
-					continue
+	for row in table:
+		# find space lengths
+		if D.rowtype(row)=="normal":
+			if D.lookup(row,"SPACE"):
+				# start a new space
+				spaces[D.lookup(row,"SPACE")]=0
+				last_space = D.lookup(row,"SPACE")
+			elif D.lookup(row,"GCTLR") or D.lookup(row,"IONP") or D.lookup(row,"RGA"):
+				# extend length of last space
+				spaces[last_space]+=1
 
-				if header:
-					if row[0] == "NAME":
-						header = False
-						colIndex = 0
-						for cell in row:
-							rowIndex[cell] = colIndex
-							colIndex += 1
-					continue
-
-				# if we reach a wall....
-				# here should either be a switch to another file (ie start a new table with the same template)
-				# or just draw some sort of 'wall'...
-				if row[0] == "FILE:":
-					if hutchNumber > 0:
-						if row[1] == "end":
-#							print "the end..."
-							edmTable.fillCellContent("beWindow", {})
-							edmTable.fillCellContent("beWindowTitle", {"<TITLE>": "Be Window"})
-							edmTable.nextCell()
-
-							# Create an EDM screen where the table will fit exactly
-	#						print "tablesize: " + str(edmTable.tableTemplate['screenSizeX']) + "x" +  str(edmTable.tableTemplate['screenSizeY'])
-	#						print "CellPointer: " + str(edmTable.cellPointer['x']) + "x" +  str(edmTable.cellPointer['y'])
-						print "Writing screen to file: " + outputFile
-						if os.path.isfile(out_dir+"/"+outputFile):
-							os.remove(out_dir+"/"+outputFile)
-							print "Replaced "+outputFile
-						edmTable.writeEdmScreenAuto(out_dir+"/"+outputFile)
-						text = outputFile
-						if outputFile.find("OH")>-1:
-							text = "Optics Hutch "+outputFile[outputFile.find("OH")+2]
-						if outputFile.find("EH")>-1:
-							text = "Experiment Hutch "+outputFile[outputFile.find("EH")+2]	
-						if outputFile.find("EE")>-1:
-							text = "Experimental Enclosure "+outputFile[outputFile.find("EE")+2]							
-						if outputFile.find("BE")>-1:
-							text = "Branchline Enclosure "+outputFile[outputFile.find("BE")+2]							
-						
-						titlebar(out_dir+"/"+outputFile,colour="green",htype=1,buttonText="$(dom)",headerText=text +" Vacuum Summary",tooltipFilename="generic-tooltip")
-	
-						tmpCellTemplate = edmTable.cellTemplate.copy()
-						tmpTableTemplate = edmTable.tableTemplate.copy()
-						edmTable = edmTableBuilder(0,0,10,10)
-						edmTable.cellTemplate = tmpCellTemplate
-						edmTable.tableTemplate = tmpTableTemplate
-						
-						# Get ready to fill in the content of each cell...
-						edmTable.nextCell()
-					if row[1]:
-						outputFile = row[1]
-					hutchNumber += 1
-					if len(row) <= 2:
-						continue		
-					
-				if row[rowIndex['PREFIX']]:
-					prefix = row[rowIndex['PREFIX']]
+	for row in table:
+	# write files
+		rowtype = D.rowtype(row)
+		if rowtype=="file":
+			complete_screen(D,row[1])
+			# print the existing table to file and start a new file
+		if rowtype=="normal":
+			prefix = D.lookup(row,"PREFIX")
+			# add RGAs
+			rowRGA=D.lookup(row,"RGA")
+			if rowRGA:
+				edmTable.fillCellContent("RGAstub", {})
+				edmTable.fillCellContent("RGApipe", {})
+				edmTable.fillCellContent("RGAsymbol", {"<DEVICE>": prefix + rowRGA})
+				edmTable.fillCellContent("RGAtitle", {"<TITLE>": rowRGA})
+			# add IMGs
+			rowIMG=D.lookup(row,"IMG")
+			if rowIMG:
+				edmTable.fillCellContent("IMGstub", {})
+				edmTable.fillCellContent("IMGpipe", {})
+				edmTable.fillCellContent("IMGtitle", {"<TITLE>": rowIMG})
+				edmTable.fillCellContent("IMGsymbol", {"<DEVICE>": prefix + rowIMG})
+				edmTable.fillCellContent("IMGvalue", {"<DEVICE>": prefix + rowIMG + ":P"})
+			# add PIRGs
+			rowPIRG=D.lookup(row,"PIRG")
+			if rowPIRG:
+				edmTable.fillCellContent("PIRGstub", {})
+				edmTable.fillCellContent("PIRGpipe", {})
+				edmTable.fillCellContent("PIRGtitle", {"<TITLE>": rowPIRG})
+				edmTable.fillCellContent("PIRGsymbol", {"<DEVICE>": prefix + rowPIRG})
+				edmTable.fillCellContent("PIRGvalue", {"<DEVICE>": prefix + rowPIRG + ":P"})
+			# add GCTLR
+			rowGID=D.lookup(row,"GID")
+			if rowGID:
+				if len(rowGID)<2:
+					rowGID = "0"+rowGID[0]
+				edmTable.fillCellContent("gaugeRelatedDisplay", {"<ID>": rowGID, "<GCTLR_DEVICE>": prefix + D.lookup(row,'GCTLR')})
+				edmTable.fillCellContent("GaugeValue", {"<DEVICE>": prefix + "GAUGE-" + rowGID + ":P"})
+			# add IONP
+			rowIONP=D.lookup(row,"IONP")
+			if rowIONP:
+				edmTable.fillCellContent("pumpStub", {})
+				edmTable.fillCellContent("pumpSymbol", {"<DEVICE>": prefix + rowIONP})
+				edmTable.fillCellContent("pumptitle", {"<TITLE>": rowIONP})
+				edmTable.fillCellContent("pumpvalue", {"<DEVICE>": prefix + rowIONP + ":P"})
+			# add VALVE
+			rowVALVE=D.lookup(row,"VALVE")
+			if rowVALVE:
+				if rowVALVE.upper().find("WIND")>-1:
+					edmTable.fillCellContent("window", {})
+					edmTable.fillCellContent("windowTitle", {"<TITLE>": rowVALVE})
+				elif rowVALVE.upper().find("APER")>-1:
+					edmTable.fillCellContent("aperture", {})
+					edmTable.fillCellContent("apertureTitle", {"<TITLE>": rowVALVE})
 				else:
-					prefix = ""
-				
-				if row[rowIndex['RGA']]:
-					edmTable.fillCellContent("RGAstub", {})
-					edmTable.fillCellContent("RGApipe", {})
-					edmTable.fillCellContent("RGAsymbol", {"<DEVICE>": prefix + row[rowIndex['RGA']]})
-					edmTable.fillCellContent("RGAtitle", {"<TITLE>": row[rowIndex['RGA']]})
-					
-				if row[rowIndex['IMG']]:	
-					edmTable.fillCellContent("gaugeRelatedDisplay", {"<DOMAIN>": "BL16B", "<ID>": row[rowIndex['GID']], "<GCTLR_DEVICE>": prefix + row[rowIndex['GCTLR']]})
-					
-					edmTable.fillCellContent("PIRGstub", {})
-					edmTable.fillCellContent("PIRGpipe", {})
-					edmTable.fillCellContent("PIRGtitle", {"<TITLE>": row[rowIndex['PIRG']]})
-					edmTable.fillCellContent("PIRGsymbol", {"<DEVICE>": prefix + row[rowIndex['PIRG']]})
-					edmTable.fillCellContent("PIRGvalue", {"<DEVICE>": prefix + row[rowIndex['PIRG']] + ":P"})
-					
-					edmTable.fillCellContent("IMGstub", {})
-					edmTable.fillCellContent("IMGpipe", {})
-					edmTable.fillCellContent("IMGtitle", {"<TITLE>": row[rowIndex['IMG']]})
-					edmTable.fillCellContent("IMGsymbol", {"<DEVICE>": prefix + row[rowIndex['IMG']]})
-					edmTable.fillCellContent("IMGvalue", {"<DEVICE>": prefix + row[rowIndex['IMG']] + ":P"})
+					edmTable.fillCellContent("valveSymbol", {"<DEVICE>": rowVALVE})
+			# add space
+			rowSPACE=D.lookup(row,"SPACE")
+			if rowSPACE:
+				vaSpaceLength = edmTable.tableTemplate['cellwidth'] - 20 + edmTable.tableTemplate['colspacing']
+				cellWidth = edmTable.tableTemplate['cellwidth'] + edmTable.tableTemplate['colspacing']
+				edmTable.fillCellContent("vaSpace", {"<SPACE>": prefix + rowSPACE, "<WIDTH>": str(vaSpaceLength+spaces[rowSPACE]*cellWidth-1)})
+			edmTable.nextCell()
+			D.bugprint("New Cell")
 
-					edmTable.fillCellContent("GaugeValue", {"<DEVICE>": prefix + "GAUGE-" + row[rowIndex['GID']] + ":P"})
+	# tidy up
+	complete_screen(D,"")
 
-				if row[rowIndex['IONP']]:
-					edmTable.fillCellContent("pumpStub", {})
-					edmTable.fillCellContent("pumpSymbol", {"<DEVICE>": prefix + row[rowIndex['IONP']]})
-					edmTable.fillCellContent("pumptitle", {"<TITLE>": row[rowIndex['IONP']]})
-					edmTable.fillCellContent("pumpvalue", {"<DEVICE>": prefix + row[rowIndex['IONP']] + ":P"})
 
-				if row[rowIndex['SPACE']]:
-					vaSpaceLength = edmTable.tableTemplate['cellwidth'] - 20 + edmTable.tableTemplate['colspacing']
-					cellWidth = edmTable.tableTemplate['cellwidth'] + edmTable.tableTemplate['colspacing']
-					nextRow = 1
-					spaceEndReached = False
-					while (not spaceEndReached):
-						if len(table[i+nextRow]) <= 1:		# Check and ignore if the row is (almost) empty
-							nextRow += 1
-							continue
-						if re.compile(r'^[\#].*').match(table[i+nextRow][0]):	# check and ignore if the row is a comment
-							nextRow += 1
-							continue
-							
-						spaceStr = table[i+nextRow][rowIndex['SPACE']]
-						if spaceStr == "end":
-							spaceEndReached = True
-						elif table[i+nextRow][rowIndex['NAME']] == "FILE:":
-							nextRow += 1
-						elif not spaceStr:
-							nextRow += 1
-							vaSpaceLength += cellWidth
-						else:
-							spaceEndReached = True
+def main():
+	usage = "usage: ./%prog [options] INPUT_XML_FILE"
+	parser = OptionParser(usage)
+	D = table_handler(".","",True)
+	(options, args) = parser.parse_args()
+	if len(args) != 1:
+		D.errorprint("*** Error: Incorrect number of arguments - you must supply one input file (.xml)")
 
-					edmTable.fillCellContent("vaSpace", {"<SPACE>": prefix + row[rowIndex['SPACE']], "<WIDTH>": str(vaSpaceLength-1)})
-					
-				if len(row) >= rowIndex['VALVE']:
-					if row[rowIndex['VALVE']]:
-						if row[rowIndex['VALVE']].upper().find("WIND")>-1:
-							edmTable.fillCellContent("beWindow", {})
-							edmTable.fillCellContent("beWindowTitle", {"<TITLE>": row[rowIndex['VALVE']]})
-						elif row[rowIndex['VALVE']].upper().find("APER")>-1:
-							edmTable.fillCellContent("beWindow", {})
-							edmTable.fillCellContent("beWindowTitle", {"<TITLE>": row[rowIndex['VALVE']]})
-						else:
-							edmTable.fillCellContent("valveSymbol", {"<DEVICE>": row[rowIndex['VALVE']]})
-						
-				edmTable.nextCell()
-	return
-
+	# parse xml file
+	xml = args[0]
+	data = ExcelHandler()
+	parse(xml, data)		
+	for name, table in data.tables:
+		if name=="!GUI-VA":
+			gen_edm_vac(table,D)
+	sys.exit(0)
+	
 screenProperties = '''4 0 1
 beginScreenProperties
 major 4
@@ -531,7 +514,7 @@ menuLabel {
   1 "Controller"
 }
 symbols {
-  0 "dom=<DOMAIN>, id=<ID>"
+  0 "id=<ID>"
   1 "device=<GCTLR_DEVICE>"
 }
 endObjectProperties
@@ -801,7 +784,7 @@ endObjectProperties
 
 '''
 
-beWindow = '''
+window = '''
 # (Rectangle)
 object activeRectangleClass
 beginObjectProperties
@@ -810,37 +793,85 @@ minor 0
 release 0
 x 200
 y 296
-w 10
+w 20
 h 42
-lineColor index 38
+lineColor index 25
 fill
-fillColor index 38
+fillColor index 25
+endObjectProperties
+'''
+aperture = '''
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 170
+y 130
+w 20
+h 10
+lineColor index 25
+fill
+fillColor index 25
+numPoints 4
+xPoints {
+  0 170
+  1 190
+  2 180
+  3 170
+}
+yPoints {
+  0 130
+  1 130
+  2 140
+  3 130
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 170
+y 160
+w 20
+h 10
+lineColor index 25
+fill
+fillColor index 25
+numPoints 4
+xPoints {
+  0 170
+  1 190
+  2 180
+  3 170
+}
+yPoints {
+  0 170
+  1 170
+  2 160
+  3 170
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 170
+y 147
+w 20
+h 6
+lineColor index 35
+fill
+fillColor index 15
 endObjectProperties
 '''
 
-
 if __name__ == "__main__":
-	usage = "usage: ./%prog [options] INPUT_XML_FILE"
-	parser = OptionParser(usage)
-	(options, args) = parser.parse_args()
-	if len(args) != 1:
-#		parser.error("*** Error: Incorrect number of arguments - you must supply one input file (.xml)")
-		print >> sys.stderr, "*** Error: Incorrect number of arguments - you must supply one input file (.xml)"
-		sys.exit(1)
-
-	# read in the arguments
-	inputFile = args[0]
-	try:
-		fileHandle = open(inputFile, 'r')
-	except IOError:
-		print >> sys.stderr, "*** ERROR: could not open file: " + inputFile + " for reading."
-		sys.exit(1)
-	fileHandle.close()
-
-	xmlData = ExcelHandler()
-	parse(inputFile, xmlData)
-	gen_edm_vac(xmlData)
-	sys.exit(0)
-	
-
-
+	main()

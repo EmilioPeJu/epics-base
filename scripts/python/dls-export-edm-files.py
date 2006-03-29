@@ -6,7 +6,7 @@ from dlsxmlexcelparser import *
 from dls_generate_edm_macros import *
 from dls_generate_edm_autofill import *
 from dls_generate_edm_sum import *
-from dlsGenerateEdmVacuumGui import gen_edm_vac
+from dls_generate_edm_vac import gen_edm_vac
 from dlsxmlparserfunctions import table_handler
 
 ####################
@@ -128,7 +128,7 @@ Creating edm files from: %s
 					gen_edm_autofill(table,Table_handler,f)
 			if options.vac:
 				bugprint("Creating EDM vacuum screens")
-				gen_edm_vac(data,out_dir)
+				gen_edm_vac(table,Table_handler)
 	if options.overview:
 		for f in overview_files:
 			os.chmod(out_dir+"/"+f,0555)

@@ -101,13 +101,6 @@ class table_handler:
 			self.bugprint("Found File "+row[1]+" row")
 			# file has no default action
 			return "file"
-		elif row[0][:5]=='SMODE':
-			self.bugprint("Found SMODE row")
-			# smode returns the current simulation mode: SMODE:SIM if simulation or SMODE:REAL if reaf
-			if row[1][:3].upper()=="SIM":
-				return "SMODE:SIM"
-			else:
-				return "SMODE:REAL"
 		elif len(row) < self.smallest_row or row[self.ioc_row]=="":
 			self.bugprint("Found Empty row")
 			# empty rows have no def action
