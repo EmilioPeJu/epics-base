@@ -65,7 +65,8 @@ CONFIGS += RULES.Dls
 
 SCRIPTS += convertDlsRelease.pl
 
-# DLS private copy of svn_load_dirs (because it disappeared from the subversion distribution)
+# DLS private copy of svn_load_dirs 
+# (because it disappeared from the subversion distribution)
 
 SCRIPTS += dls-svn_load_dirs
 
@@ -82,7 +83,7 @@ SCRIPTS += dls-start-bugfix-branch.py
 SCRIPTS += dls-start-feature-branch.py
 SCRIPTS += dls-start-new-module.py
 SCRIPTS += dls-sync-from-trunk.py
-#SCRIPTS += dls-vendor-import.py
+SCRIPTS += dls-vendor-import.py
 #SCRIPTS += dls-vendor-update.py
 
 # signal-list python scripts
@@ -115,7 +116,7 @@ SCRIPTS += dls-subst-to-csv.py
 #SCRIPTS += dls-start-feature-branch
 #SCRIPTS += dls-start-new-module
 #SCRIPTS += dls-sync-from-trunk
-SCRIPTS += dls-vendor-import
+#SCRIPTS += dls-vendor-import
 SCRIPTS += dls-vendor-update
 
 include $(TOP)/configure/RULES
