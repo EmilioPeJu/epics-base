@@ -73,6 +73,7 @@ SCRIPTS += dls-svn_load_dirs
 # Python scripts (new)
 
 SCRIPTS += dls-checkout-module.py
+SCRIPTS += dls-export-release.py
 SCRIPTS += dls-list-branches.py
 SCRIPTS += dls-list-modules.py
 SCRIPTS += dls-list-releases.py
