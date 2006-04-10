@@ -34,18 +34,18 @@ def main():
     sys.exit()
 
   if options.ioc:
-    source = 'ioc/'+args[0]
-    # Allow for individual technical areas to be specified
-    if ("/" in args[0] ):
-      n = args[0].rfind("/")
-      source   = 'ioc'
-      blName   = args[0][0:n]
-      techArea = args[0][n+1:]
+    cols = args[0].split('/')
+    if len(cols) > 1:
+      appType  = 'ioc'
+      appName  = cols[0]
+      techArea = cols[1]
     else:
-      n = -1
+      print 'Missing Technical Area under Beam Line'
+      sys.exit()
   else:
-    source = 'support/'+args[0]
-    n = -1
+    appType  = 'support'
+    appName  = args[0]
+    techArea = ''
 
   # Create an object to interact with subversion
   subversion = pysvn.Client()
@@ -58,9 +58,10 @@ def main():
   subversion.callback_get_log_message = get_log_message
 
   # Check for existence of this module in trunk in the repository
-  exists = pathcheck( subversion, os.path.join(prefix,'trunk',source) )
+
+  exists = pathcheck( subversion, os.path.join(prefix,'trunk',appType,appName,techArea) )
   if not exists:
-    print prefix+'/trunk/'+source+' does not exist'
+    print os.path.join(prefix,'trunk',appType,appName,techArea) + ' does not exist'
     sys.exit()
 
   if os.path.isdir(args[1]):
@@ -68,34 +69,37 @@ def main():
     print 'Please choose another name or move elsewhere'
     sys.exit()
 
-  # Check for existence of branches/<ioc or support>/<beamline>/<technical area> 
-  # directory tree in the repository
-  if n != -1:
-    exists = pathcheck( subversion, os.path.join(prefix,'branches',source,blName) )
-    if not exists:
-      print 'Creating ' +blName+ ' branches area'
-      subversion.mkdir(os.path.join(prefix,'branches',source,blName),
-                       '"Created " +blName+ " branches area"')
-    exists = pathcheck( subversion, os.path.join(prefix,'branches',source,blName,techArea) )
-    if not exists:
-      print 'Creating ' +techArea+ ' branches area'
-      subversion.mkdir(os.path.join(prefix,'branches',source,blName,techArea),
-                       '"Created " +techArea+ " branches area"')
-    source = 'ioc' + '/' + blName +  '/' + techArea
+  # Check for existence of "appName" branches directory in the repository
 
-  # Check for existence of branches/<name>/<branch name> in the repository
-  exists = pathcheck( subversion, os.path.join(prefix,'branches', source, args[1]) )
+  exists = pathcheck( subversion, os.path.join(prefix,'branches',appType,appName) )
   if not exists:
-    print 'Creating branch of ' +args[0]+ ' called ' +args[1]
-    subversion.copy( os.path.join(prefix, 'trunk', source),
-                     os.path.join(prefix, 'branches', source, args[1]) )
+    print 'Creating ' + appName + ' branches area'
+    subversion.mkdir(os.path.join(prefix,'branches',appType,appName),
+                     '"Created " + appName + " branches area"')
+
+  # Check for existence of "techArea" branches directory in the repository
+
+  exists = pathcheck( subversion, os.path.join(prefix,'branches',appType,appName,techArea) )
+  if not exists:
+    print 'Creating ' + techArea + ' branches area'
+    subversion.mkdir(os.path.join(prefix,'branches',appType,appName,techArea),
+                     '"Created " + techArea + " branches area"')
+
+  # Check for existence of <branch name> in the repository
+
+  exists = pathcheck( subversion, os.path.join(prefix,'branches',appType,appName,techArea,args[1]) )
+  if not exists:
+    print 'Creating branch of ' + args[0] + ' called ' + args[1]
+    subversion.copy( os.path.join(prefix, 'trunk', appType, appName,techArea),
+                     os.path.join(prefix, 'branches', appType, appName, techArea, args[1]) )
   else:
-    print 'A branch called "' +args[1]+ '" already exists in the repository'
+    print 'A branch called "' + args[1] + '" already exists in the repository'
     print 'Please choose a different name and try again'
     sys.exit()
 
   tempdir = '/tmp/svn'
-  subversion.checkout( os.path.join(prefix, 'branches', source, args[1]), tempdir )
+  subversion.checkout( os.path.join(prefix, 'branches', appType, appName, techArea, args[1]),
+                       tempdir )
 
   entry = subversion.info(tempdir)
 
@@ -116,7 +120,10 @@ def main():
   # Is the current directory a working SVN directory?
   isWC = workingCopy(subversion)
   if isWC:
-    if isWC.url == os.path.join(prefix,'trunk',source):
+    pp = os.path.join(prefix,'trunk',appType,appName,techArea)
+    if( pp[-1] == '/' ):
+      pp = pp[:len(pp)-1]
+    if isWC.url == pp:
       status_list = subversion.status( '.', True, True, True, True )
       modified    = 0
       for x in status_list:
@@ -127,30 +134,34 @@ def main():
           print
           print 'To create a working directory from the new branch'
           print 'change directories and run:'
-          print 'svn checkout '+os.path.join(prefix,'branches',source,args[1])
+          print 'svn checkout '+os.path.join(prefix,'branches',appType,appName,techArea,args[1])
 
       if not modified:
-        print 'This is an SVN working directory for: "' +os.path.join(prefix,'trunk',source)+ '"'
+        print 'This is an SVN working directory for:'
+        print '"' + os.path.join(prefix,'trunk',appType,appName,techArea) + '"'
         ans = raw_input('Do you want to switch this working directory onto the new branch? ')
         if( ans == 'y' or ans == 'Y' or ans == 'yes' or ans == 'Yes' ):
-          print 'Switching this working directory to the new branch ' +args[1]
-          subversion.switch( '.', os.path.join(prefix,'branches',source,args[1]),
+          print 'Switching this working directory to the new branch ' + args[1]
+          subversion.switch( '.', os.path.join(prefix,'branches',appType,appName,techArea,args[1]),
                              True, pysvn.Revision( pysvn.opt_revision_kind.head ) )
         else:
           print 'NOT switching this working directory to the new branch'
           print
           print 'To create a working directory from this new branch,'
           print 'change directories and run:'
-          print 'svn checkout '+os.path.join(prefix,'branches',source,args[1])
+          print 'svn checkout '+os.path.join(prefix,'branches',appType,appName,techArea,args[1])
     else:
-      print 'This is an SVN working directory but not for: "' +os.path.join(prefix,'trunk',source)+ '"'
+      print 'This is an SVN working directory but not for:'
+      print '"' + os.path.join(prefix,'trunk',appType,appName,techArea)+ '"'
       print
       print 'To create a working directory from this new branch,'
       print 'change directories and run:'
-      print 'svn checkout '+os.path.join(prefix,'branches',source,args[1])
+      print 'svn checkout '+os.path.join(prefix,'branches',appType,appName,techArea,args[1])
   else:
-    print 'Checking out: ' + os.path.join(prefix,'branches',source,args[1]) + '...'
-    subversion.checkout(os.path.join(prefix,'branches',source,args[1]), args[1])
+    print 'Checking out:' 
+    print  os.path.join(prefix,'branches',appType,appName,techArea,args[1]) + '...'
+    subversion.checkout(os.path.join(prefix,'branches',appType,appName,techArea,args[1]), 
+                        os.path.join(args[0],args[1]))
 
 if __name__ == "__main__":
   main()

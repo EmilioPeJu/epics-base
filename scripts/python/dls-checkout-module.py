@@ -34,7 +34,12 @@ def main():
     sys.exit()
 
   if options.ioc:
-    source = 'ioc/' + args[0]
+    cols = args[0].split('/')
+    if len(cols) > 1:
+      source = 'ioc/' + args[0]
+    else:
+      print 'Missing Technical Area under Beamline'
+      sys.exit()
   else:
     source = 'support/' + args[0]
 
