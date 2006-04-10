@@ -13,7 +13,8 @@ This script should be used to create all branches which are
 not for bug fixes to existing releases.
 
 The -i flag is used to specify that we want to start a branch
-of an IOC application.
+of an IOC application. For an IOC application, <name> is expected 
+to be of the form: <beamLine/Technical Area> e.g. BL18I/MO
 """
 
 import os, pysvn, shutil, sys

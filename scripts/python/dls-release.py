@@ -10,6 +10,8 @@ software is tagged as <tag> in the release area of the
 repository.
 
 The -i flag specifies a release of an IOC application.
+For an IOC application, <name> is expected to be of the form:
+<beamLine/Technical Area> e.g. BL18I/MO
 
 The -b flag tells the script to release from a branch
 rather than from the trunk.
@@ -43,6 +45,16 @@ def main():
     epicsVer = 'R3.14.7'
   else:
     epicsVer = options.epicsVer
+
+  if( epicsVer != 'R3.13.9' and epicsVer != 'R3.14.7' and epicsVer != 'R3.14.8.2' ):
+    print 'The EPICS version must be one of: R3.13.9, R3.14.7 or R3.14.8.2'
+    sys.exit()
+
+  if options.ioc:
+    cols = args[0].split('/')
+    if len(cols) < 2:
+      print 'Missing Technical Area under Beam Line'
+      sys.exit()
 
   if( not options.ioc and not options.branch ):
     srcDir  = 'trunk/support/'+args[0]
@@ -123,7 +135,7 @@ def main():
     if not stat:
       os.mkdir(baseStr)
 
-#  subversion.export(  os.path.join(prefix,relDir, args[1]),       os.path.join(baseStr,args[1]) )
+  print 'Checking out: ' + os.path.join(relDir, args[1])
   subversion.checkout(os.path.join(prefix,relDir, args[1]), os.path.join(baseStr,args[1]) )
 
   print 'Building release...'

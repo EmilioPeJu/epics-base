@@ -9,9 +9,12 @@ IOC application from the trunk or a branch in the
 repository. The support module or IOC application
 is checked out into the users current directory.
 
-The -i flag is used to specify an IOC application.
 The -b flag tells the script to checkout from a
 branch rather than the trunk.
+
+The -i flag is used to specify an IOC application.
+For an IOC application, <name> is expected to be of the form:
+<beamLine/Technical Area> e.g. BL18I/MO
 """
 
 import sys, os, pysvn
