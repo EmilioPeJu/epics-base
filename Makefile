@@ -79,7 +79,6 @@ SCRIPTS += dls-list-modules.py
 SCRIPTS += dls-list-releases.py
 SCRIPTS += dlsPyLib.py
 SCRIPTS += dls-release.py
-SCRIPTS += dls-signalparse.py
 SCRIPTS += dls-start-bugfix-branch.py
 SCRIPTS += dls-start-feature-branch.py
 SCRIPTS += dls-start-new-module.py
@@ -107,6 +106,7 @@ SCRIPTS += dlsedmtable.py
 
 SCRIPTS += dls-csv-to-subst.py
 SCRIPTS += dls-subst-to-csv.py
+SCRIPTS += dls-signalparse.py
 
 # Bash scripts (old)
 
