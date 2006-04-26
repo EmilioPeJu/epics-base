@@ -20,6 +20,11 @@ For an IOC application <name> is expected to be of
 the form "Beamline/Technical Area/IOC number"
 i.e. BL02I/VA/03. The IOC number can be omitted, in
 which case, it defaults to "01".
+
+If the technical area is set to BL, a different template
+is used. This template builds client input files from
+the metadata stored in the specified technical areas'
+database files.
 """
 
 import os, shutil, pysvn, sys
@@ -39,6 +44,8 @@ def main():
   if not prefix:
     sys.exit()
 
+  # Set empty technical area so it always defined
+  technicalArea = ""
   cols = args[0].split('/')
 
   if options.ioc:
@@ -52,10 +59,14 @@ def main():
     else:
       iocNumber = '01'
 
+    # For BL technical area the names are different...
+    if technicalArea == "BL":
+      appName    = beamLine
+    else:
+      appName    = beamLine + '-' + technicalArea + '-' + 'IOC' + '-' + iocNumber
     svnBlToCreate  = 'ioc/' + beamLine
     svnAppToCreate = svnBlToCreate + '/' + technicalArea
     diskDir        = beamLine + '/' + technicalArea
-    appName        = beamLine + '-' + technicalArea + '-' + 'IOC' + '-' + iocNumber
   else:
     svnAppToCreate = 'support/' + cols[0]
     diskDir        = cols[0]
@@ -103,10 +114,15 @@ def main():
 
   os.chdir(diskDir)
 
-  command = 'makeBaseApp.pl -t dls ' + appName
+  if technicalArea == "BL":
+    # Need to build different app for BL technical area.
+    command = 'makeBaseApp.pl -t dlsBL ' + appName
+  else:
+    command = 'makeBaseApp.pl -t dls ' + appName
   os.system(command)
 
-  if options.ioc:
+  # For non BL iocs we need to build the boot directory
+  if options.ioc and technicalArea != "BL":
     command = 'makeBaseApp.pl -i -t dls ' + appName
     os.system(command)
     # IOC applications do not need the "opi" directory
@@ -127,10 +143,16 @@ def main():
 
   subversion.checkout(os.path.join(prefix, 'trunk', svnAppToCreate), diskDir)
 
-  print
-  print 'Please now edit "' + diskDir + '/configure/RELEASE" to put in correct paths for dependencies.'
-  print 'You can also add dependencies to "' + diskDir + '/' + appName + 'App/src/Makefile"'
-  print 'and "' + diskDir + '/' + appName + 'App/Db/Makefile" if appropriate.'
+  if technicalArea == "BL":
+    # Need different message for BL technical area
+    print
+    print 'Please now edit "' + diskDir + '/configure/RELEASE" to put in correct paths for the ioc\'s other technical areas.'
+    print 'Also edit "' + diskDir + '/' + appName + 'App/Makefile"' + 'to add all database files from these technical areas.'
+  else:
+    print
+    print 'Please now edit "' + diskDir + '/configure/RELEASE" to put in correct paths for dependencies.'
+    print 'You can also add dependencies to "' + diskDir + '/' + appName + 'App/src/Makefile"'
+    print 'and "' + diskDir + '/' + appName + 'App/Db/Makefile" if appropriate.'
 
 
 if __name__ == "__main__":
