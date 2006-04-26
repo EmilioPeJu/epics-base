@@ -22,6 +22,7 @@ class ExcelHandler(handler.ContentHandler):
         self.cells=[]
         self.rows=[]
         self.tables=[]
+        self.data=[]
         
     def characters(self, content):
         self.chars.append(content)
@@ -45,11 +46,14 @@ class ExcelHandler(handler.ContentHandler):
     
     def endElement(self, name):
         if name=="Cell":
-            self.cells.append(''.join(self.chars))
+            self.cells.append(''.join(self.data))
         elif name=="Row":
             self.rows.append(self.cells)
         elif name=="Table":
             self.tables.append((self.worksheet, self.rows))
+        elif name=="Data":
+            self.data=self.chars
+            self.chars=[]
 
 if __name__ == "__main__":
     excelHandler=ExcelHandler()
