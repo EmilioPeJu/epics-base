@@ -56,6 +56,10 @@ TEMPLATES += top/dlsExampleBoot/ioc/Makefile@Common
 TEMPLATES += top/dlsExampleBoot/ioc/st_APPNAME_.src@Common
 TEMPLATES += top/dlsExampleBoot/ioc/README@Common
 
+# dlsBLApp is used for building the special cross-technical area BL ioc module.
+# It only contains a Makefile
+TEMPLATES += top/dlsBLApp/Makefile
+
 # Extra Diamond Rules
 
 CONFIGS += CONFIG.Dls
