@@ -2,10 +2,13 @@
 
 import os, sys
 from dlsxmlparserfunctions import *
+#from dls_generate_edm_optimized_screen import gen_edm_optimized_screen
+from dls_generate_edm_generic_screen import gen_edm_generic_screen
 
 ####################
 # hardcoded fields #
 ####################
+RELEASE_file=""
 
 ##############
 # initialise #
@@ -13,7 +16,7 @@ from dlsxmlparserfunctions import *
 device = {}
 
 # see if a group needs subs done
-def group(D,lines,start):
+def group(D,lines,start,overview,optimized):
 	i = start
 	vis = ""
 	counter = 1
@@ -37,14 +40,14 @@ def group(D,lines,start):
 			line=line[:7]+line[11+len(macro):]
 		i+=1
 	if vis:
-		write_vis_object(D,lines,start,end,macro)
+		write_vis_object(D,lines,start,end,macro,overview,optimized)
 		output.writelines(lines[end:i])
 	else:
 		output.writelines(lines[start:i])
 	return i
 	
 # replace tags in a given group
-def write_vis_object(D,lines,start,end,vis):
+def write_vis_object(D,lines,start,end,vis,overview,optimized):
 	i = start
 	while i < end:
 		line_out = lines[i]
@@ -59,6 +62,17 @@ def write_vis_object(D,lines,start,end,vis):
 				if D.unsubbed_names.has_key(vis):
 					del D.unsubbed_names[vis]
 				subst = D.lookup(device[vis],macro)
+				if macro=="FILE" and overview:
+					if subst=="autogen":
+						subst=gen_edm_generic_screen(D.out_dir,subst,title=vis+" - $(P)",row=device[vis],tableHandler=D)
+					elif subst[:7]=="autogen":
+						subst=gen_edm_generic_screen(D.out_dir,subst,title="Device - $(P)",tableHandler=D)
+					if optimized:
+					# lines for optimizing screens
+					#	out_file=D.lookup(device[vis],"P")+"-optimized-screen.edl"
+					#	opt_title=D.lookup(device[vis],"NAME")+" - "+D.lookup(device[vis],"P"
+					#	gen_edm_optimized_screen(subst,RELEASE_file,D.out_dir+"/"+out_file,D.lookuplist(device[vis]),title=opt_title)
+						subst=out_file
 			line_out = line_out.replace("#<"+macro+">#",subst)
 			D.bugprint("Replaced %s with %s in %s" %(macro,subst,lines[i]))
 		global output
@@ -66,7 +80,7 @@ def write_vis_object(D,lines,start,end,vis):
 		i+=1
 			
 # parse table, create device dictionary, parse input file
-def gen_edm_autofill(table,D,filename_in):
+def gen_edm_autofill(table,D,filename_in,overview=False,optimized=False):
 	global filename
 	filename = filename_in
 	for row in table:
@@ -82,7 +96,7 @@ def gen_edm_autofill(table,D,filename_in):
 	i = 0
 	while i < len(lines):
 		if lines[i][:10]=="beginGroup":
-			i = group(D,lines,i)
+			i = group(D,lines,i,overview,optimized)
 		output.writelines([lines[i]])
 		i+=1 
 	print "Wrote "+ filename

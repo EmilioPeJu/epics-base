@@ -19,12 +19,12 @@ filename = ""
 # create the temperature-table object at offset 0, 0 with 10 pixels between rows and columns.
 edmTable = edmTableBuilder(0,0,10,10)
 
-def complete_screen(D,new_filename):
+def complete_screen(D,new_filename,domain):
 	global filename
 	global edmTable
 	if filename:
 		# print the existing table to file and start a new file
-		print "Wrote: "+filename
+		print "Wrote "+filename
 		if os.path.isfile(D.out_dir+"/"+filename):
 			os.remove(D.out_dir+"/"+filename)
 			D.bugprint("Replaced "+filename)
@@ -39,7 +39,7 @@ def complete_screen(D,new_filename):
 		if filename.find("BE")>-1:
 			hutchText = "Branchline Enclosure "+filename[filename.find("BE")+2].replace(".","-")							
 		# add titlebar to screen					
-		titlebar(D.out_dir+"/"+filename,colour="green",htype=1,buttonText="$(dom)",headerText=hutchText +" Vacuum Summary",tooltipFilename="generic-tooltip")
+		titlebar(D.out_dir+"/"+filename,colour="green",htype=1,buttonText=domain,headerText=hutchText +" Vacuum Summary",tooltipFilename="generic-tooltip")
 		# start new file	
 		if new_filename:
 			filename = new_filename
@@ -55,7 +55,7 @@ def complete_screen(D,new_filename):
 		filename = new_filename
 
 
-def gen_edm_vac(table,D):
+def gen_edm_vac(table,D,domain="$(dom)"):
 	##############
 	# initialise #
 	##############
@@ -90,6 +90,7 @@ def gen_edm_vac(table,D):
 	edmTable.addObjectType("pumpvalue", textMonitor, 5, 330);
 	edmTable.addObjectType("valveSymbol", valveSymbol, 0, 215);
 	edmTable.addObjectTypeSpecial("vaSpace", vaSpace, 21, 230);
+	edmTable.addObjectTypeSpecial("vaSpaceLeft", vaSpace, 0, 230);
 	edmTable.addObjectType("window", window, 0, 215);
 	edmTable.addObjectType("windowTitle", title, 0, 265);
 	edmTable.addObjectType("aperture", aperture, 0, 215);
@@ -112,8 +113,8 @@ def gen_edm_vac(table,D):
 		if D.rowtype(row)=="normal":
 			if D.lookup(row,"SPACE"):
 				# start a new space
-				spaces[D.lookup(row,"SPACE")]=0
-				last_space = D.lookup(row,"SPACE")
+				spaces[D.lookup(row,"NAME")]=0
+				last_space = D.lookup(row,"NAME")
 			elif D.lookup(row,"GCTLR") or D.lookup(row,"IONP") or D.lookup(row,"RGA"):
 				# extend length of last space
 				spaces[last_space]+=1
@@ -122,7 +123,7 @@ def gen_edm_vac(table,D):
 	# write files
 		rowtype = D.rowtype(row)
 		if rowtype=="file":
-			complete_screen(D,row[1])
+			complete_screen(D,row[1],domain)
 			# print the existing table to file and start a new file
 		if rowtype=="normal":
 			prefix = D.lookup(row,"PREFIX")
@@ -163,12 +164,6 @@ def gen_edm_vac(table,D):
 				edmTable.fillCellContent("pumpSymbol", {"<DEVICE>": prefix + rowIONP})
 				edmTable.fillCellContent("pumptitle", {"<TITLE>": rowIONP})
 				edmTable.fillCellContent("pumpvalue", {"<DEVICE>": prefix + rowIONP + ":P"})
-			# add space
-			rowSPACE=D.lookup(row,"SPACE")
-			if rowSPACE:
-				vaSpaceLength = edmTable.tableTemplate['cellwidth'] - 20 + edmTable.tableTemplate['colspacing']
-				cellWidth = edmTable.tableTemplate['cellwidth'] + edmTable.tableTemplate['colspacing']
-				edmTable.fillCellContent("vaSpace", {"<SPACE>": prefix + rowSPACE, "<WIDTH>": str(vaSpaceLength+spaces[rowSPACE]*cellWidth-1)})
 			# add VALVE
 			rowVALVE=D.lookup(row,"VALVE")
 			if rowVALVE:
@@ -180,21 +175,31 @@ def gen_edm_vac(table,D):
 					edmTable.fillCellContent("apertureTitle", {"<TITLE>": rowVALVE})
 				else:
 					edmTable.fillCellContent("valveSymbol", {"<DEVICE>": rowVALVE})
+			# add space
+			rowSPACE=D.lookup(row,"SPACE")
+			if rowSPACE:
+				vaSpaceLength = edmTable.tableTemplate['cellwidth'] - 20 + edmTable.tableTemplate['colspacing']
+				cellWidth = edmTable.tableTemplate['cellwidth'] + edmTable.tableTemplate['colspacing']
+				if not rowVALVE:
+					edmTable.fillCellContent("vaSpaceLeft", {"<SPACE>": prefix + rowSPACE, "<WIDTH>": str(21+vaSpaceLength+spaces[D.lookup(row,"NAME")]*cellWidth-1)})
+				else:
+					edmTable.fillCellContent("vaSpace", {"<SPACE>": prefix + rowSPACE, "<WIDTH>": str(vaSpaceLength+spaces[D.lookup(row,"NAME")]*cellWidth-1)})
+			# add WALL
 			rowWALL=D.lookup(row,"WALL")
-			if rowWALL.upper()=="LEFT":
+			if rowWALL[:4].upper()=="LEFT":
 				edmTable.fillCellContent("topLeftWall", {})
 				edmTable.fillCellContent("bottomLeftWall", {})
-			if rowWALL.upper()=="RIGHT":
+			if rowWALL[:5].upper()=="RIGHT":
 				edmTable.fillCellContent("topRightWall", {})
 				edmTable.fillCellContent("bottomRightWall", {})
-			if rowWALL.upper()=="MID":
+			if rowWALL[:3].upper()=="MID":
 				edmTable.fillCellContent("topMidWall", {})
 				edmTable.fillCellContent("bottomMidWall", {})
 			edmTable.nextCell()
 			D.bugprint("New Cell")
 
 	# tidy up
-	complete_screen(D,"")
+	complete_screen(D,"",domain)
 
 
 def main():

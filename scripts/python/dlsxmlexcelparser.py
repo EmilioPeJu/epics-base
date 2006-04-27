@@ -37,6 +37,7 @@ class ExcelHandler(handler.ContentHandler):
                 self.cells.extend(
                     ['' for i in range(int(index) - len(self.cells) - 1)])
             self.chars=[]
+            self.data=[]
         elif name=="Row":
             self.cells=[]
         elif name=="Table":

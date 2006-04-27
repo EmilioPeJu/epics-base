@@ -80,8 +80,8 @@ class table_handler:
 			if dodefaction:
 				# create name_dict with new prefix row
 				self.prefix_row = self.trim(row)
-				self.name_dict = {}
-				i = 0
+				self.name_dict = {"NAME": (0,"","")}
+				i = 1
 				while i<len(self.name_row):
 					self.name_dict[self.name_row[i]]=(i,self.safeindex(self.prefix_row,i),self.safeindex(self.def_row,i))
 					i +=1		
@@ -164,6 +164,20 @@ class table_handler:
 					self.subbed_edm_row[i]=self.edm_row[i]
 			i += 1
 		return out_text[:len(out_text)-1]
+
+	# expands macros in string from current row
+	def expand(self,row,string):
+		sections = string.split("$")
+		output = sections[0]
+		for i in range(1,len(sections)):
+			delta_output="$"+sections[i]
+			macro = sections[i][1:sections[i].find(")")]
+			subst = self.lookup(row,macro)
+			if sections[i][0]=="(" and subst:
+				delta_output = sections[i].replace("("+macro+")",subst)
+			output+=delta_output
+		return output
+
 
 	# returns "" if index outside range
 	def safeindex(self,row,i):

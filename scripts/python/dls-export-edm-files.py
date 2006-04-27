@@ -3,9 +3,9 @@
 import os, sys, shutil
 from optparse import OptionParser
 from dlsxmlexcelparser import *
-from dls_generate_edm_macros import *
-from dls_generate_edm_autofill import *
-from dls_generate_edm_sum import *
+from dls_generate_edm_macros import gen_edm_macros
+from dls_generate_edm_autofill import gen_edm_autofill
+from dls_generate_edm_sum import gen_edm_sum
 from dls_generate_edm_vac import gen_edm_vac
 from dlsxmlparserfunctions import table_handler
 
@@ -114,7 +114,7 @@ Creating edm files from: %s
 			if options.overview:
 				bugprint("Autofilling EDM overview screens: Motion")
 				for f in overview_files:
-					gen_edm_autofill(table,Table_handler,f)
+					gen_edm_autofill(table,Table_handler,f,overview=True)
 			if options.temp:
 				bugprint("Creating EDM temperature screen")
 				gen_edm_sum(table,Table_handler,dom+temp_out,dom,"Temperature Summary","temp")	
@@ -125,10 +125,10 @@ Creating edm files from: %s
 			if options.overview:
 				bugprint("Autofilling EDM overview screens: Vacuum")
 				for f in overview_files:
-					gen_edm_autofill(table,Table_handler,f)
+					gen_edm_autofill(table,Table_handler,f,overview=True)
 			if options.vac:
 				bugprint("Creating EDM vacuum screens")
-				gen_edm_vac(table,Table_handler)
+				gen_edm_vac(table,Table_handler,domain=dom)
 	if options.overview:
 		for f in overview_files:
 			os.chmod(out_dir+"/"+f,0555)

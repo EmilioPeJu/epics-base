@@ -134,7 +134,7 @@ class edmTableBuilder:
 #  \param objName name of the object to do tag-substitution on.
 #  \param dictReplacement dictionary of tag-substitutions: the key is defined to be the tag to replace and the value is the new substitution string.
 #	Note: the dictionary parameter must have both keys and values of type string!
-	def fillCellContent(self, objName, dictReplacement):
+	def fillCellContent(self, objName, dictReplacement, suppress_warnings=False):
 		if not self.cellTemplate.has_key(objName):
 			print >> std.err, "*** WARNING: There is no \'" + objName + "\' object in the cell you defined! No replacements will take place. (fillCellContent())"
 			return
@@ -142,7 +142,7 @@ class edmTableBuilder:
 		tmpObjString = self.cellTemplate[objName][0]
 		replacementTags = dictReplacement.keys()
 		for tag in replacementTags:
-			if (tmpObjString.find(tag) < 0):
+			if (tmpObjString.find(tag) < 0) and not suppress_warnings:
 				print >> sys.stderr, "*** WARNING: TAG: \'" + tag + "\' was not found in object \'" + objName + "\' - no replacement of this tag done... (fillCellContent())"
 				break
 #			print "Replace: " + tag + " with: " + dictReplacement[tag]

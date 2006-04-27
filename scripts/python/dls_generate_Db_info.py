@@ -11,11 +11,14 @@ def limit(input,max):
 		return max
 
 # used for alarm summary: returns the name of the summary pv to be added
-def summary(row,n,p,d,D):
-	if int(D.lookup(row,n))==0:
-		return p+':'+d[1:]+':SUM'
+def summary(row,n,p,d,D,x=0):
+	if int(D.lookup(row,n))>x:
+		if x==0:
+			return p+':'+n[1:]+':SUM'
+		else:
+			return p+':'+n[1:]+str(x)+':SUM'
 	else:
-		return p+':'+n[1:]+':SUM'
+		return p+':'+d[1:]+':SUM'
 
 # write edm macro substitutions files
 def gen_Db_info(table,D,filename):
@@ -25,9 +28,9 @@ def gen_Db_info(table,D,filename):
 	####################
 	template1 = "info-gui.template"
 	template2 = "genericalarmsum.template"
-	nflowlim = 4
-	ntemplim = 8
-	ncurrlim = 4
+	nflowlim = 6
+	ntemplim = 24
+	ncurrlim = 24
 
 	##############
 	# initialise #
@@ -88,11 +91,11 @@ pattern { P, CALC, INPA, INPB, INPC, INPD, INPE, INPF, INPG, INPH, INPI, INPJ, I
 											( p, p+':SUM', \
 											  summary(out_row, 'NFLOW',p,d,D), \
 											  summary(out_row, 'NTEMP',p,d,D), \
+											  summary(out_row, 'NTEMP',p,d,D,12), \
 											  summary(out_row, 'NMOTOR',p,d,D), \
+											  summary(out_row, 'NMOTOR',p,d,D,12), \
 											  summary(out_row, 'NCURR',p,d,D), \
-											  p+':'+d[1:]+':SUM', \
-											  p+':'+d[1:]+':SUM', \
-											  p+':'+d[1:]+':SUM', \
+											  summary(out_row, 'NCURR',p,d,D,12), \
 											  p+':'+d[1:]+':SUM', \
 											  p+':'+d[1:]+':SUM', \
 											  p+':'+d[1:]+':SUM', \
@@ -135,6 +138,22 @@ pattern { P, CALC, INPA, INPB, INPC, INPD, INPE, INPF, INPG, INPH, INPI, INPJ, I
 												  p+D.lookup(out_row,s[1]+'10',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
 												  p+D.lookup(out_row,s[1]+'11',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
 												  p+D.lookup(out_row,s[1]+'12',emptyval=d)+D.lookup(out_row,'E'+s[1:]) ))	
+				if v > 12:
+					d = D.lookup(out_row,s[1]+'13')
+					outfile.write("\t{ %s, 1, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s }\n" % \
+												( p+':'+s[1:]+'12:SUM', \
+												  p+d+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'14',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'15',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'16',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'17',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'18',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'19',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'20',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'21',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'22',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'23',emptyval=d)+D.lookup(out_row,'E'+s[1:]), \
+												  p+D.lookup(out_row,s[1]+'24',emptyval=d)+D.lookup(out_row,'E'+s[1:]) ))	
 
 	outfile.write("}\n\n")
 	D.closef()

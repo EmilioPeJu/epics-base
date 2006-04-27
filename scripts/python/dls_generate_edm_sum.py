@@ -18,15 +18,16 @@ def gen_edm_sum(xml_table,D,filename,dom,title,vtype="temp",aspectratio=0.65):
 	# create the temperature-table object at offset 100, 100 with 10 pixels between rows and columns.
 	table = edmTableBuilder(0,0,2,2)
 	# Add and name the EDM objects to the cell template with their (cell) offset
-	table.addObjectType(vtype+"Tooltip", Tooltip.replace("#<VTYPE>#",vtype), 1, 1)
-	table.addObjectType("deviceTooltip", deviceTooltip, 1, 1)
-	table.addObjectType(vtype+"RD", RD, 1, 1)
-	table.addObjectType(vtype+"Symbol", eval(vtype+"Symbol"), 74, 4)
-	table.addObjectType("Label", Label, 4, 6)
-	table.addObjectType("tempVal", tempVal, 29, 6)
-	table.addObjectType("Text_title", Text_title, 4, 4)	
+	table.addObjectType(vtype+"Tooltip", Tooltip.replace("#<VTYPE>#",vtype), 11, 1)
+	table.addObjectType("deviceTooltip", deviceTooltip, 11, 1)
+	table.addObjectType(vtype+"RD", RD, 11, 1)
+	table.addObjectType(vtype+"Symbol", eval(vtype+"Symbol"), 84, 4)
+	table.addObjectType("Label", Label, 14, 6)
+	table.addObjectType("tempVal", tempVal, 42, 6)
+	table.addObjectType("Text_title", Text_title, 14, 4)	
 	table.tableTemplate['cellborder'] = False	# Don't want borders around each cell.
-	cell_width = 100
+	cell_width = 110
+	done_devices = []
 	nvtype = "N"+vtype.upper()
 
 	##############
@@ -52,37 +53,45 @@ def gen_edm_sum(xml_table,D,filename,dom,title,vtype="temp",aspectratio=0.65):
 			nvtypev = int(D.lookup(row,nvtype))
 			if nvtypev > 0:
 				p = D.lookup(row,"P")
-				i = 1
-				if y + nvtypev + 1 > height:
-					table.forceNewCol(0)
-					x += 1
-					y = 1
-					D.bugprint("forcing new column for " + p)
-				D.bugprint("writing cell header for "+p)
-				if not y==1:
-					table.nextCell()
-					y +=1 					
-				table.fillCellContent("Text_title", {"#<NAME>#": D.lookup(row,"NAME")})
-				table.fillCellContent(vtype+"RD", {"#<P>#": p,"#<FILE>#": D.lookup(row,"FILE")})
-				table.fillCellContent("deviceTooltip", {"#<P>#": p})
-				table.nextCell()
-				y += 1
-				while not i > nvtypev:
-					vn = D.lookup(row,vtype[:1].upper()+str(i))
-					vPV = p + vn
-					table.fillCellContent(vtype+"Tooltip", {})
-					table.fillCellContent(vtype+"RD", {"#<P>#": p,"#<FILE>#":D.lookup(row,"FILE")})
-					if vtype == "temp":
-						table.fillCellContent("Label", {"$(label)": vtype[:1].upper()+str(i)})						
-						table.fillCellContent(vtype+"Val", {"$("+vtype+")": vPV})
-						table.fillCellContent("tempSymbol", {"$(temp)": vPV})
+				skip_list = []
+				for i in range(int(D.lookup(row,"NFLOW"))):
+					wn = D.lookup(row,"W")+D.lookup(row,"W"+str(i))
+					if wn in done_devices:
+						skip_list.append(wn)
 					else:
-						table.fillCellContent("Label", {"$(label)": "Flow "+str(i)})
-						table.fillCellContent("flowSymbol", {"$(flow)": D.lookup(row,"W")+D.lookup(row,"W"+str(i))})
-					D.bugprint("writing cell for "+vtype+" "+str(i))
-					i += 1
+						done_devices.append(wn)
+				if vtype=="temp" or not len(skip_list) == int(D.lookup(row,"NFLOW")):
+					i = 1
+					if y + nvtypev + 1 > height:
+						table.forceNewCol(0)
+						x += 1
+						y = 1
+						D.bugprint("forcing new column for " + p)
+					D.bugprint("writing cell header for "+p)
+					if not y==1:
+						table.nextCell()
+						y +=1 					
+					table.fillCellContent("Text_title", {"#<NAME>#": D.lookup(row,"NAME")})
+					table.fillCellContent(vtype+"RD", {"#<P>#": p,"#<FILE>#": D.lookup(row,"FILE")})
+					table.fillCellContent("deviceTooltip", {"#<P>#": p})
 					table.nextCell()
 					y += 1
+					while not i > nvtypev:
+						vn = D.lookup(row,vtype[:1].upper()+str(i))
+						vPV = p + vn
+						table.fillCellContent(vtype+"Tooltip", {})
+						table.fillCellContent(vtype+"RD", {"#<P>#": p,"#<FILE>#":D.lookup(row,"FILE")})
+						if vtype == "temp":
+							table.fillCellContent("Label", {"$(label)": vtype[:1].upper()+str(i)})						
+							table.fillCellContent(vtype+"Val", {"$("+vtype+")": vPV})
+							table.fillCellContent("tempSymbol", {"$(temp)": vPV})
+						elif D.lookup(row,"W")+D.lookup(row,"W"+str(i)) not in skip_list:
+							table.fillCellContent("Label", {"$(label)": "Flow "+str(i)})
+							table.fillCellContent("flowSymbol", {"$(flow)": D.lookup(row,"W")+D.lookup(row,"W"+str(i))})
+						D.bugprint("writing cell for "+vtype+" "+str(i))
+						i += 1
+						table.nextCell()
+						y += 1
 	
 	global screenProperties
 	# Get the size of the entire table and create an EDM screen where the table will fit exactly
@@ -274,6 +283,7 @@ w 40
 h 18
 controlPv "$(temp)"
 font "arial-bold-r-14.0"
+fontAlign "right"
 fgColor index 14
 bgColor index 0
 useDisplayBg
