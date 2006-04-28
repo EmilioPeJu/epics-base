@@ -96,7 +96,7 @@ Creating Db files from: %s
 				gen_Db_info(table,Table_handler,ioc+info_suffix)	
 		elif name[:1]=="!" and not name[:4]=="!GUI":	
 			if options.subst:
-				bugprint("Creating substitution file "+name)
+				bugprint("Creating substitution file "+ioc+'.'+name[1:]+subst_suffix)
 				gen_Db_subst(table,mo_table,Table_handler,ioc+'.'+name[1:]+subst_suffix)
 	
 	# close output files
