@@ -90,29 +90,6 @@ SCRIPTS += dls-sync-from-trunk.py
 SCRIPTS += dls-vendor-import.py
 SCRIPTS += dls-vendor-update.py
 
-# signal-list python scripts
-
-SCRIPTS += dls-export-edm-files.py
-SCRIPTS += dls_generate_edm_autofill.py
-SCRIPTS += dls_generate_edm_macros.py
-SCRIPTS += dls_generate_edm_sum.py
-SCRIPTS += dls_generate_edm_titlebar.py
-SCRIPTS += dls_generate_edm_generic_screen.py
-SCRIPTS += dls_generate_edm_vac.py
-
-SCRIPTS += dls-export-Db-files.py
-SCRIPTS += dls_generate_Db_info.py
-SCRIPTS += dls_generate_Db_sim.py
-SCRIPTS += dls_generate_Db_subst.py
-
-SCRIPTS += dlsxmlparserfunctions.py
-SCRIPTS += dlsxmlexcelparser.py
-SCRIPTS += dlsedmtable.py
-
-SCRIPTS += dls-csv-to-subst.py
-SCRIPTS += dls-subst-to-csv.py
-SCRIPTS += dls-signalparse.py
-
 # Bash scripts (old)
 
 #SCRIPTS += dls-list-branches
