@@ -1,0 +1,13686 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 30
+y 70
+w 1250
+h 600
+font "arial-medium-r-18.0"
+ctlFont "arial-medium-r-18.0"
+btnFont "arial-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+title "Summary - $(dom)"
+showGrid
+snapToGrid
+gridSize 5
+disableScroll
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 15
+y 535
+w 1100
+h 10
+lineColor index 14
+fill
+fillColor index 13
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 675
+y 375
+w 40
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 675
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 675
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 690
+y 385
+w 10
+h 20
+file "symbols-shutter-symbol.edl"
+numStates 5
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+}
+controlPvs {
+  0 "#<P>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 690
+y 405
+w 0
+h 130
+lineColor index 11
+fillColor index 0
+visMax "wall top shadow"
+numPoints 2
+xPoints {
+  0 690
+  1 690
+}
+yPoints {
+  0 535
+  1 405
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 700
+y 405
+w 0
+h 130
+lineColor index 14
+fillColor index 0
+visMax "wall bottom shadow"
+numPoints 2
+xPoints {
+  0 700
+  1 700
+}
+yPoints {
+  0 535
+  1 405
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 691
+y 405
+w 8
+h 130
+lineColor index 13
+fill
+fillColor index 13
+visMax "wall"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 675
+y 425
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 675
+y 425
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 675
+  1 675
+  2 715
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 675
+y 425
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 675
+  1 715
+  2 715
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<SHTR2>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 375
+w 40
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 25
+y 385
+w 10
+h 20
+file "symbols-shutter-symbol.edl"
+numStates 5
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+}
+controlPvs {
+  0 "#<P>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 25
+y 405
+w 0
+h 130
+lineColor index 11
+fillColor index 0
+visMax "wall top shadow"
+numPoints 2
+xPoints {
+  0 25
+  1 25
+}
+yPoints {
+  0 535
+  1 405
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 35
+y 405
+w 0
+h 130
+lineColor index 14
+fillColor index 0
+visMax "wall bottom shadow"
+numPoints 2
+xPoints {
+  0 35
+  1 35
+}
+yPoints {
+  0 535
+  1 405
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 26
+y 405
+w 8
+h 130
+lineColor index 13
+fill
+fillColor index 13
+visMax "wall"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 425
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 10
+y 425
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 10
+  1 10
+  2 50
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 10
+y 425
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 10
+  1 50
+  2 50
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<SHTR1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 25
+y 60
+w 10
+h 150
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 25
+y 60
+w 0
+h 150
+lineColor index 11
+fillColor index 0
+numPoints 2
+xPoints {
+  0 25
+  1 25
+}
+yPoints {
+  0 210
+  1 60
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 35
+y 60
+w 0
+h 150
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 35
+  1 35
+}
+yPoints {
+  0 210
+  1 60
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 26
+y 60
+w 8
+h 150
+lineColor index 13
+fill
+fillColor index 13
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 25
+y 240
+w 10
+h 145
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 25
+y 240
+w 0
+h 145
+lineColor index 11
+fillColor index 0
+numPoints 2
+xPoints {
+  0 25
+  1 25
+}
+yPoints {
+  0 385
+  1 240
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 35
+y 240
+w 0
+h 145
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 35
+  1 35
+}
+yPoints {
+  0 385
+  1 240
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 26
+y 240
+w 8
+h 145
+lineColor index 13
+fill
+fillColor index 13
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 690
+y 60
+w 10
+h 150
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 690
+y 60
+w 0
+h 150
+lineColor index 11
+fillColor index 0
+numPoints 2
+xPoints {
+  0 690
+  1 690
+}
+yPoints {
+  0 210
+  1 60
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 700
+y 60
+w 0
+h 150
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 700
+  1 700
+}
+yPoints {
+  0 210
+  1 60
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 691
+y 60
+w 8
+h 150
+lineColor index 13
+fill
+fillColor index 13
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 690
+y 240
+w 10
+h 145
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 690
+y 240
+w 0
+h 145
+lineColor index 11
+fillColor index 0
+numPoints 2
+xPoints {
+  0 690
+  1 690
+}
+yPoints {
+  0 385
+  1 240
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 700
+y 240
+w 0
+h 145
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 700
+  1 700
+}
+yPoints {
+  0 385
+  1 240
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 691
+y 240
+w 8
+h 145
+lineColor index 13
+fill
+fillColor index 13
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 770
+y 60
+w 10
+h 150
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 770
+y 60
+w 0
+h 150
+lineColor index 11
+fillColor index 0
+numPoints 2
+xPoints {
+  0 770
+  1 770
+}
+yPoints {
+  0 210
+  1 60
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 780
+y 60
+w 0
+h 150
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 780
+  1 780
+}
+yPoints {
+  0 210
+  1 60
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 771
+y 60
+w 8
+h 150
+lineColor index 13
+fill
+fillColor index 13
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 770
+y 240
+w 10
+h 145
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 770
+y 240
+w 0
+h 145
+lineColor index 11
+fillColor index 0
+numPoints 2
+xPoints {
+  0 770
+  1 770
+}
+yPoints {
+  0 385
+  1 240
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 780
+y 240
+w 0
+h 145
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 780
+  1 780
+}
+yPoints {
+  0 385
+  1 240
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 771
+y 240
+w 8
+h 145
+lineColor index 13
+fill
+fillColor index 13
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 770
+y 405
+w 10
+h 130
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 770
+y 405
+w 0
+h 130
+lineColor index 11
+fillColor index 0
+numPoints 2
+xPoints {
+  0 770
+  1 770
+}
+yPoints {
+  0 535
+  1 405
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 780
+y 405
+w 0
+h 130
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 780
+  1 780
+}
+yPoints {
+  0 535
+  1 405
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 771
+y 405
+w 8
+h 130
+lineColor index 13
+fill
+fillColor index 13
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 805
+y 0
+w 300
+h 31
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 885
+y 0
+w 140
+h 30
+font "arial-bold-r-16.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 53
+useDisplayBg
+value {
+  "Vacuum"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 995
+y 5
+w 20
+h 20
+file "symbols-traffic-light-symbol.edl"
+truthTable
+numStates 4
+minValues {
+  0 -1
+  2 2
+  3 1
+}
+maxValues {
+  1 1
+  2 3
+  3 2
+}
+controlPvs {
+  0 "$(dom)-VA-SPACE-#<SPACEID>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 895
+y 5
+w 20
+h 20
+file "symbols-traffic-light-symbol.edl"
+truthTable
+numStates 4
+minValues {
+  0 -1
+  2 2
+  3 1
+}
+maxValues {
+  1 1
+  2 3
+  3 2
+}
+controlPvs {
+  0 "$(dom)-VA-SPACE-#<SPACEID>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1032
+y 4
+w 67
+h 24
+fgColor index 14
+bgColor index 3
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+xPosOffset -66
+yPosOffset 35
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<HUTCH># Vacuum Controls"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1032
+y 4
+w 67
+h 24
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+buttonLabel "Controls"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "space"
+}
+symbols {
+  0 "device=$(dom)-VA-SPACE-#<SPACEID>#"
+}
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1028
+y 2
+w 77
+h 29
+lineColor index 11
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1025
+y 0
+w 77
+h 29
+lineColor index 1
+fillColor index 63
+lineWidth 2
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1028
+y 2
+w 75
+h 27
+lineColor index 54
+fill
+fillColor index 53
+lineWidth 3
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1044
+y 6
+w 7
+h 3
+lineColor index 1
+fill
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1025
+y 0
+w 80
+h 30
+font "arial-bold-r-16.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Controls"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 812
+y 4
+w 67
+h 24
+fgColor index 14
+bgColor index 3
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+xPosOffset -66
+yPosOffset 35
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<HUTCH># Vacuum Status"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 812
+y 4
+w 67
+h 24
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+buttonLabel "Status"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-VA-#<HUTCH>#"
+}
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 808
+y 2
+w 77
+h 29
+lineColor index 11
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 805
+y 0
+w 77
+h 29
+lineColor index 1
+fillColor index 63
+lineWidth 2
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 808
+y 2
+w 75
+h 27
+lineColor index 54
+fill
+fillColor index 53
+lineWidth 3
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 824
+y 6
+w 7
+h 3
+lineColor index 1
+fill
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 805
+y 0
+w 80
+h 30
+font "arial-bold-r-16.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Status"
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<SPACEID=82>##<HUTCH=EH>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 165
+y 0
+w 300
+h 31
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 245
+y 0
+w 140
+h 30
+font "arial-bold-r-16.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 53
+useDisplayBg
+value {
+  "Vacuum"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 355
+y 5
+w 20
+h 20
+file "symbols-traffic-light-symbol.edl"
+truthTable
+numStates 4
+minValues {
+  0 -1
+  2 2
+  3 1
+}
+maxValues {
+  1 1
+  2 3
+  3 2
+}
+controlPvs {
+  0 "$(dom)-VA-SPACE-#<SPACEID>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 255
+y 5
+w 20
+h 20
+file "symbols-traffic-light-symbol.edl"
+truthTable
+numStates 4
+minValues {
+  0 -1
+  2 2
+  3 1
+}
+maxValues {
+  1 1
+  2 3
+  3 2
+}
+controlPvs {
+  0 "$(dom)-VA-SPACE-#<SPACEID>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 392
+y 4
+w 67
+h 24
+fgColor index 14
+bgColor index 3
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+xPosOffset -66
+yPosOffset 35
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<HUTCH># Vacuum Controls"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 392
+y 4
+w 67
+h 24
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+buttonLabel "Controls"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "space"
+}
+symbols {
+  0 "device=$(dom)-VA-SPACE-#<SPACEID>#"
+}
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 388
+y 2
+w 77
+h 29
+lineColor index 11
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 385
+y 0
+w 77
+h 29
+lineColor index 1
+fillColor index 63
+lineWidth 2
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 388
+y 2
+w 75
+h 27
+lineColor index 54
+fill
+fillColor index 53
+lineWidth 3
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 404
+y 6
+w 7
+h 3
+lineColor index 1
+fill
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 385
+y 0
+w 80
+h 30
+font "arial-bold-r-16.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Controls"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 4
+w 67
+h 24
+fgColor index 14
+bgColor index 3
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+xPosOffset -66
+yPosOffset 35
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<HUTCH># Vacuum Status"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 172
+y 4
+w 67
+h 24
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+buttonLabel "Status"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-VA-#<HUTCH>#"
+}
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 168
+y 2
+w 77
+h 29
+lineColor index 11
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 165
+y 0
+w 77
+h 29
+lineColor index 1
+fillColor index 63
+lineWidth 2
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 168
+y 2
+w 75
+h 27
+lineColor index 54
+fill
+fillColor index 53
+lineWidth 3
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 184
+y 6
+w 7
+h 3
+lineColor index 1
+fill
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 165
+y 0
+w 80
+h 30
+font "arial-bold-r-16.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Status"
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<SPACEID=81>##<HUTCH=OH>#"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 720
+y 75
+w 33
+h 20
+font "arial-bold-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "CIA"
+}
+autoSize
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 15
+y 210
+w 30
+h 180
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 30
+y 240
+w 0
+h 20
+lineColor index 14
+fillColor index 0
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 30
+  1 30
+}
+yPoints {
+  0 240
+  1 260
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 15
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -85
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 15
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 15
+y 250
+w 30
+h 20
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 53
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 15
+y 250
+w 30
+h 20
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 15
+  1 15
+  2 45
+}
+yPoints {
+  0 270
+  1 250
+  2 250
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 15
+y 250
+w 30
+h 20
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 15
+  1 45
+  2 45
+}
+yPoints {
+  0 270
+  1 270
+  2 250
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 25
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -95
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 25
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 25
+y 215
+w 10
+h 20
+file "symbols-valve-small-symbol.edl"
+numStates 6
+minValues {
+  0 99
+  2 1
+  3 2
+  4 3
+  5 4
+}
+maxValues {
+  0 100
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+}
+controlPvs {
+  0 "#<P>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<GV0>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 60
+y 375
+w 30
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 65
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 65
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 74
+y 400
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 65
+y 375
+w 20
+h 40
+file "symbols-aperture-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 60
+y 530
+w 30
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 60
+y 425
+w 30
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 60
+y 425
+w 30
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 60
+  1 90
+  2 90
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 60
+y 425
+w 30
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 60
+  1 60
+  2 90
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<GBC1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 295
+y 375
+w 30
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 300
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 300
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 309
+y 400
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 300
+y 375
+w 20
+h 40
+file "symbols-aperture-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 295
+y 530
+w 30
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 295
+y 425
+w 30
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 295
+y 425
+w 30
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 295
+  1 325
+  2 325
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 295
+y 425
+w 30
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 295
+  1 295
+  2 325
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<WBS>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 470
+y 375
+w 60
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 470
+y 375
+w 60
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 470
+y 375
+w 60
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -70
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 480
+y 400
+w 5
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "left leg"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 515
+y 400
+w 5
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 470
+y 375
+w 60
+h 40
+file "symbols-KBM-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 470
+y 530
+w 60
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 470
+y 425
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 470
+y 425
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 470
+  1 470
+  2 530
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 470
+y 425
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 470
+  1 530
+  2 530
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<M1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 890
+y 375
+w 60
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 890
+y 375
+w 60
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 890
+y 375
+w 60
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -70
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 900
+y 400
+w 5
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "left leg"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 935
+y 400
+w 5
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 890
+y 375
+w 60
+h 40
+file "symbols-empty-chamber-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 890
+y 530
+w 60
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 890
+y 425
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 890
+y 425
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 890
+  1 890
+  2 950
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 890
+y 425
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 890
+  1 950
+  2 950
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<T1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 150
+y 375
+w 27
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 150
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 150
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 159
+y 400
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 150
+y 530
+w 20
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 150
+y 425
+w 20
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (PNG Image)
+object activePngClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 165
+y 377
+w 12
+h 12
+file "camera-tiny.png"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 150
+y 375
+w 20
+h 40
+file "symbols-static-window-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 150
+y 425
+w 20
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 150
+  1 150
+  2 170
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 150
+y 425
+w 20
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 150
+  1 170
+  2 170
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<D1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 435
+y 375
+w 27
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 435
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 435
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 444
+y 400
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 435
+y 530
+w 20
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 435
+y 425
+w 20
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (PNG Image)
+object activePngClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 450
+y 377
+w 12
+h 12
+file "camera-tiny.png"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 435
+y 375
+w 20
+h 40
+file "symbols-static-window-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 435
+y 425
+w 20
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 435
+  1 435
+  2 455
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 435
+y 425
+w 20
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 435
+  1 455
+  2 455
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<D3>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 640
+y 375
+w 27
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 640
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 640
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 649
+y 400
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 640
+y 530
+w 20
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 640
+y 425
+w 20
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (PNG Image)
+object activePngClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 655
+y 377
+w 12
+h 12
+file "camera-tiny.png"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 640
+y 375
+w 20
+h 40
+file "symbols-static-window-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 640
+y 425
+w 20
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 640
+  1 640
+  2 660
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 640
+y 425
+w 20
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 640
+  1 660
+  2 660
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<D5>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 855
+y 375
+w 27
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 855
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 855
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 864
+y 400
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 855
+y 530
+w 20
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 855
+y 425
+w 20
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (PNG Image)
+object activePngClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 870
+y 377
+w 12
+h 12
+file "camera-tiny.png"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 855
+y 375
+w 20
+h 40
+file "symbols-static-window-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 855
+y 425
+w 20
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 855
+  1 855
+  2 875
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 855
+y 425
+w 20
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 855
+  1 875
+  2 875
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<D6>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 360
+w 60
+h 175
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 360
+w 60
+h 95
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 360
+w 60
+h 95
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -70
+yPosOffset 105
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1055
+y 400
+w 5
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "left leg"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1090
+y 400
+w 5
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 365
+w 60
+h 60
+file "symbols-diffractometer-circle-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 530
+w 60
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1045
+y 425
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1045
+y 425
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1045
+  1 1045
+  2 1105
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1045
+y 425
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1045
+  1 1105
+  2 1105
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<DIFF>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 460
+w 60
+h 30
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 460
+w 60
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 460
+w 60
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -70
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1045
+y 460
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1045
+y 460
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1045
+  1 1045
+  2 1105
+}
+yPoints {
+  0 490
+  1 460
+  2 460
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1045
+y 460
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1045
+  1 1105
+  2 1105
+}
+yPoints {
+  0 490
+  1 490
+  2 460
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<T2>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 330
+w 120
+h 40
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 335
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 335
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -40
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1180
+y 335
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 335
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1180
+  2 1240
+}
+yPoints {
+  0 365
+  1 335
+  2 335
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 335
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1240
+  2 1240
+}
+yPoints {
+  0 365
+  1 365
+  2 335
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 330
+w 60
+h 40
+file "symbols-detector-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<MAC2>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 370
+w 120
+h 40
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 375
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 375
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -40
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1180
+y 375
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 375
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1180
+  2 1240
+}
+yPoints {
+  0 405
+  1 375
+  2 375
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 375
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1240
+  2 1240
+}
+yPoints {
+  0 405
+  1 405
+  2 375
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 370
+w 60
+h 40
+file "symbols-detector-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<MAC3>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 410
+w 120
+h 40
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 415
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 415
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -40
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1180
+y 415
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 415
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1180
+  2 1240
+}
+yPoints {
+  0 445
+  1 415
+  2 415
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 415
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1240
+  2 1240
+}
+yPoints {
+  0 445
+  1 445
+  2 415
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 410
+w 60
+h 40
+file "symbols-detector-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<MAC4>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 450
+w 120
+h 40
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 455
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 455
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -40
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1180
+y 455
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 455
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1180
+  2 1240
+}
+yPoints {
+  0 485
+  1 455
+  2 455
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 455
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1240
+  2 1240
+}
+yPoints {
+  0 485
+  1 485
+  2 455
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 450
+w 60
+h 40
+file "symbols-detector-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<MAC5>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 490
+w 120
+h 40
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 495
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 495
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -40
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1180
+y 495
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 495
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1180
+  2 1240
+}
+yPoints {
+  0 525
+  1 495
+  2 495
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 495
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1240
+  2 1240
+}
+yPoints {
+  0 525
+  1 525
+  2 495
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 490
+w 60
+h 40
+file "symbols-detector-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<MAC6>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 290
+w 120
+h 40
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 295
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 295
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -40
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1180
+y 295
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 295
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1180
+  2 1240
+}
+yPoints {
+  0 325
+  1 295
+  2 295
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1180
+y 295
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1180
+  1 1240
+  2 1240
+}
+yPoints {
+  0 325
+  1 325
+  2 295
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1120
+y 290
+w 60
+h 40
+file "symbols-detector-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<MAC1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 495
+w 60
+h 30
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 495
+w 60
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 495
+w 60
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -70
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1045
+y 495
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1045
+y 495
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1045
+  1 1045
+  2 1105
+}
+yPoints {
+  0 525
+  1 495
+  2 495
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1045
+y 495
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1045
+  1 1105
+  2 1105
+}
+yPoints {
+  0 525
+  1 525
+  2 495
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<T3>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 330
+w 60
+h 30
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 330
+w 60
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1045
+y 330
+w 60
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -70
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1045
+y 330
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1045
+y 330
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 1045
+  1 1045
+  2 1105
+}
+yPoints {
+  0 360
+  1 330
+  2 330
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 1045
+y 330
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 1045
+  1 1105
+  2 1105
+}
+yPoints {
+  0 360
+  1 360
+  2 330
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<T4>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 900
+y 290
+w 40
+h 70
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 900
+y 290
+w 40
+h 70
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 900
+y 290
+w 40
+h 70
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 80
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 900
+y 290
+w 40
+h 40
+file "symbols-cog-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 900
+y 330
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 900
+y 330
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 900
+  1 940
+  2 940
+}
+yPoints {
+  0 360
+  1 360
+  2 330
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 900
+y 330
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 900
+  1 900
+  2 940
+}
+yPoints {
+  0 360
+  1 330
+  2 330
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<USER>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 200
+y 210
+w 30
+h 180
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 215
+y 240
+w 0
+h 150
+lineColor index 14
+fillColor index 0
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 215
+  1 215
+}
+yPoints {
+  0 240
+  1 390
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 200
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -85
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 200
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 200
+y 250
+w 30
+h 20
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 53
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 200
+y 250
+w 30
+h 20
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 200
+  1 200
+  2 230
+}
+yPoints {
+  0 270
+  1 250
+  2 250
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 200
+y 250
+w 30
+h 20
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 200
+  1 230
+  2 230
+}
+yPoints {
+  0 270
+  1 270
+  2 250
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 210
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -95
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 210
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 210
+y 215
+w 10
+h 20
+file "symbols-valve-small-symbol.edl"
+numStates 6
+minValues {
+  0 99
+  2 1
+  3 2
+  4 3
+  5 4
+}
+maxValues {
+  0 100
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+}
+controlPvs {
+  0 "#<P>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<GV1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 270
+y 210
+w 30
+h 180
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 285
+y 240
+w 0
+h 150
+lineColor index 14
+fillColor index 0
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 285
+  1 285
+}
+yPoints {
+  0 240
+  1 390
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 270
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -85
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 270
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 270
+y 250
+w 30
+h 20
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 53
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 270
+y 250
+w 30
+h 20
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 270
+  1 270
+  2 300
+}
+yPoints {
+  0 270
+  1 250
+  2 250
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 270
+y 250
+w 30
+h 20
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 270
+  1 300
+  2 300
+}
+yPoints {
+  0 270
+  1 270
+  2 250
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 280
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -95
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 280
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 280
+y 215
+w 10
+h 20
+file "symbols-valve-small-symbol.edl"
+numStates 6
+minValues {
+  0 99
+  2 1
+  3 2
+  4 3
+  5 4
+}
+maxValues {
+  0 100
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+}
+controlPvs {
+  0 "#<P>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<GV2>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 720
+y 210
+w 30
+h 180
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 735
+y 240
+w 0
+h 150
+lineColor index 14
+fillColor index 0
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 735
+  1 735
+}
+yPoints {
+  0 240
+  1 390
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 720
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -85
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 720
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 720
+y 250
+w 30
+h 20
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 53
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 720
+y 250
+w 30
+h 20
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 720
+  1 720
+  2 750
+}
+yPoints {
+  0 270
+  1 250
+  2 250
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 720
+y 250
+w 30
+h 20
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 720
+  1 750
+  2 750
+}
+yPoints {
+  0 270
+  1 270
+  2 250
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 730
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -95
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 730
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 730
+y 215
+w 10
+h 20
+file "symbols-valve-small-symbol.edl"
+numStates 6
+minValues {
+  0 99
+  2 1
+  3 2
+  4 3
+  5 4
+}
+maxValues {
+  0 100
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+}
+controlPvs {
+  0 "#<P>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<GV4>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 775
+y 210
+w 30
+h 180
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 790
+y 240
+w 0
+h 150
+lineColor index 14
+fillColor index 0
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 790
+  1 790
+}
+yPoints {
+  0 240
+  1 390
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 775
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -85
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 775
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 775
+y 250
+w 30
+h 20
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 53
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 775
+y 250
+w 30
+h 20
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 775
+  1 775
+  2 805
+}
+yPoints {
+  0 270
+  1 250
+  2 250
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 775
+y 250
+w 30
+h 20
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 775
+  1 805
+  2 805
+}
+yPoints {
+  0 270
+  1 270
+  2 250
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 785
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -95
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 785
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 785
+y 215
+w 10
+h 20
+file "symbols-valve-small-symbol.edl"
+numStates 6
+minValues {
+  0 99
+  2 1
+  3 2
+  4 3
+  5 4
+}
+maxValues {
+  0 100
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+}
+controlPvs {
+  0 "#<P>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<GV5>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 880
+y 210
+w 10
+h 175
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 880
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -95
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Window"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 885
+y 245
+w 0
+h 140
+lineColor index 14
+fillColor index 0
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 885
+  1 885
+}
+yPoints {
+  0 245
+  1 385
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 880
+y 210
+w 10
+h 30
+lineColor index 14
+fill
+fillColor index 25
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 70
+w 20
+h 150
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 70
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Residual Gas Analyser: #<RGA>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 110
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Pirani Gauge: #<PIRG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 140
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Inverted Magnetron Gauge: #<IMG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Ion Pump: #<IONP>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 55
+y 80
+w 1
+h 140
+lineColor index 14
+fillColor index 14
+lineWidth 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 70
+w 20
+h 20
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rga.edl"
+}
+menuLabel {
+  0 "Gauges"
+}
+symbols {
+  0 "device=#<PREFIX>##<RGA>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "digitelMpcIonpControl.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<IONP>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 180
+w 20
+h 20
+file "symbols-pump-small-symbol.edl"
+numStates 10
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+}
+controlPvs {
+  0 "#<PREFIX>##<IONP>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 110
+w 20
+h 50
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "mks937aGauge.edl"
+  1 "mks937a.edl"
+}
+menuLabel {
+  0 "Gauges"
+  1 "Controller"
+}
+symbols {
+  0 "dom=$(dom), id=#<GID>#"
+  1 "device=#<PREFIX>##<GCTLR>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 110
+w 20
+h 20
+file "symbols-pirg-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<PIRG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 140
+w 20
+h 20
+file "symbols-IMG-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<IMG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 45
+y 70
+w 20
+h 20
+file "symbols-RGA-small-symbol.edl"
+numStates 11
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+}
+controlPvs {
+  0 "#<PREFIX>##<RGA>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 80
+y 110
+w 20
+h 110
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 80
+y 110
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Pirani Gauge: #<PIRG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 80
+y 140
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Inverted Magnetron Gauge: #<IMG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 80
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Ion Pump: #<IONP>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 90
+y 125
+w 1
+h 95
+lineColor index 14
+fillColor index 14
+lineWidth 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 80
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "digitelMpcIonpControl.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<IONP>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 80
+y 180
+w 20
+h 20
+file "symbols-pump-small-symbol.edl"
+numStates 10
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+}
+controlPvs {
+  0 "#<PREFIX>##<IONP>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 80
+y 110
+w 20
+h 50
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "mks937aGauge.edl"
+  1 "mks937a.edl"
+}
+menuLabel {
+  0 "Gauges"
+  1 "Controller"
+}
+symbols {
+  0 "dom=$(dom), id=#<GID>#"
+  1 "device=#<PREFIX>##<GCTLR>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 80
+y 110
+w 20
+h 20
+file "symbols-pirg-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<PIRG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 80
+y 140
+w 20
+h 20
+file "symbols-IMG-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<IMG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V2>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 240
+y 110
+w 20
+h 110
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 240
+y 110
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Pirani Gauge: #<PIRG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 240
+y 140
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Inverted Magnetron Gauge: #<IMG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 240
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Ion Pump: #<IONP>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 250
+y 125
+w 1
+h 95
+lineColor index 14
+fillColor index 14
+lineWidth 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 240
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "digitelMpcIonpControl.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<IONP>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 240
+y 180
+w 20
+h 20
+file "symbols-pump-small-symbol.edl"
+numStates 10
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+}
+controlPvs {
+  0 "#<PREFIX>##<IONP>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 240
+y 110
+w 20
+h 50
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "mks937aGauge.edl"
+  1 "mks937a.edl"
+}
+menuLabel {
+  0 "Gauges"
+  1 "Controller"
+}
+symbols {
+  0 "dom=$(dom), id=#<GID>#"
+  1 "device=#<PREFIX>##<GCTLR>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 240
+y 110
+w 20
+h 20
+file "symbols-pirg-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<PIRG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 240
+y 140
+w 20
+h 20
+file "symbols-IMG-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<IMG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V3>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 110
+w 20
+h 110
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 110
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Pirani Gauge: #<PIRG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 140
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Inverted Magnetron Gauge: #<IMG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Ion Pump: #<IONP>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 670
+y 125
+w 1
+h 95
+lineColor index 14
+fillColor index 14
+lineWidth 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "digitelMpcIonpControl.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<IONP>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 180
+w 20
+h 20
+file "symbols-pump-small-symbol.edl"
+numStates 10
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+}
+controlPvs {
+  0 "#<PREFIX>##<IONP>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 110
+w 20
+h 50
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "mks937aGauge.edl"
+  1 "mks937a.edl"
+}
+menuLabel {
+  0 "Gauges"
+  1 "Controller"
+}
+symbols {
+  0 "dom=$(dom), id=#<GID>#"
+  1 "device=#<PREFIX>##<GCTLR>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 110
+w 20
+h 20
+file "symbols-pirg-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<PIRG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 140
+w 20
+h 20
+file "symbols-IMG-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<IMG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V6>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 110
+w 20
+h 110
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 110
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Pirani Gauge: #<PIRG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 140
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Inverted Magnetron Gauge: #<IMG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Ion Pump: #<IONP>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 720
+y 125
+w 1
+h 95
+lineColor index 14
+fillColor index 14
+lineWidth 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "digitelMpcIonpControl.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<IONP>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 180
+w 20
+h 20
+file "symbols-pump-small-symbol.edl"
+numStates 10
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+}
+controlPvs {
+  0 "#<PREFIX>##<IONP>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 110
+w 20
+h 50
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "mks937aGauge.edl"
+  1 "mks937a.edl"
+}
+menuLabel {
+  0 "Gauges"
+  1 "Controller"
+}
+symbols {
+  0 "dom=$(dom), id=#<GID>#"
+  1 "device=#<PREFIX>##<GCTLR>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 110
+w 20
+h 20
+file "symbols-pirg-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<PIRG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 710
+y 140
+w 20
+h 20
+file "symbols-IMG-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<IMG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V7>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 110
+w 20
+h 110
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 110
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Pirani Gauge: #<PIRG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 140
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Inverted Magnetron Gauge: #<IMG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Ion Pump: #<IONP>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 750
+y 125
+w 1
+h 95
+lineColor index 14
+fillColor index 14
+lineWidth 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "digitelMpcIonpControl.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<IONP>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 180
+w 20
+h 20
+file "symbols-pump-small-symbol.edl"
+numStates 10
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+}
+controlPvs {
+  0 "#<PREFIX>##<IONP>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 110
+w 20
+h 50
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "mks937aGauge.edl"
+  1 "mks937a.edl"
+}
+menuLabel {
+  0 "Gauges"
+  1 "Controller"
+}
+symbols {
+  0 "dom=$(dom), id=#<GID>#"
+  1 "device=#<PREFIX>##<GCTLR>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 110
+w 20
+h 20
+file "symbols-pirg-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<PIRG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 140
+w 20
+h 20
+file "symbols-IMG-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<IMG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V8>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 110
+w 20
+h 110
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 110
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Pirani Gauge: #<PIRG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 140
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Inverted Magnetron Gauge: #<IMG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Ion Pump: #<IONP>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 805
+y 125
+w 1
+h 95
+lineColor index 14
+fillColor index 14
+lineWidth 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "digitelMpcIonpControl.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<IONP>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 180
+w 20
+h 20
+file "symbols-pump-small-symbol.edl"
+numStates 10
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+}
+controlPvs {
+  0 "#<PREFIX>##<IONP>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 110
+w 20
+h 50
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "mks937aGauge.edl"
+  1 "mks937a.edl"
+}
+menuLabel {
+  0 "Gauges"
+  1 "Controller"
+}
+symbols {
+  0 "dom=$(dom), id=#<GID>#"
+  1 "device=#<PREFIX>##<GCTLR>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 110
+w 20
+h 20
+file "symbols-pirg-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<PIRG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 140
+w 20
+h 20
+file "symbols-IMG-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<IMG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V9>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 35
+y 220
+w 175
+h 25
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 37
+y 220
+w 172
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Vacuum Space: #<SPACE>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 37
+y 220
+w 172
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "space.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<SPACE>#"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 35
+y 235
+w 175
+h 12
+controlPv "#<PREFIX>##<SPACE>#:P"
+format "exponential"
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 35
+y 220
+w 175
+h 10
+file "symbols-vacuum-symbol.edl"
+truthTable
+numStates 3
+minValues {
+  0 -1
+  2 1
+}
+maxValues {
+  1 1
+  2 2
+}
+controlPvs {
+  0 "#<PREFIX>##<SPACE>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 220
+y 220
+w 60
+h 25
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 221
+y 220
+w 59
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Vacuum Space: #<SPACE>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 221
+y 220
+w 59
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "space.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<SPACE>#"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 220
+y 235
+w 60
+h 12
+controlPv "#<PREFIX>##<SPACE>#:P"
+format "exponential"
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 220
+y 220
+w 60
+h 10
+file "symbols-vacuum-symbol.edl"
+truthTable
+numStates 3
+minValues {
+  0 -1
+  2 1
+}
+maxValues {
+  1 1
+  2 2
+}
+controlPvs {
+  0 "#<PREFIX>##<SPACE>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V3>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 220
+w 85
+h 25
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 796
+y 220
+w 84
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Vacuum Space: #<SPACE>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 796
+y 220
+w 84
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "space.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<SPACE>#"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 795
+y 235
+w 85
+h 12
+controlPv "#<PREFIX>##<SPACE>#:P"
+format "exponential"
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 795
+y 220
+w 85
+h 10
+file "symbols-vacuum-symbol.edl"
+truthTable
+numStates 3
+minValues {
+  0 -1
+  2 1
+}
+maxValues {
+  1 1
+  2 2
+}
+controlPvs {
+  0 "#<PREFIX>##<SPACE>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V9>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 220
+w 45
+h 25
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 220
+w 44
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Vacuum Space: #<SPACE>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 220
+w 44
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "space.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<SPACE>#"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 740
+y 235
+w 45
+h 12
+controlPv "#<PREFIX>##<SPACE>#:P"
+format "exponential"
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 740
+y 220
+w 45
+h 10
+file "symbols-vacuum-symbol.edl"
+truthTable
+numStates 3
+minValues {
+  0 -1
+  2 1
+}
+maxValues {
+  1 1
+  2 2
+}
+controlPvs {
+  0 "#<PREFIX>##<SPACE>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V8>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 393
+w 1075
+h 3
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 0
+y 393
+w 25
+h 3
+lineColor index 25
+fill
+fillColor index 30
+numPoints 4
+xPoints {
+  0 0
+  1 25
+  2 25
+  3 0
+}
+yPoints {
+  0 393
+  1 393
+  2 396
+  3 396
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 25
+y 393
+w 665
+h 3
+lineColor index 25
+fill
+fillColor index 30
+visPv "CALC\\\{A<2\}(#<SS1>#:STA)"
+visMin "1"
+visMax "2"
+numPoints 4
+xPoints {
+  0 25
+  1 690
+  2 690
+  3 25
+}
+yPoints {
+  0 393
+  1 393
+  2 396
+  3 396
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 690
+y 393
+w 385
+h 3
+lineColor index 25
+fill
+fillColor index 30
+visPv "CALC\\\{A<2&&B<2\}(#<SS1>#:STA,#<SS2>#:STA)"
+visMin "1"
+visMax "2"
+numPoints 4
+xPoints {
+  0 690
+  1 1075
+  2 1075
+  3 690
+}
+yPoints {
+  0 393
+  1 393
+  2 396
+  3 396
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<SS1=$(dom)-VA-VALVE-01>##<SS2=$(dom)-PS-SHTR-01>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 100
+y 375
+w 40
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 100
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 100
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 119
+y 399
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 100
+y 375
+w 40
+h 40
+file "symbols-slit-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 100
+y 530
+w 40
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 425
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 100
+y 425
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 100
+  1 140
+  2 140
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 100
+y 425
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 100
+  1 100
+  2 140
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<S1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 185
+y 375
+w 20
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 185
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 185
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 194
+y 400
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 185
+y 375
+w 20
+h 40
+file "symbols-diag-no-camera-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 185
+y 530
+w 20
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 185
+y 425
+w 20
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 185
+y 425
+w 20
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 185
+  1 205
+  2 205
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 185
+y 425
+w 20
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 185
+  1 185
+  2 205
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<A1>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 220
+y 360
+w 60
+h 175
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 220
+y 360
+w 60
+h 95
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 220
+y 360
+w 60
+h 95
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -70
+yPosOffset 105
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 230
+y 400
+w 5
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "left leg"
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 265
+y 400
+w 5
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 220
+y 360
+w 60
+h 60
+file "symbols-DCM-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 220
+y 530
+w 60
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 220
+y 425
+w 60
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 220
+y 425
+w 60
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 220
+  1 220
+  2 280
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 220
+y 425
+w 60
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 220
+  1 280
+  2 280
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<DCM>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 335
+y 375
+w 40
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 335
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 335
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 354
+y 399
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 335
+y 375
+w 40
+h 40
+file "symbols-BPM-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 335
+y 530
+w 40
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 335
+y 425
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 335
+y 425
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 335
+  1 375
+  2 375
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 335
+y 425
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 335
+  1 335
+  2 375
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<D2>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 385
+y 375
+w 40
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 385
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 385
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 404
+y 399
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 385
+y 375
+w 40
+h 40
+file "symbols-slit-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 385
+y 530
+w 40
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 385
+y 425
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 385
+y 425
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 385
+  1 425
+  2 425
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 385
+y 425
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 385
+  1 385
+  2 425
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<S2>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 540
+y 375
+w 40
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 540
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 540
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 559
+y 399
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 540
+y 375
+w 40
+h 40
+file "symbols-BPM-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 540
+y 530
+w 40
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 540
+y 425
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 540
+y 425
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 540
+  1 580
+  2 580
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 540
+y 425
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 540
+  1 540
+  2 580
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<D4>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 590
+y 375
+w 40
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 590
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 590
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 609
+y 399
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 590
+y 375
+w 40
+h 40
+file "symbols-slit-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 590
+y 530
+w 40
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 590
+y 425
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 590
+y 425
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 590
+  1 630
+  2 630
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 590
+y 425
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 590
+  1 590
+  2 630
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<S3>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 805
+y 375
+w 40
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 805
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 805
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 824
+y 399
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 805
+y 375
+w 40
+h 40
+file "symbols-slit-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 805
+y 530
+w 40
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 805
+y 425
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 805
+y 425
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 805
+  1 845
+  2 845
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 805
+y 425
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 805
+  1 805
+  2 845
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<S4>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 960
+y 375
+w 20
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 960
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 960
+y 375
+w 20
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 969
+y 400
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 960
+y 375
+w 20
+h 40
+file "symbols-diag-no-camera-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 960
+y 530
+w 20
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 960
+y 425
+w 20
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 960
+y 425
+w 20
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 960
+  1 980
+  2 980
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 960
+y 425
+w 20
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 960
+  1 960
+  2 980
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<A2>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 990
+y 375
+w 40
+h 160
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 990
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+invisible
+buttonLabel "component screen"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "#<FILE>#"
+}
+symbols {
+  0 "@#<P>#.subst"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 990
+y 375
+w 40
+h 80
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -80
+yPosOffset 90
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1009
+y 399
+w 1
+h 130
+lineColor index 14
+fill
+fillColor index 14
+visMax "right leg"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 990
+y 375
+w 40
+h 40
+file "symbols-slit-symbol.edl"
+numStates 4
+minValues {
+  0 -1
+  2 1
+  3 2
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+}
+controlPvs {
+  0 "#<P>#:SUM.SEVR"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 990
+y 530
+w 40
+h 5
+lineColor index 14
+fill
+fillColor index 14
+visMax "base"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 990
+y 425
+w 40
+h 30
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 48
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 990
+y 425
+w 40
+h 30
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 990
+  1 1030
+  2 1030
+}
+yPoints {
+  0 455
+  1 455
+  2 425
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 990
+y 425
+w 40
+h 30
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 990
+  1 990
+  2 1030
+}
+yPoints {
+  0 455
+  1 425
+  2 425
+}
+endObjectProperties
+
+endGroup
+
+visPv "#<S5>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 290
+y 220
+w 240
+h 25
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 293
+y 220
+w 236
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Vacuum Space: #<SPACE>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 293
+y 220
+w 236
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "space.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<SPACE>#"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 290
+y 235
+w 240
+h 12
+controlPv "#<PREFIX>##<SPACE>#:P"
+format "exponential"
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 290
+y 220
+w 240
+h 10
+file "symbols-vacuum-symbol.edl"
+truthTable
+numStates 3
+minValues {
+  0 -1
+  2 1
+}
+maxValues {
+  1 1
+  2 2
+}
+controlPvs {
+  0 "#<PREFIX>##<SPACE>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V4>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 540
+y 220
+w 190
+h 25
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 542
+y 220
+w 187
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Vacuum Space: #<SPACE>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 542
+y 220
+w 187
+h 10
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "space.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<SPACE>#"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 540
+y 235
+w 190
+h 12
+controlPv "#<PREFIX>##<SPACE>#:P"
+format "exponential"
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+autoHeight
+limitsFromDb
+nullColor index 0
+showUnits
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 540
+y 220
+w 190
+h 10
+file "symbols-vacuum-symbol.edl"
+truthTable
+numStates 3
+minValues {
+  0 -1
+  2 1
+}
+maxValues {
+  1 1
+  2 2
+}
+controlPvs {
+  0 "#<PREFIX>##<SPACE>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 3
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V6>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 520
+y 210
+w 30
+h 180
+
+beginGroup
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 535
+y 240
+w 0
+h 150
+lineColor index 14
+fillColor index 0
+lineStyle "dash"
+numPoints 2
+xPoints {
+  0 535
+  1 535
+}
+yPoints {
+  0 240
+  1 390
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 520
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -85
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 520
+y 250
+w 30
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 520
+y 250
+w 30
+h 20
+font "arial-medium-r-10.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 53
+value {
+  "#<NAME>#"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 520
+y 250
+w 30
+h 20
+lineColor index 1
+fillColor index 0
+visMax "shortname top shadow"
+numPoints 3
+xPoints {
+  0 520
+  1 520
+  2 550
+}
+yPoints {
+  0 270
+  1 250
+  2 250
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 520
+y 250
+w 30
+h 20
+lineColor index 11
+fillColor index 0
+visMax "shortname bottom shadow"
+numPoints 3
+xPoints {
+  0 520
+  1 550
+  2 550
+}
+yPoints {
+  0 270
+  1 270
+  2 250
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 530
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -95
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=#<DESCRIPTION>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 530
+y 210
+w 10
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "vacuumValve.edl"
+}
+symbols {
+  0 "device=#<P>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 530
+y 215
+w 10
+h 20
+file "symbols-valve-small-symbol.edl"
+numStates 6
+minValues {
+  0 99
+  2 1
+  3 2
+  4 3
+  5 4
+}
+maxValues {
+  0 100
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+}
+controlPvs {
+  0 "#<P>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<GV3>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 70
+w 20
+h 150
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 70
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Residual Gas Analyser: #<RGA>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 110
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Pirani Gauge: #<PIRG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 140
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Inverted Magnetron Gauge: #<IMG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Ion Pump: #<IONP>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 505
+y 80
+w 1
+h 140
+lineColor index 14
+fillColor index 14
+lineWidth 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 70
+w 20
+h 20
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "rga.edl"
+}
+menuLabel {
+  0 "Gauges"
+}
+symbols {
+  0 "device=#<PREFIX>##<RGA>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "digitelMpcIonpControl.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<IONP>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 180
+w 20
+h 20
+file "symbols-pump-small-symbol.edl"
+numStates 10
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+}
+controlPvs {
+  0 "#<PREFIX>##<IONP>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 110
+w 20
+h 50
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "mks937aGauge.edl"
+  1 "mks937a.edl"
+}
+menuLabel {
+  0 "Gauges"
+  1 "Controller"
+}
+symbols {
+  0 "dom=$(dom), id=#<GID>#"
+  1 "device=#<PREFIX>##<GCTLR>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 110
+w 20
+h 20
+file "symbols-pirg-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<PIRG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 140
+w 20
+h 20
+file "symbols-IMG-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<IMG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 495
+y 70
+w 20
+h 20
+file "symbols-RGA-small-symbol.edl"
+numStates 11
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+}
+controlPvs {
+  0 "#<PREFIX>##<RGA>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V5>#"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 350
+y 110
+w 20
+h 110
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 350
+y 110
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Pirani Gauge: #<PIRG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 350
+y 140
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Inverted Magnetron Gauge: #<IMG>#"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 350
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -90
+yPosOffset 30
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Ion Pump: #<IONP>#"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 360
+y 125
+w 1
+h 95
+lineColor index 14
+fillColor index 14
+lineWidth 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 350
+y 180
+w 20
+h 20
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "digitelMpcIonpControl.edl"
+}
+symbols {
+  0 "device=#<PREFIX>##<IONP>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 350
+y 180
+w 20
+h 20
+file "symbols-pump-small-symbol.edl"
+numStates 10
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+}
+controlPvs {
+  0 "#<PREFIX>##<IONP>#:STA"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 350
+y 110
+w 20
+h 50
+fgColor index 53
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 53
+font "arial-medium-r-18.0"
+invisible
+numPvs 4
+numDsps 2
+displayFileName {
+  0 "mks937aGauge.edl"
+  1 "mks937a.edl"
+}
+menuLabel {
+  0 "Gauges"
+  1 "Controller"
+}
+symbols {
+  0 "dom=$(dom), id=#<GID>#"
+  1 "device=#<PREFIX>##<GCTLR>#"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 350
+y 110
+w 20
+h 20
+file "symbols-pirg-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<PIRG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 350
+y 140
+w 20
+h 20
+file "symbols-IMG-small-symbol.edl"
+numStates 17
+minValues {
+  2 1
+  3 2
+  4 3
+  5 4
+  6 5
+  7 6
+  8 7
+  9 8
+  10 9
+  11 10
+  12 11
+  13 12
+  14 13
+  15 14
+  16 15
+}
+maxValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  10 10
+  11 11
+  12 12
+  13 13
+  14 14
+  15 15
+  16 16
+}
+controlPvs {
+  0 "#<PREFIX>##<IMG>#:STA"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+endGroup
+
+visPv "#<V4>#"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 295
+y 150
+w 655
+h 165
+font "arial-bold-r-28.0"
+fontAlign "center"
+fgColor index 20
+bgColor index 14
+value {
+  "EXAMPLE"
+  ""
+  "Replace with cut and paste symbols"
+  "Look in Help -> available symbols"
+}
+lineWidth 10
+endObjectProperties
+

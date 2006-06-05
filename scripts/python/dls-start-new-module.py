@@ -146,8 +146,9 @@ def main():
   if technicalArea == "BL":
     # Need different message for BL technical area
     print
-    print 'Please now edit "' + diskDir + '/configure/RELEASE" to put in correct paths for the ioc\'s other technical areas.'
-    print 'Also edit "' + diskDir + '/' + appName + 'App/Makefile"' + 'to add all database files from these technical areas.'
+    print 'Please now edit "' + diskDir + '/configure/RELEASE" to put in correct paths for the ioc\'s other technical areas and path to scripts.'
+    print 'Also edit "' + diskDir + '/' + appName + 'App/src/Makefile"' + 'to add all database files from these technical areas.'
+    print 'An example set of screens has been placed in '+diskDir+'/'+appName+'App/opi/edl. Please modify these.'
   else:
     print
     print 'Please now edit "' + diskDir + '/configure/RELEASE" to put in correct paths for dependencies.'

@@ -20,6 +20,7 @@ TEMPLATES += top/dlsApp/src/_APPNAME_Main.cpp
 TEMPLATES += top/dlsApp/opi/Makefile
 TEMPLATES += top/dlsApp/opi/edl/Makefile
 TEMPLATES += top/dlsApp/opi/symbol/Makefile
+TEMPLATES += top/dlsApp/protocol/Makefile
 
 TEMPLATES += top/dlsBoot/Makefile
 TEMPLATES += top/dlsBoot/ioc/Makefile@Common
@@ -57,8 +58,14 @@ TEMPLATES += top/dlsExampleBoot/ioc/st_APPNAME_.src@Common
 TEMPLATES += top/dlsExampleBoot/ioc/README@Common
 
 # dlsBLApp is used for building the special cross-technical area BL ioc module.
-# It only contains a Makefile
 TEMPLATES += top/dlsBLApp/Makefile
+TEMPLATES += top/dlsBLApp/src/Makefile
+TEMPLATES += top/dlsBLApp/opi/Makefile
+TEMPLATES += top/dlsBLApp/opi/edl/_APPNAME_-help.edl
+TEMPLATES += top/dlsBLApp/opi/edl/_APPNAME_-status.edl
+TEMPLATES += top/dlsBLApp/opi/edl/_APPNAME_-synoptic.edl
+TEMPLATES += top/dlsBLApp/opi/edl/_APPNAME_-overview-src.edl
+TEMPLATES += top/dlsBLApp/opi/edl/Makefile
 
 # Extra Diamond Rules
 

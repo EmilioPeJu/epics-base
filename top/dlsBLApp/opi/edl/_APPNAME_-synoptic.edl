@@ -1,0 +1,500 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 0
+y 5
+w 1270
+h 940
+font "arial-medium-r-18.0"
+ctlFont "arial-medium-r-18.0"
+btnFont "arial-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+title "Synoptic - $(dom)"
+showGrid
+snapToGrid
+disableScroll
+endScreenProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 10
+w 1270
+h 60
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 0
+y 10
+w 1270
+h 60
+font "arial-bold-r-28.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Synoptic"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 0
+y 10
+w 1270
+h 0
+lineColor index 1
+fillColor index 0
+lineWidth 2
+numPoints 2
+xPoints {
+  0 0
+  1 1270
+}
+yPoints {
+  0 10
+  1 10
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 0
+y 70
+w 1270
+h 0
+lineColor index 11
+fillColor index 0
+lineWidth 2
+numPoints 2
+xPoints {
+  0 0
+  1 1270
+}
+yPoints {
+  0 70
+  1 70
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 820
+w 130
+h 50
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 60
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Help Screen"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 750
+w 130
+h 50
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 60
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Water Flow Summary"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 690
+w 130
+h 50
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 60
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Temperature Summary"
+}
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1130
+y 880
+w 130
+h 50
+fgColor index 46
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+label "EXIT"
+font "arial-medium-r-18.0"
+3d
+endObjectProperties
+
+# (Embedded Window)
+object activePipClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 690
+w 1110
+h 240
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+displaySource "file"
+file "$(dom)-status"
+center
+setSize
+sizeOfs 5
+numDsps 1
+displayFileName {
+  0 "$(dom)-status.edl"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 690
+w 130
+h 50
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-medium-r-18.0"
+buttonLabel "Temperatures"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-temp"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 750
+w 130
+h 50
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-medium-r-18.0"
+buttonLabel "Water Flows"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-flow"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 870
+y 40
+w 190
+h 30
+font "arial-bold-r-20.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Experiment Hutch"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 260
+y 40
+w 130
+h 30
+font "arial-bold-r-20.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Optics Hutch"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 820
+w 130
+h 50
+fgColor index 0
+bgColor index 9
+topShadowColor index 1
+botShadowColor index 11
+font "arial-medium-r-18.0"
+buttonLabel "Help"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-help"
+}
+endObjectProperties
+
+# (Embedded Window)
+object activePipClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 80
+w 1250
+h 600
+fgColor index 14
+bgColor index 0
+topShadowColor index 1
+botShadowColor index 11
+displaySource "file"
+file "$(dom)-overview"
+center
+sizeOfs 5
+numDsps 0
+noScroll
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 130
+h 80
+
+beginGroup
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 7
+w 120
+h 70
+lineColor index 11
+fillColor index 63
+lineWidth 4
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 3
+y 3
+w 120
+h 70
+lineColor index 1
+fillColor index 63
+lineWidth 4
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 5
+w 120
+h 70
+lineColor index 8
+fill
+fillColor index 6
+lineWidth 3
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 15
+w 10
+h 6
+lineColor index 1
+fill
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 10
+w 120
+h 60
+font "arial-bold-r-28.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "$(dom)"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 130
+h 80
+lineColor index 14
+fillColor index 0
+lineWidth 2
+invisible
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+

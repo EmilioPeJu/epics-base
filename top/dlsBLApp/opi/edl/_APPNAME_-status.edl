@@ -1,0 +1,251 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 104
+y 383
+w 1105
+h 235
+font "arial-medium-r-18.0"
+ctlFont "arial-medium-r-18.0"
+btnFont "arial-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+title "Summary - $(dom)"
+showGrid
+snapToGrid
+disableScroll
+endScreenProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 0
+y 0
+w 130
+h 50
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Port "
+  "Shutter"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 130
+y 0
+w 130
+h 50
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Experiment"
+  "Shutter"
+}
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 100
+w 110
+h 70
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(dom)-VA-VALVE-01:CON"
+indicatorPv "$(dom)-VA-VALVE-01:LASTCON"
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 140
+y 100
+w 110
+h 70
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(dom)-PS-SHTR-01:CON"
+indicatorPv "$(dom)-PS-SHTR-01:LASTCON"
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 390
+y 0
+w 130
+h 50
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Ring"
+  "Energy"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 400
+y 100
+w 110
+h 70
+controlPv "LOC\\dummyRE=i:0"
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 520
+y 0
+w 130
+h 50
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Ring"
+  "Current"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 530
+y 100
+w 110
+h 70
+controlPv "LOC\\dummyRC=i:0"
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 650
+y 0
+w 460
+h 50
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Other Important Status"
+  "Readouts and Controls"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 260
+y 0
+w 130
+h 50
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Sample"
+  "Shutter"
+}
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 270
+y 100
+w 110
+h 70
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(dom)-PS-SHTR-02:CON"
+indicatorPv "$(dom)-PS-SHTR-02:LASTCON"
+font "arial-medium-r-16.0"
+endObjectProperties
+
