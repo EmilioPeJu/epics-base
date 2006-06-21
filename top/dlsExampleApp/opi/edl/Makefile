@@ -1,28 +1,15 @@
 TOP = ../../..
 include $(TOP)/configure/CONFIG
 
-# List here, the edl files to be be created using "velocity"
-# Requires that you have the "*.v" file
-#EDL_FROM_V += <name>.edl
-#EDL_FROM_V += <name>.edl
-
-buildInstall: $(EDL_FROM_V)
-
 DATA += $(patsubst ../%, %, $(wildcard ../*.edl))
 DATA += $(patsubst ../%, %, $(wildcard ../*.gif))
 DATA += $(patsubst ../%, %, $(wildcard ../*.png))
-
-clean::
-	rm -f $(EDL_FROM_V) velocity.log
-
-uninstall:
-	$(foreach file,$(EDL_FROM_V),rm -f $(file))
+#DATA += <name>.edl for "edl" files created with velocity scripts
 
 include $(TOP)/configure/RULES
 
+# How to specify a path for velocity dependencies
+VELOCITYPATH = /home/diamond/R3.14.7/prod/support/pss/4-11/pssApp/opi/velocity
 
-%.edl: %.v
-	velocity -a $< > $@
-
-%.edl: ../%.v
-	velocity -a $< > ../$@
+ %.edl: ../%.v
+	(cd ..; velocity -p$(VELOCITYPATH) -l O.Common/velocity.log -a $(notdir $<)) > $@
