@@ -22,8 +22,57 @@ botShadowColor index 14
 title "Synoptic - $(dom)"
 showGrid
 snapToGrid
+gridSize 5
 disableScroll
 endScreenProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1135
+y 805
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Swap Beam Direction"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 795
+w 130
+h 50
+lineColor index 14
+fill
+fillColor index 5
+endObjectProperties
 
 # (Group)
 object activeGroupClass
@@ -116,16 +165,16 @@ major 4
 minor 0
 release 0
 x 1130
-y 820
+y 855
 w 130
-h 50
+h 35
 fgColor index 14
 bgColor index 0
 topShadowColor index 0
 botShadowColor index 14
 font "arial-medium-r-12.0"
 xPosOffset -35
-yPosOffset 60
+yPosOffset 45
 button3Popup
 invisible
 buttonLabel "tooltip"
@@ -149,16 +198,16 @@ major 4
 minor 0
 release 0
 x 1130
-y 750
+y 740
 w 130
-h 50
+h 40
 fgColor index 14
 bgColor index 0
 topShadowColor index 0
 botShadowColor index 14
 font "arial-medium-r-12.0"
 xPosOffset -35
-yPosOffset 60
+yPosOffset 50
 button3Popup
 invisible
 buttonLabel "tooltip"
@@ -184,14 +233,14 @@ release 0
 x 1130
 y 690
 w 130
-h 50
+h 40
 fgColor index 14
 bgColor index 0
 topShadowColor index 0
 botShadowColor index 14
 font "arial-medium-r-12.0"
 xPosOffset -35
-yPosOffset 60
+yPosOffset 50
 button3Popup
 invisible
 buttonLabel "tooltip"
@@ -215,9 +264,9 @@ major 4
 minor 1
 release 0
 x 1130
-y 880
+y 900
 w 130
-h 50
+h 30
 fgColor index 46
 bgColor index 3
 topShadowColor index 1
@@ -261,7 +310,7 @@ release 0
 x 1130
 y 690
 w 130
-h 50
+h 40
 fgColor index 43
 bgColor index 3
 topShadowColor index 1
@@ -282,9 +331,9 @@ major 4
 minor 0
 release 0
 x 1130
-y 750
+y 740
 w 130
-h 50
+h 40
 fgColor index 43
 bgColor index 3
 topShadowColor index 1
@@ -345,9 +394,9 @@ major 4
 minor 0
 release 0
 x 1130
-y 820
+y 855
 w 130
-h 50
+h 35
 fgColor index 0
 bgColor index 9
 topShadowColor index 1
@@ -375,11 +424,15 @@ fgColor index 14
 bgColor index 0
 topShadowColor index 1
 botShadowColor index 11
-displaySource "file"
-file "$(dom)-overview"
+displaySource "menu"
+filePv "LOC\\overview$(!W)=e:0,Left to Right,Right to Left"
 center
 sizeOfs 5
-numDsps 0
+numDsps 2
+displayFileName {
+  0 "$(dom)-overview"
+  1 "$(dom)-overview-flipped"
+}
 noScroll
 endObjectProperties
 
@@ -496,5 +549,44 @@ endObjectProperties
 
 endGroup
 
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1135
+y 805
+w 120
+h 30
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "LOC\\overview$(!W)"
+font "arial-bold-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1130
+y 785
+w 47
+h 14
+font "arial-medium-r-12.0"
+fgColor index 14
+bgColor index 8
+value {
+  "  Beam  "
+}
+autoSize
+border
 endObjectProperties
 

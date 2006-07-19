@@ -25,7 +25,7 @@ _APPNAME_ : $(USES_DB)
 
 
 st_APPNAME_-gui: $(TOP)/configure/RELEASE
-	$(BLSLSCRIPTS)/dls_generate_edm_paths.py _APPNAME_ $(TOP)/configure/RELEASE > $@
+	$(BLSLSCRIPTS)/dls_edm_paths.py _APPNAME_ $(TOP)/configure/RELEASE > $@
 	
 buildInstall: _APPNAME_ st_APPNAME_-gui
 
