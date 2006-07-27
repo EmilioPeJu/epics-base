@@ -8,7 +8,7 @@ DATA += _APPNAME_.subst
 
 .PHONY: _APPNAME_.subst
 
-$(INSTALL_DATA)/_APPNAME_.subst: $(BLSRC)/_APPNAME_SignalList.xml
+$(INSTALL_DATA)/_APPNAME_.subst: $(BLSRC)/_APPNAME_SignalList.xml ../_APPNAME_-overview-src.edl
 	$(BLSLSCRIPTS)/dls-export-edm-files.py -m -o -t -f -v -r --dir=$(INSTALL_DATA) _APPNAME_ $<
 
 include $(TOP)/configure/RULES
