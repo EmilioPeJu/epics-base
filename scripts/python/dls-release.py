@@ -42,7 +42,11 @@ def main():
     sys.exit()
 
   if( not options.epicsVer ):
-    epicsVer = 'R3.14.7'
+    try:
+      epicsVer = os.environ['EPICS_RELEASE']
+    except KeyError:
+      print "EPICS_RELEASE environment variable not set, defaulting to R3.14.8.2"
+      epicsVer = 'R3.14.8.2'
   else:
     epicsVer = options.epicsVer
 
