@@ -108,7 +108,7 @@ def main():
 
   command1 = 'dls-svn_load_dirs -t ' + args[3]
   command2 = os.path.join(prefix,'vendor',source)+' current ' + args[0]
-  command  = command1 + ' ' + command2 + ' >& /dev/null'
+  command  = command1 + ' ' + command2
 
   print ''
   print 'Running command: '
