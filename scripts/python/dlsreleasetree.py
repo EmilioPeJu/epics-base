@@ -1,14 +1,13 @@
-#!/bin/env python
+#!/bin/env python2.4
 
 """
 dlsreleasetree.py
 Author: Tom Cobb
 
-contains a python representation of a tree of modules
+contains a python representation of a tree of modules with an associated gui
 """
 
-import os, sys
-from optparse import OptionParser
+import os, sys, shutil
 
 class release_tree:
 
@@ -139,10 +138,10 @@ class release_tree:
 					output.append(leaf)
 		return output
 
-	def __latest_version(self):
+	def latest_version(self):
 		path = self.__latest_path()
 		if os.path.samefile(path,self.path):
-			return "-"
+			return ""
 		else:
 			return path.split("/")[-1]
 	
@@ -242,62 +241,139 @@ Number	Module		Current		Latest
 			else:
 				output += str(i)+"\t"+self.leaves[i].name+"\t\t"
 			if len(self.leaves[i].version) >= len("\t".expandtabs()):
-				output += self.leaves[i].version+"\t"+self.leaves[i].__latest_version()+"\n"
+				output += self.leaves[i].version+"\t"+self.leaves[i].latest_version()+"\n"
 			else:
-				output += self.leaves[i].version+"\t\t"+self.leaves[i].__latest_version()+"\n"
+				output += self.leaves[i].version+"\t\t"+self.leaves[i].latest_version()+"\n"
 		return output
+	
+	def equals(self,tree):
+		output = self.name==tree.name and self.version==tree.version and len(self.leaves)==len(tree.leaves)
+		for i in range(len(self.leaves)):
+			output = output and self.leaves[i].equals(tree.leaves[i])
+		return output
+
 		
-def release_tree_parser():
-	parser = OptionParser("usage: %prog [options] <module_path>")
-	(options, args) = parser.parse_args()
-	if len(args) != 1:
-		print >> sys.stderr, "***Error: Incorrect number of arguments. Type %prog -h for help"
-		sys.exit(1)
-	print "******************************"
-	print "* Interactive object viewer  *"
-	print "******************************"
-	commands = """Commands:
-q   quit
-f   print flattened list of modules
-..  go to parent module
-.   refresh the tree
-0   go to module 0
-1   go to module 1, etc...
-"""
-	print commands
-	release_file = release_tree(None,args[0])
-	path = []
-	print release_file
-	while True:
-		command = raw_input("Please enter a command:")
-		if command=="..":
-			if release_file.parent:
-				release_file=release_file.parent
-				path = path[:-1]
-				print
-				print release_file
-			else:
-				print "Error: this module has no parent"
-		elif command==".":
-			release_file = release_tree(None,args[0])
-			for number in path:
-				release_file = release_file.leaves[number]
-			print release_file	
-		elif command=="q":
+						
+class tree_update:
+
+	def __init__(self,tree,no_check=False):
+		self.modules = {}
+		self.old_tree = tree
+		self.tree = tree.copy()
+		for i in range(len(self.tree.leaves)):
+			leaf_updates = self.tree.leaves[i].updates()+[tree.leaves[i]]
+			if leaf_updates:
+				self.modules[self.tree.leaves[i].name]=leaf_updates
+#				print "### Updated",self.tree.leaves[i].name,"from",self.tree.leaves[i].version,"to",leaf_updates[0].version
+				self.tree.leaves[i]=leaf_updates[0]
+		if no_check:
 			return
-		elif command=="f":
-			for m in release_file.flatten():
-				print m.name,m.version
-		else:
-			try:
-				number=int(command)
-				release_file=release_file.leaves[number]
-				path.append(number)
-				print
-				print release_file
-			except:
-				print commands
+		clashes = self.tree.clashes(ignore_warnings=True)
+		agenda = []
+		while clashes:
+			if agenda:
+				name = agenda.pop()
+				if not name in self.modules.keys():
+					flat_leaves = self.tree.flatten()
+					flag = False
+					for leaf in flat_leaves:
+						if leaf.name == name:
+							agenda.append(leaf.parent.name)
+							flag = True
+					if not flag:
+						print "*** Warning - Can't find a consistent set, the following clashes need to be resolved"
+						return
+				elif not self.revert(name):
+					for leaf in clashes[name]:
+						if not leaf.parent.name == self.tree.name:
+							agenda.append(leaf.parent.name)
+			else:	
+				clash = clashes[clashes.keys()[0]]
+				duplicates = self.__duplicates(clash)
+				if duplicates:
+					agenda.append(duplicates)
+				else:
+					agenda += self.fix_clash(clash)
+			clashes = self.tree.clashes(ignore_warnings=True)
 		
+	def fix_clash(self,leaves):
+		clash_name = leaves[0].name
+		# set minimum path
+		min_leaf_path = self.tree.sort_paths([x.path for x in leaves])[-1]
+		out_names = []
+		for leaf in leaves:
+			if leaf.path==min_leaf_path:
+				min_leaf = leaf.copy()
+				min_leaf.parent = self.tree
+				if not leaf.parent == self.tree:
+					for i in range(len(self.tree.leaves)):
+						if self.tree.leaves[i].name == clash_name:
+							self.tree.leaves[i] = min_leaf
+			elif not leaf.parent == self.tree:
+				out_names.append(leaf.parent.name)
+		return out_names
+	
+	def __duplicates(self,leaves):
+		dict = {}
+		for name in [x.parent.name for x in leaves]:
+			if name in dict.keys():
+				dict[name]+=1
+			else:
+				dict[name]=1
+		for key in dict.keys():
+			if dict[key]>1:
+				return key
+		return 0
+	
+	def revert(self,name):
+		upgrades = self.modules[name]
+		index = -1
+		for i in range(len(self.tree.leaves)):
+			if self.tree.leaves[i].name == name:
+				index = i
+		if not index == -1:
+			for i in range(len(upgrades)):
+				if upgrades[i].path==self.tree.leaves[index].path and i+1<len(upgrades):
+#					print "### Reverted",name,"to",upgrades[i+1].version
+					self.tree.leaves[index] = upgrades[i+1]
+					return 1
+		return 0
 		
-if __name__ == "__main__":
-	release_tree_parser()
+	def changes(self):
+		output = {}
+		file = open(self.tree.path+"/configure/RELEASE","r")
+		lines = file.readlines()
+		file.close()
+		for i in range(len(self.old_tree.leaves)):
+			if not self.old_tree.leaves[i].version == self.tree.leaves[i].version:
+				for j in range(len(lines)):
+					if (self.old_tree.leaves[i].name+"\n" in lines[j] or self.old_tree.leaves[i].name+"/" in lines[j]) and (self.old_tree.leaves[i].version in lines[j] or self.old_tree.leaves[i].version.upper() in lines[j]) and "#" not in lines[j][:4]:
+						out_line = lines[j].split("=")[0]+"= "+self.tree.leaves[i].path+"\n"
+						output[lines[j]]=out_line
+		return output
+	
+	def print_changes(self):
+		changes = self.changes()
+		message = ""
+		for old_line in changes.keys():
+			message+= "Change: "+old_line+"To:     "+changes[old_line]
+		print message
+		
+	
+	def write_changes(self):
+		changes = self.changes()
+		shutil.copy(self.tree.path+"/configure/RELEASE",self.tree.path+"/configure/RELEASE~")
+		print "Backup written to",self.tree.path+"/configure/RELEASE~."
+		file = open(self.tree.path+"/configure/RELEASE","r")
+		lines = file.readlines()
+		file.close()
+		file = open(self.tree.path+"/configure/RELEASE","w")
+		for line in lines:
+			if changes.has_key(line):
+				file.write(changes[line])
+			else:
+				file.write(line)
+		file.close()
+		print "Changes written to",self.tree.path+"/configure/RELEASE."
+
+	
