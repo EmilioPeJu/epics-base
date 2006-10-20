@@ -4,10 +4,12 @@
 dlsreleasetree.py
 Author: Tom Cobb
 
-contains a python representation of a tree of modules with an associated gui
+contains release_tree: a python representation of a tree of modules
+also tree_update: a class that updates a release_tree to is most up to date consistent state
 """
 
 import os, sys, shutil
+
 
 class release_tree:
 
@@ -22,47 +24,69 @@ class release_tree:
 	# parent: parent node
 	
 	def __init__(self,parent,module_path=None):
+		# dls specific entries:
+		self.work_string = "work"
+		self.prod_string = "prod"
+		self.support_string = "support"
+		self.ioc_string = "ioc"
+		# setup variables
 		self.leaves=[]
 		self.path = ""
 		self.name = ""
 		self.epics_version = "R3.14.8.2"
 		self.version = ""
 		self.parent=parent
+		self.macros={}
 		if module_path:
 			self.process_module(module_path)
-
+		
 	def copy(self):
+		# return a new_tree that is a copy of self
 		new_tree = release_tree(self.parent)
 		new_tree.path = self.path
 		new_tree.name = self.name
 		new_tree.epics_version = self.epics_version
 		new_tree.version = self.version
+		new_tree.macros = self.macros.copy()
 		for leaf in self.leaves:
 			new_leaf = leaf.copy()
 			new_leaf.parent = new_tree
 			new_tree.leaves.append(new_leaf)
 		return new_tree
 
-	def process_module(self,module_path):
-		if not os.path.isfile(module_path+"/configure/RELEASE"):
-			print >> sys.stderr, "***Error: module does not exist - "+module_path
-			sys.exit(0)
-		if module_path[-1]=="/":
-			self.path=module_path[:-1]
+	def make_path(self,prod_work,ioc_support):
+		# return a path for prod/work support/ioc. E.g path("prod","ioc") = /home/diamond/R3.14.8.2/prod/ioc
+		string = "/home/diamond/"+self.epics_version+"/"
+		if prod_work=="prod":
+			string += self.prod_string + "/"
+		elif prod_work=="work":
+			string += self.work_string + "/"
 		else:
-			self.path=module_path
+			print >> sys.stderr, "***Error: expected prod or work, got: "+str(prod_work)
+			sys.exit(0)
+		if ioc_support=="ioc":
+			string += self.ioc_string
+		elif ioc_support=="support":
+			string += self.support_string
+		else:
+			print >> sys.stderr, "***Error: expected ioc or support, got: "+str(ioc_support)
+			sys.exit(0)
+		return string
+
+	def init_module(self):
+		# initialise name and version from self.path
 		sections = self.path.split("/")
-		if "prod" in self.path:
-			if "ioc" in self.path:
-				self.name = sections[-3]+"/"+sections[-2]
-			else:
-				self.name = sections[-2]
+		if self.make_path("prod","support") in self.path:
+			self.name = sections[-2]
 			self.version = sections[-1]
-		elif "work" in self.path:
-			if "ioc" in self.path:
-				self.name = sections[-2]+"/"+sections[-1]
-			else:
-				self.name = sections[-1]
+		elif self.make_path("prod","ioc") in self.path:
+			self.name = sections[-3]+"/"+sections[-2]
+			self.version = sections[-1]
+		elif self.make_path("work","support") in self.path:
+			self.name = sections[-1]
+			self.version = "work"
+		elif self.make_path("work","ioc") in self.path:
+			self.name = sections[-2]+"/"+sections[-1]
 			self.version = "work"
 		else:
 			if "ioc" in self.path:
@@ -70,26 +94,22 @@ class release_tree:
 			else:
 				self.name = sections[-1]
 			self.version = "local"
-		self.process_release(self.path+"/configure/RELEASE")
 
-	def process_release(self,RELEASE_filename):
-		# check for existence of modules here
-		# number of times to recursively substitute macros in RELEASE
-		retries = 5
+	def process_module(self,module_path):
 		# read the file in
-		input = open(RELEASE_filename,"r")
+		if not os.path.isfile(module_path+"/configure/RELEASE"):
+			print >> sys.stderr, "***Error: cannot find module - "+module_path+"/configure/RELEASE"
+			sys.exit(0)
+		if module_path[-1]=="/":
+			self.path=module_path[:-1]
+		else:
+			self.path=module_path
+		input = open(self.path+"/configure/RELEASE","r")
 		lines = input.readlines()
 		input.close()
 		# store current working directory then go to module base
 		cwd = os.getcwd()
-		os.chdir(RELEASE_filename.replace("/configure/RELEASE",""))
-		# strip the modules from lines
-		self.__make_leaves(lines)
-		# go back to initial place and return the values
-		os.chdir(cwd)
-
-
-	def __make_leaves(self,lines):
+		os.chdir(self.path)
 		modules = {"TOP":"."}
 		module_order = []
 		retries = 5
@@ -103,6 +123,8 @@ class release_tree:
 				elif not list[0].strip() in ignore_list:
 					modules[list[0].strip()]=list[1].strip()
 					module_order.append(list[0].strip())
+		self.macros = modules
+		self.init_module()
 		while retries>0:
 			unsubbed_macros = []
 			for macro in modules.keys():
@@ -117,10 +139,18 @@ class release_tree:
 		for module in module_order:
 			if (self.parent and module==self.parent.name) or module=="TOP" or modules[module]=="." or not os.path.isfile(modules[module]+"/configure/RELEASE"):
 				if not os.path.isdir(modules[module]) and modules[module].upper() not in ["YES","NO","TRUE","FALSE"] and "python" not in modules[module]:
+					if self.make_path("work","support") in modules[module] or self.make_path("work","ioc") in modules[module] or self.make_path("prod","ioc") in modules[module] or self.make_path("prod","support") in modules[module]:
+						new_leaf = release_tree(parent=self)
+						new_leaf.path = modules[module]
+						new_leaf.init_module()
+						new_leaf.version="invalid"
+						self.leaves.append(new_leaf)
 					print >> sys.stderr, "***Warning: can't find "+modules[module]
-			else:
+			elif not self.name in modules[module]:
 				new_leaf = release_tree(parent=self,module_path=modules[module])
 				self.leaves.append(new_leaf) 
+		# go back to initial place and return the values
+		os.chdir(cwd)
 
 	def flatten(self,include_self=True):
 		if include_self:
@@ -132,7 +162,10 @@ class release_tree:
 			for leaf in flattened_list:
 				flag = False
 				for path in [x.path for x in output]:
-					if os.path.samefile(leaf.path,path):
+					try:
+						if os.path.samefile(leaf.path,path):
+							flag = True
+					except OSError:
 						flag = True
 				if not flag:
 					output.append(leaf)
@@ -140,10 +173,13 @@ class release_tree:
 
 	def latest_version(self):
 		path = self.__latest_path()
-		if os.path.samefile(path,self.path):
-			return ""
-		else:
-			return path.split("/")[-1]
+		try:
+			if os.path.samefile(path,self.path):
+				return ""
+			else:
+				return path.split("/")[-1]
+		except OSError:
+			return path.split("/")[-1]		
 	
 	def __latest_path(self):
 		try:
@@ -153,10 +189,10 @@ class release_tree:
 			return self.path
 
 	def __possible_paths(self):
-		if "ioc" in self.path:
-			prefix = "/home/diamond/"+self.epics_version+"/prod/ioc/"+self.name
+		if self.ioc_string in self.path:
+			prefix = self.make_path("prod","ioc")+"/"+self.name
 		else:
-			prefix = "/home/diamond/"+self.epics_version+"/prod/support/"+self.name
+			prefix = self.make_path("prod","support")+"/"+self.name
 		if os.path.isdir(prefix):
 			files = [prefix + "/" + x for x in os.listdir(prefix)]
 		else:
@@ -216,36 +252,23 @@ class release_tree:
 					clashes[leaf.name].append(leaf)
 		return clashes
 					
-					
 	def updates(self):
 		paths = self.sort_paths(self.__possible_paths())
 		updates = []
 		for path in paths:
-			if os.path.samefile(path,self.path):
-				return updates
-			else:
-				updates.append(release_tree(self.parent,path))
-		print >> sys.stderr, "*** Error: badly formed path "+self.path
-		sys.exit()
+			try:
+				if os.path.samefile(path,self.path):
+					return updates
+				else:
+					updates.append(release_tree(self.parent,path))
+			except OSError:
+				if os.path.isdir(path):
+					updates.append(release_tree(self.parent,path))
+		return updates
 		
 	def __repr__(self):
-		output = """##############################
-# Module: """+self.name+"""
-# Version: """+self.version+"""
-##############################
-Number	Module		Current		Latest
-"""
-		for i in range(len(self.leaves)):
-			if len(self.leaves[i].name) >= len("\t".expandtabs()):
-				output += str(i)+"\t"+self.leaves[i].name+"\t"
-			else:
-				output += str(i)+"\t"+self.leaves[i].name+"\t\t"
-			if len(self.leaves[i].version) >= len("\t".expandtabs()):
-				output += self.leaves[i].version+"\t"+self.leaves[i].latest_version()+"\n"
-			else:
-				output += self.leaves[i].version+"\t\t"+self.leaves[i].latest_version()+"\n"
-		return output
-	
+		return "<release_tree - "+self.name+": "+self.version+">"
+
 	def equals(self,tree):
 		output = self.name==tree.name and self.version==tree.version and len(self.leaves)==len(tree.leaves)
 		for i in range(len(self.leaves)):
@@ -270,6 +293,7 @@ class tree_update:
 			return
 		clashes = self.tree.clashes(ignore_warnings=True)
 		agenda = []
+		counter = 0
 		while clashes:
 			if agenda:
 				name = agenda.pop()
@@ -278,6 +302,7 @@ class tree_update:
 					flag = False
 					for leaf in flat_leaves:
 						if leaf.name == name:
+							print leaf
 							agenda.append(leaf.parent.name)
 							flag = True
 					if not flag:
@@ -295,6 +320,15 @@ class tree_update:
 				else:
 					agenda += self.fix_clash(clash)
 			clashes = self.tree.clashes(ignore_warnings=True)
+			counter+=1
+			if counter > 300:
+				print >> sys.stderr, "***Error: Maximum recursion depth reached. Check you don't have duplicate entries in your configure/RELEASE. Clashes still remain:"
+				for key in clashes.keys():
+					text = ": "
+					for leaf in clashes[key]:
+						text += leaf.parent.name + ": " + leaf.parent.version + " has " + leaf.version + ", " 
+					print >> sys.stderr, key+text
+				sys.exit()
 		
 	def fix_clash(self,leaves):
 		clash_name = leaves[0].name
@@ -347,8 +381,17 @@ class tree_update:
 		for i in range(len(self.old_tree.leaves)):
 			if not self.old_tree.leaves[i].version == self.tree.leaves[i].version:
 				for j in range(len(lines)):
-					if (self.old_tree.leaves[i].name+"\n" in lines[j] or self.old_tree.leaves[i].name+"/" in lines[j]) and (self.old_tree.leaves[i].version in lines[j] or self.old_tree.leaves[i].version.upper() in lines[j]) and "#" not in lines[j][:4]:
-						out_line = lines[j].split("=")[0]+"= "+self.tree.leaves[i].path+"\n"
+					if ("/"+self.old_tree.leaves[i].name+"\n" in lines[j] or "/"+self.old_tree.leaves[i].name+"/" in lines[j]) and (self.old_tree.leaves[i].version in lines[j] or self.old_tree.leaves[i].version.upper() in lines[j] or self.old_tree.leaves[i].version=="invalid") and "#" not in lines[j][:4]:
+						macros = {}
+						out_line = lines[j]
+						while "$(" in out_line:
+							index = out_line.find("$(")
+							macro = out_line[index+2:index+out_line[index:].find(")")]
+							macros[self.tree.macros[macro]]=macro
+							out_line = out_line.replace("$("+macro+")",self.tree.macros[macro])
+						out_line = out_line.replace(self.old_tree.leaves[i].path,self.tree.leaves[i].path)
+						for macro_sub in macros.keys():
+							out_line = out_line.replace(macro_sub,"$("+macros[macro_sub]+")")
 						output[lines[j]]=out_line
 		return output
 	

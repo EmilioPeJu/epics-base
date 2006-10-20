@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>775</width>
-            <height>861</height>
+            <width>828</width>
+            <height>791</height>
         </rect>
     </property>
     <property name="caption">
@@ -21,7 +21,7 @@
         </property>
         <widget class="QLayoutWidget" row="0" column="0">
             <property name="name">
-                <cstring>layout15</cstring>
+                <cstring>layout7</cstring>
             </property>
             <vbox>
                 <property name="name">
@@ -62,20 +62,66 @@
                             <verstretch>0</verstretch>
                         </sizepolicy>
                     </property>
+                    <property name="maximumSize">
+                        <size>
+                            <width>32767</width>
+                            <height>16</height>
+                        </size>
+                    </property>
                     <property name="text">
-                        <string>Key:  &lt;FONT COLOR="#177D17"&gt;Update,  &lt;FONT COLOR="#C1C15D"&gt;In clash,  &lt;FONT COLOR="#7D1717"&gt;Causing clash</string>
+                        <string>Key:   &lt;font color="#999600"&gt;In Clash&lt;/font&gt;,  &lt;font color="#ff0000"&gt;Causing Clash&lt;/font&gt;,  &lt;font color="#a020f0"&gt;Invalid&lt;/font&gt;</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel1_2</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="paletteBackgroundColor">
+                        <color>
+                            <red>203</red>
+                            <green>255</green>
+                            <blue>197</blue>
+                        </color>
+                    </property>
+                    <property name="text">
+                        <string>Update Available</string>
                     </property>
                 </widget>
             </vbox>
         </widget>
         <widget class="QLayoutWidget" row="0" column="1">
             <property name="name">
-                <cstring>layout16</cstring>
+                <cstring>layout5</cstring>
             </property>
             <grid>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
+                <spacer row="1" column="1">
+                    <property name="name">
+                        <cstring>spacer1_2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>61</width>
+                            <height>30</height>
+                        </size>
+                    </property>
+                </spacer>
                 <widget class="QListView" row="0" column="0" rowspan="1" colspan="3">
                     <column>
                         <property name="text">
@@ -103,30 +149,31 @@
                     <property name="name">
                         <cstring>write2</cstring>
                     </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>0</width>
+                            <height>38</height>
+                        </size>
+                    </property>
                     <property name="text">
                         <string>Write Changes</string>
                     </property>
                 </widget>
-                <spacer row="1" column="1">
-                    <property name="name">
-                        <cstring>spacer1_2</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>20</width>
-                            <height>30</height>
-                        </size>
-                    </property>
-                </spacer>
                 <widget class="QPushButton" row="1" column="0">
                     <property name="name">
                         <cstring>print2</cstring>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>0</width>
+                            <height>38</height>
+                        </size>
+                    </property>
+                    <property name="maximumSize">
+                        <size>
+                            <width>32767</width>
+                            <height>36</height>
+                        </size>
                     </property>
                     <property name="text">
                         <string>Print Changes</string>
@@ -136,12 +183,51 @@
         </widget>
         <widget class="QLayoutWidget" row="0" column="2">
             <property name="name">
-                <cstring>layout17</cstring>
+                <cstring>layout6</cstring>
             </property>
             <grid>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
+                <spacer row="1" column="1">
+                    <property name="name">
+                        <cstring>spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>62</width>
+                            <height>30</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton" row="1" column="0">
+                    <property name="name">
+                        <cstring>print3</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>3</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>0</width>
+                            <height>38</height>
+                        </size>
+                    </property>
+                    <property name="text">
+                        <string>Print Changes</string>
+                    </property>
+                </widget>
                 <widget class="QListView" row="0" column="0" rowspan="1" colspan="3">
                     <column>
                         <property name="text">
@@ -169,41 +255,14 @@
                     <property name="name">
                         <cstring>write3</cstring>
                     </property>
-                    <property name="text">
-                        <string>Write Changes</string>
-                    </property>
-                </widget>
-                <spacer row="1" column="1">
-                    <property name="name">
-                        <cstring>spacer1</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
+                    <property name="minimumSize">
                         <size>
-                            <width>20</width>
-                            <height>30</height>
+                            <width>0</width>
+                            <height>38</height>
                         </size>
                     </property>
-                </spacer>
-                <widget class="QPushButton" row="1" column="0">
-                    <property name="name">
-                        <cstring>print3</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>3</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
                     <property name="text">
-                        <string>Print Changes</string>
+                        <string>Write Changes</string>
                     </property>
                 </widget>
             </grid>

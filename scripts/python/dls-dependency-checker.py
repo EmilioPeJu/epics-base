@@ -69,21 +69,20 @@ def build_gui_tree(list_view,tree,parent=None):
 	child.tree = tree
 	child.setSelectable(False)
 	child.text_color = Qt.black
-	child.base_color = QColor(212,216,236) #normal
+	child.base_color = QColor(212,216,236) # normal - blue
 	open_parents = False
 	if tree.latest_version():
-		child.text_color = Qt.white
-		child.base_color = QColor(23,125,23) #update available - green
+		child.base_color = QColor(203,255,197) # update available - green
 		open_parents = True
 	if tree.name in list_view.clashes.keys():
-		if not tree.latest_version():
-			child.text_color = Qt.black
-			child.base_color = QColor(225,225,125) #clash in module with same name 
-			open_parents = True
+		open_parents = True
+		if tree.path == tree.sort_paths([x.path for x in list_view.clashes[tree.name]])[0]:
+			child.text_color = QColor(153,150,0) # involved in clash: yellow
 		else:
-			child.text_color = Qt.white
-			child.base_color = QColor(125,23,23) #clash - red
-			open_parents = True
+			child.text_color = Qt.red # causes clash: red
+	if tree.version == "invalid":
+		open_parents = True
+		child.text_color = QColor(160,32,240) # invalid: purple
 	if open_parents: 
 		temp_ob = child
 		while temp_ob.parent():
@@ -126,7 +125,10 @@ def release_tree_gui():
 			print >> sys.stderr, "***Error: Incorrect number of arguments. Type %prog -h for help"
 			sys.exit()
 	else:
-		path = args[0]
+		here = os.getcwd()
+		os.chdir(args[0])
+		path = os.getcwd()
+		os.chdir(here)
 		
 	namespace = uiload(os.path.dirname(sys.argv[0])+"/dls-dependency-checker.ui")
 	app = QApplication([])
