@@ -84,6 +84,11 @@ SCRIPTS += dls-svn_load_dirs
 # Python scripts (new)
 
 SCRIPTS += dls-checkout-module.py
+SCRIPTS += dls-changes-since-release.py
+SCRIPTS += dls-dependency-checker.py
+SCRIPTS += dls-dependency-checker.ui
+SCRIPTS += dls-subst-to-csv.py
+SCRIPTS += dlsreleasetree.py
 SCRIPTS += dls-export-release.py
 SCRIPTS += dls-list-branches.py
 SCRIPTS += dls-list-modules.py
