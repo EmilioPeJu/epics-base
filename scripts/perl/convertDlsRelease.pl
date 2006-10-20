@@ -10,7 +10,7 @@ eval 'exec perl -S $0 ${1+"$@"}'  # -*- Mode: perl -*-
 # in file LICENSE that is included with this distribution. 
 #*************************************************************************
 #
-# convertRelease.pl,v 1.14.2.14 2004/08/11 19:31:36 jba Exp
+# convertRelease.pl,v 1.14.2.16 2005/11/30 21:44:55 jba Exp
 #
 # Parse configure/RELEASE file(s) and generate a derived output file.
 # Modified for DLS use by Nick Rees, 16 Sep 2005.
@@ -23,9 +23,7 @@ use strict;
 my ($cwd, $arch, $top, $hostarch, $iocroot, $root, $outfile, $relfile, %macros, @apps);
 our ($opt_a, $opt_T, $opt_t, $opt_h);
 
-$cwd = cwd();
-$cwd =~ s/\/tmp_mnt//;	# hack for sun4
-$cwd =~ s/\\/\//g;	# hack for win32
+$cwd = UnixPath(cwd());
 
 getopt "ahtT";
 
@@ -46,7 +44,6 @@ if ($opt_T) {
     $top = $cwd;
     $top =~ s/\/iocBoot.*$//;
     $top =~ s/\/configure.*$//;
-    chomp($top = `cygpath -m $top`) if ($^O eq "cygwin");
 }
 
 # The IOC may need a different path to get to $top
@@ -67,7 +64,7 @@ unless (@ARGV == 1) {
     print "\tenvPaths - generate epicsEnvSet commands for other IOCs\n";
     print "\tmsiPaths - send msi substitutions from RELEASE macros to stdout\n";
     print "\tvdctPaths - send vdct paths from RELEASE macros to stdout\n";
-    print "\tdataPaths - send vdct paths from RELEASE macros to stdout\n";
+    print "\tdataPaths - send data paths from RELEASE macros to stdout\n";
     print "\tCONFIG_APP_INCLUDE - additional build variables\n";
     print "\tRULES_INCLUDE - supports installable build rules\n";
     exit 2;
@@ -75,7 +72,7 @@ unless (@ARGV == 1) {
 $outfile = $ARGV[0];
 
 # TOP refers to this application
-%macros = (TOP => $top);
+%macros = (TOP => LocalPath($top));
 @apps   = ("TOP");	# Records the order of definitions in RELEASE file
 
 # Read the RELEASE file(s)
@@ -432,4 +429,28 @@ sub checkDLSRelease {
     }
     print "\n" if ($status);
     exit $status;
+}
+
+# Path rewriting rules for various OSs
+# These functions are duplicated in src/makeBaseApp/makeBaseApp.pl
+sub UnixPath {
+    my ($newpath) = @_;
+    if ($^O eq "cygwin") {
+       $newpath =~ s|\\|/|go;
+       $newpath =~ s%^([a-zA-Z]):/%/cygdrive/$1/%;
+    } elsif ($^O eq 'sunos') {
+       $newpath =~ s(^\/tmp_mnt/)(/);
+    }
+    return $newpath;
+}
+
+sub LocalPath {
+    my ($newpath) = @_;
+    if ($^O eq "cygwin") {
+       $newpath =~ s%^/cygdrive/([a-zA-Z])/%$1:/%;
+    } elsif ($^O eq "darwin") {
+       # These rules are likely to be site-specific
+       $newpath =~ s%^/private/var/auto\.home/%/home/%;    # APS
+    }
+    return $newpath;
 }
