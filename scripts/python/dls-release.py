@@ -121,7 +121,7 @@ cd $version
 # Modify configure/RELEASE
 mv configure/RELEASE configure/RELEASE.svn || ( echo Can not rename configure/RELEASE; exit 1 )
 sed -e 's,^ *EPICS_BASE *=.*$,'"EPICS_BASE=/dls_sw/epics/$epics_version/base,"   \
-    -e 's,^ *SUPPORT *=.*$,'"SUPPORT=/dls_sw/prod/$epics_version/prod/support," \
+    -e 's,^ *SUPPORT *=.*$,'"SUPPORT=/dls_sw/prod/$epics_version/support," \
     -e 's,^ *WORK *=.*$,WORK=,' \
 configure/RELEASE.svn > configure/RELEASE  || ( echo Can not edit configure/RELEASE; exit 1 )
 
