@@ -1,150 +1,142 @@
-#!/usr/bin/env python2.4
+#!/bin/env python2.4
 
-"""
-dls-release [-i -b <branch> -e <epicsVer>] <name> <tag>
-Converted to Python and IOC option added by: Andy Foster
-
-This script is used to release a support module or IOC
-application, <name>, to the 'prod' tree. The released
-software is tagged as <tag> in the release area of the
-repository.
-
-The -i flag specifies a release of an IOC application.
-For an IOC application, <name> is expected to be of the form:
-<beamLine/Technical Area> e.g. BL18I/MO
-
-The -b flag tells the script to release from a branch
-rather than from the trunk.
-
-The -e flag specifies which EPICS version 'prod' area
-the release should be made to.
-"""
-
-import os, pysvn, sys
+import os, subprocess, datetime, pysvn, sys
 from   optparse import OptionParser
 from   dlsPyLib import *
 
 def main():
-  parser = OptionParser("usage: %prog [-i -b <branch> -e <EPICS version>] <name> <tag>")
-  parser.add_option("-i", "--ioc", action="store_true", dest="ioc",
-                    help="Release an IOC application")
-  parser.add_option("-b", "--branch", action="store", type="string", dest="branch",
-                    help="Release from a branch")
-  parser.add_option("-e", "--epicsVer", action="store", type="string", dest="epicsVer",
-                    help="Release into \"/home/diamond/epicsVer/prod\"")
-  (options, args) = parser.parse_args()
-  if len(args) < 2 or len(args) > 3:
-    parser.error("Incorrect number of arguments")
+	
+	# override epics_version if set
+	try:
+		epics_version = os.environ['DLS_EPICS_RELEASE']
+	except KeyError:
+		try:
+			epics_version = os.environ['EPICS_RELEASE']
+		except KeyError:
+			epics_version = 'R3.14.8.2'
 
-  # Check the SVN_ROOT environment variable
-  prefix = checkSVN_ROOT()
-  if not prefix:
-    sys.exit()
+	# set default variables
+	out_dir = "/dls_sw/work/etc/build/queue"
+	build_script = "dls-build-release.py"
 
-  if( not options.epicsVer ):
-    try:
-      epicsVer = os.environ['EPICS_RELEASE']
-    except KeyError:
-      print "EPICS_RELEASE environment variable not set, defaulting to R3.14.8.2"
-      epicsVer = 'R3.14.8.2'
-  else:
-    epicsVer = options.epicsVer
+	# command line options
+	parser = OptionParser("usage: %prog [options] <MODULE_NAME> <RELEASE#>")
+	parser.add_option("-i", "--ioc", action="store_true", dest="ioc", help="Release an IOC application")
+	parser.add_option("-b", "--branch", action="store", type="string", dest="branch", help="Release from a branch")
+	parser.add_option("-e", "--epics_version", action="store", type="string", dest="epics_version", help="Force an epics version, default is "+epics_version)
+	parser.add_option("-d", "--dir", action="store", type="string", dest="out_dir", help="Set the output directory, default is "+out_dir)
+	(options, args) = parser.parse_args()
+	if len(args)!=2:
+		parser.error("incorrect number of arguments")
 
-  if( epicsVer != 'R3.13.9' and epicsVer != 'R3.14.7' and epicsVer != 'R3.14.8.2' ):
-    print 'The EPICS version must be one of: R3.13.9, R3.14.7 or R3.14.8.2'
-    sys.exit()
+	# set variables
+	module = args[0]
+	release_number = args[1]
+	if options.epics_version:
+		epics_version = options.epics_version
+	prod_dir = "/dls_sw/prod/"+epics_version
+	if options.out_dir:
+		out_dir = options.out_dir
+		
+	# print messages
+	if not options.branch:
+		print 'Releasing '+module+" "+release_number+" from trunk using epics "+epics_version
+	else:
+		print 'Releasing '+module+" "+release_number+" from branch "+options.branch+" using epics "+epics_version
 
-  if options.ioc:
-    cols = args[0].split('/')
-    if len(cols) < 2:
-      print 'Missing Technical Area under Beam Line'
-      sys.exit()
+	# setup svn				
+	prefix = os.environ['SVN_ROOT']
+	if not prefix:
+		print >> sys.stderr, "***Error: SVN_ROOT is not set in the environment"
+		sys.exit()
+	subversion = pysvn.Client()	
+	log_message = 'Releasing ' +module+ ' at version ' +release_number
+	def get_log_message():
+		return True, log_message
+	subversion.callback_get_log_message = get_log_message	
+	
+	# setup svn directories
+	if options.ioc:
+		support = "ioc"
+	else:
+		support = "support"
+	if options.branch:
+		src_dir = os.path.join("diamond/trunk",support,module,options.branch)
+	else:
+		src_dir = os.path.join("diamond/trunk",support,module)
+	rel_dir = os.path.join("diamond/release",support,module)
+	
+	# check for existence of directories	
+  	if not pathcheck(subversion, os.path.join(prefix, src_dir)):
+		print >> sys.stderr, "***Error: "+os.path.join(prefix, src_dir)+' does not exist in the repository.'
+		sys.exit()
+	if not pathcheck(subversion, os.path.join(prefix, rel_dir, release_number)):
+		# copy the source to the release directory
+		dirs = rel_dir.split("/")
+		for i in range(1,len(dirs)+1):
+			# make sure all directories exist
+			if not pathcheck(subversion, os.path.join(prefix,*dirs[:i])):
+				subversion.mkdir(os.path.join(prefix,*dirs[:i]),'Created: '+os.path.join(prefix,*dirs[:i]))
+		subversion.copy(os.path.join(prefix, src_dir), os.path.join(prefix, rel_dir, release_number))
+		print "Created release in svn directory: "+os.path.join(prefix,rel_dir,release_number)
+	elif os.path.isdir(os.path.join(prod_dir,support,module,release_number)):
+		# if release exists in prod and prod then fail with an error
+		print >> sys.stderr, "***Error: "+module+" "+release_number+" already exists in "+os.path.join(prod_dir,support)
+		sys.exit()
+		
+	# find out which user wants to release
+	user = os.getlogin()
+	
+	# generate the filename
+	now = datetime.datetime.now()
+	filename = now.strftime("%Y-%m-%d_%H-%M-%S_")+user+".sh"
+	
+	# check filename isn't already in use
+	while os.path.isfile(filename):
+		filename = filename.replace(".sh","_1.sh")
 
-  if( not options.ioc and not options.branch ):
-    srcDir  = 'trunk/support/'+args[0]
-    relDir1 = 'release/support/'
-    diskDir = 'support'
-    bflag   = 0
-  elif( not options.ioc and options.branch ):
-    srcDir  = 'branches/support/'+args[0]+'/'+options.branch
-    relDir1 = 'release/support/'
-    diskDir = 'support'
-    bflag   = 1
-  elif( options.ioc and options.branch ):
-    srcDir  = 'branches/ioc/'+args[0]+'/'+options.branch
-    relDir1 = 'release/ioc/'
-    diskDir = 'ioc'
-    bflag   = 1
-  elif( options.ioc and not options.branch ):
-    srcDir  = 'trunk/ioc/'+args[0]
-    relDir1 = 'release/ioc/'
-    diskDir = 'ioc'
-    bflag   = 0
-  else:
-    print 'Should NEVER see this'
+	# create the build request
+	f = open(os.path.join(out_dir,filename),"w")
+	f.write("""#!/usr/bin/env bash
 
-  relDir = relDir1+args[0]
+# Script for building a diamond production module.
 
-  # Create an object to interact with subversion
-  subversion = pysvn.Client()
+epics_version="""+epics_version+"""
+svn_dir="""+rel_dir+"""
+build_dir="""+os.path.join(prod_dir,support,module)+"""
+version="""+release_number+r"""
 
-  log_message = 'Releasing ' +args[0]+ ' at version ' +args[1]
+# Set up environment
+DLS_EPICS_RELEASE=$epics_version
+DLS_DEV=1
+source /dls_sw/etc/profile
+SVN_ROOT=http://serv0002.cs.diamond.ac.uk/repos/controls
 
-  def get_log_message():
-    return True, log_message
+# Checkout module
+mkdir -p $build_dir                        || ( echo Can not mkdir $build_dir; exit 1 )
+cd $build_dir                              || ( echo Can not cd to $build_dir; exit 1 )
+svn checkout $SVN_ROOT/$svn_dir/$version   || ( echo Can not check out  $svn_dir/$version; exit 1 )
+cd $version
 
-  subversion.callback_get_log_message = get_log_message
+# Modify configure/RELEASE
+mv configure/RELEASE configure/RELEASE.svn || ( echo Can not rename configure/RELEASE; exit 1 )
+sed -e 's,^ *EPICS_BASE *=.*$,'"EPICS_BASE=/dls_sw/epics/$epics_version/base,"   \
+    -e 's,^ *SUPPORT *=.*$,'"SUPPORT=/dls_sw/prod/$epics_version/prod/support," \
+    -e 's,^ *WORK *=.*$,WORK=,' \
+configure/RELEASE.svn > configure/RELEASE  || ( echo Can not edit configure/RELEASE; exit 1 )
 
-  # Check for the existence of this module in "trunk" and "branches" in the repository
-
-  exists = pathcheck( subversion, os.path.join(prefix, srcDir) )
-  if not exists:
-    print os.path.join(prefix, srcDir)+ ' does not exist in the repository.'
-    sys.exit()
-
-  # Check for the existence of a directory in the repository, into which tagged 
-  # releases of this module can be made. If it is not present, create it.
-
-  relD = relDir1
-  for ss in args[0].split('/'):
-    relD = relD + ss + '/'
-    exists = pathcheck( subversion, os.path.join(prefix,relD) )
-    if not exists:
-      subversion.mkdir(os.path.join(prefix,relD), 
-                       'Created: '+os.path.join(prefix,relD))
-
-  # Check for existence of a release of this module with the same tag
-
-  exists = pathcheck( subversion, os.path.join(prefix,relDir,args[1]) )
-  if exists:
-    print 'Repository already contains the ' +args[1]+ ' release of ' +args[0]
-    print 'Please choose a different name and try again'
-    sys.exit()
-
-  if not bflag:
-    print 'Releasing "' + args[0] + '" from trunk, at version "' + args[1] + '"'
-  else:
-    print 'Releasing "' + args[0] + '" from branch, "' + options.branch + '", at version "' + args[1] + '"'
-
-  subversion.copy( os.path.join(prefix, srcDir), os.path.join(prefix, relDir, args[1]) )
-
-  # Check for the existence of the correct directory tree on disk, into which
-  # the release should be checked out. If the directory tree is not present, create it.
-
-  baseStr = '/'
-  prodDir = os.path.join( '/home/diamond', epicsVer, 'prod', diskDir, args[0] )
-  for ss in prodDir.split('/'):
-    baseStr = os.path.join( baseStr, ss )
-    stat    = os.access(baseStr, os.F_OK)
-    if not stat:
-      os.mkdir(baseStr)
-
-  print 'Checking out: ' + os.path.join(relDir, args[1])
-  subversion.checkout(os.path.join(prefix,relDir, args[1]), os.path.join(baseStr,args[1]) )
-
-  print 'Building release...'
-  stat = os.chdir(os.path.join(baseStr,args[1]))
-  os.system('make')
-
+# Build
+timestamp=$(date +%Y%m%d-%H%M%S)
+error_log=build_${timestamp}.err
+build_log=build_${timestamp}.log
+{
+    make 4>&1 1>&3 2>&4 |
+    tee $error_log
+} >$build_log 3>&1""")
+	f.close()
+	os.chmod(os.path.join(out_dir,filename),0777)
+	print "Build request file created: "+os.path.join(out_dir,filename)
+	print module+" "+release_number+" will be exported and built by the build server shortly"
+	
 if __name__ == "__main__":
-  main()
+	main()
