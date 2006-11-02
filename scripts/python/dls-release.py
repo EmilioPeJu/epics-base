@@ -122,7 +122,7 @@ cd $version
 mv configure/RELEASE configure/RELEASE.svn || ( echo Can not rename configure/RELEASE; exit 1 )
 sed -e 's,^ *EPICS_BASE *=.*$,'"EPICS_BASE=/dls_sw/epics/$epics_version/base,"   \
     -e 's,^ *SUPPORT *=.*$,'"SUPPORT=/dls_sw/prod/$epics_version/support," \
-    -e 's,^ *WORK *=.*$,WORK=,' \
+    -e 's,^ *WORK *=.*$,'"#WORK=commented out to prevent prod modules depending on work modules,"\
 configure/RELEASE.svn > configure/RELEASE  || ( echo Can not edit configure/RELEASE; exit 1 )
 
 # Build
@@ -132,9 +132,11 @@ build_log=build_${timestamp}.log
 {
     make 4>&1 1>&3 2>&4 |
     tee $error_log
-} >$build_log 3>&1""")
+} >$build_log 3>&1
+if [ $(stat -c%s $error_log) -ne 0 ] ; then
+    cat $error_log | mail -s "Build Errors: """+module+' '+release_number+'" '+user+"""@rl.ac.uk
+fi """)
 	f.close()
-	os.chmod(os.path.join(out_dir,filename),0777)
 	print "Build request file created: "+os.path.join(out_dir,filename)
 	print module+" "+release_number+" will be exported and built by the build server shortly"
 	
