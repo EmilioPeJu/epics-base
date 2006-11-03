@@ -56,11 +56,11 @@ class release_tree:
 
 	def make_path(self,prod_work,ioc_support):
 		# return a path for prod/work support/ioc. E.g path("prod","ioc") = /home/diamond/R3.14.8.2/prod/ioc
-		string = "/home/diamond/"+self.epics_version+"/"
+		string = "/dls_sw/"
 		if prod_work=="prod":
-			string += self.prod_string + "/"
+			string += self.prod_string + "/"+self.epics_version+"/"
 		elif prod_work=="work":
-			string += self.work_string + "/"
+			string += self.work_string + "/"+self.epics_version+"/"
 		else:
 			print >> sys.stderr, "***Error: expected prod or work, got: "+str(prod_work)
 			sys.exit(0)
@@ -71,6 +71,8 @@ class release_tree:
 		else:
 			print >> sys.stderr, "***Error: expected ioc or support, got: "+str(ioc_support)
 			sys.exit(0)
+		if not os.path.isdir(string):
+			print "***Warning: can't find path: "+string
 		return string
 
 	def init_module(self):
@@ -145,8 +147,8 @@ class release_tree:
 						new_leaf.init_module()
 						new_leaf.version="invalid"
 						self.leaves.append(new_leaf)
-					print >> sys.stderr, "***Warning: can't find "+modules[module]
-			elif not self.name in modules[module]:
+					print >> sys.stderr, "***Warning: can't find module: "+module+" with path: "+modules[module]
+			elif not ("/"+self.name in modules[module] and (modules[module].endswith("/"+self.name) or "/"+self.name+"/" in modules[module])):
 				new_leaf = release_tree(parent=self,module_path=modules[module])
 				self.leaves.append(new_leaf) 
 		# go back to initial place and return the values
@@ -307,11 +309,25 @@ class tree_update:
 							flag = True
 					if not flag:
 						print "*** Warning - Can't find a consistent set, the following clashes need to be resolved"
+						for key in clashes.keys():
+							text = ": "
+							for leaf in clashes[key]:
+								text += leaf.parent.name + ": " + leaf.parent.version + " has " + leaf.version + ", " 
+							print >> sys.stderr, key+text
 						return
 				elif not self.revert(name):
-					for leaf in clashes[name]:
-						if not leaf.parent.name == self.tree.name:
-							agenda.append(leaf.parent.name)
+					if clashes.has_key(name):
+						for leaf in clashes[name]:
+							if not leaf.parent.name == self.tree.name:
+								agenda.append(leaf.parent.name)
+					else:
+						print "*** Warning - Can't find a consistent set, the following clashes need to be resolved"
+						for key in clashes.keys():
+							text = ": "
+							for leaf in clashes[key]:
+								text += leaf.parent.name + ": " + leaf.parent.version + " has " + leaf.version + ", " 
+							print >> sys.stderr, key+text
+						return
 			else:	
 				clash = clashes[clashes.keys()[0]]
 				duplicates = self.__duplicates(clash)
