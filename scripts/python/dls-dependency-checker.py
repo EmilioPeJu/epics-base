@@ -130,7 +130,7 @@ def release_tree_gui():
 		path = os.getcwd()
 		os.chdir(here)
 		
-	namespace = uiload(os.path.dirname(sys.argv[0])+"/dls-dependency-checker.ui")
+	namespace = uiload(os.path.dirname(sys.argv[0])+"/lib-dependency-checker.ui")
 	app = QApplication([])
 	top = namespace["Form1"]
 	top = top()

@@ -398,16 +398,17 @@ class tree_update:
 			if not self.old_tree.leaves[i].version == self.tree.leaves[i].version:
 				for j in range(len(lines)):
 					if ("/"+self.old_tree.leaves[i].name+"\n" in lines[j] or "/"+self.old_tree.leaves[i].name+"/" in lines[j]) and (self.old_tree.leaves[i].version in lines[j] or self.old_tree.leaves[i].version.upper() in lines[j] or self.old_tree.leaves[i].version=="invalid") and "#" not in lines[j][:4]:
-						macros = {}
+						rev_macros = {}
 						out_line = lines[j]
+						for macro in self.tree.macros.keys():
+							rev_macros[self.tree.macros[macro]] = macro
 						while "$(" in out_line:
 							index = out_line.find("$(")
 							macro = out_line[index+2:index+out_line[index:].find(")")]
-							macros[self.tree.macros[macro]]=macro
 							out_line = out_line.replace("$("+macro+")",self.tree.macros[macro])
 						out_line = out_line.replace(self.old_tree.leaves[i].path,self.tree.leaves[i].path)
-						for macro_sub in macros.keys():
-							out_line = out_line.replace(macro_sub,"$("+macros[macro_sub]+")")
+						for macro_sub in rev_macros.keys():
+							out_line = out_line.replace(macro_sub,"$("+rev_macros[macro_sub]+")")
 						output[lines[j]]=out_line
 		return output
 	
