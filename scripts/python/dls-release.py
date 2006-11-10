@@ -18,6 +18,7 @@ def main():
 	# set default variables
 	out_dir = "/dls_sw/work/etc/build/queue"
 	build_script = "dls-build-release.py"
+	test_dir = "/dls_sw/work/etc/build/test"
 
 	# command line options
 	parser = OptionParser("usage: %prog [options] <MODULE_NAME> <RELEASE#>")
@@ -40,15 +41,15 @@ def main():
 		
 	# print messages
 	if not options.branch:
-		print 'Releasing '+module+" "+release_number+" from trunk using epics "+epics_version
+		print 'Releasing '+module+" "+release_number+" from trunk using epics "+epics_version+" ..."
 	else:
-		print 'Releasing '+module+" "+release_number+" from branch "+options.branch+" using epics "+epics_version
+		print 'Releasing '+module+" "+release_number+" from branch "+options.branch+" using epics "+epics_version+" ..."
 
 	# setup svn				
 	prefix = os.environ['SVN_ROOT']
 	if not prefix:
 		print >> sys.stderr, "***Error: SVN_ROOT is not set in the environment"
-		sys.exit()
+		sys.exit(1)
 	subversion = pysvn.Client()	
 	log_message = 'Releasing ' +module+ ' at version ' +release_number
 	def get_log_message():
@@ -66,11 +67,29 @@ def main():
 		src_dir = os.path.join("diamond/trunk",support,module)
 	rel_dir = os.path.join("diamond/release",support,module)
 	
+	
 	# check for existence of directories	
   	if not pathcheck(subversion, os.path.join(prefix, src_dir)):
 		print >> sys.stderr, "***Error: "+os.path.join(prefix, src_dir)+' does not exist in the repository.'
-		sys.exit()
+		sys.exit(1)
 	if not pathcheck(subversion, os.path.join(prefix, rel_dir, release_number)):
+		# check out to test area
+		print "Doing test build, logging in "+ os.path.join(test_dir,module)+"/build.log ..."
+		os.chdir(test_dir)
+		os.system("rm -rf "+module)
+		os.system("svn co "+os.path.join(prefix, src_dir)+" > /dev/null")
+		os.chdir(module)
+		os.system("mv configure/RELEASE configure/RELEASE.svn")
+		os.system("""sed -e 's,^ *EPICS_BASE *=.*$,'"EPICS_BASE=/dls_sw/epics/"""+epics_version+"""/base," -e 's,^ *SUPPORT *=.*$,'"SUPPORT=/dls_sw/prod/"""+epics_version+"""/support," -e 's,^ *WORK *=.*$,'"#WORK=commented out to prevent prod modules depending on work modules," configure/RELEASE.svn > configure/RELEASE""")
+		success = os.system("make &> build.log")
+		if success == 0:
+			os.chdir("..")
+			os.system("rm -rf "+module)
+			print "Test build successful, continuing with release"
+		else:
+			print >> sys.stderr, "***Error: module will not build. Please check module does not depend on work"
+			sys.exit(1)
+				
 		# copy the source to the release directory
 		dirs = rel_dir.split("/")
 		for i in range(1,len(dirs)+1):
@@ -82,7 +101,7 @@ def main():
 	elif os.path.isdir(os.path.join(prod_dir,support,module,release_number)):
 		# if release exists in prod and prod then fail with an error
 		print >> sys.stderr, "***Error: "+module+" "+release_number+" already exists in "+os.path.join(prod_dir,support)
-		sys.exit()
+		sys.exit(1)
 		
 	# find out which user wants to release
 	user = os.getlogin()
