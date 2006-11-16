@@ -74,22 +74,21 @@ def main():
 		sys.exit(1)
 	if not pathcheck(subversion, os.path.join(prefix, rel_dir, release_number)):
 		# check out to test area
-		print "Doing test build, logging in "+ os.path.join(test_dir,module)+"/build.log ..."
+		print "Doing test build, logging in "+ os.path.join(test_dir,module.split("/")[-1])+"/build.log ..."
 		os.chdir(test_dir)
-		os.system("rm -rf "+module)
+		os.system("rm -rf "+module.split("/")[-1])
 		os.system("svn co "+os.path.join(prefix, src_dir)+" > /dev/null")
-		os.chdir(module)
+		os.chdir(module.split("/")[-1])
 		os.system("mv configure/RELEASE configure/RELEASE.svn")
 		os.system("""sed -e 's,^ *EPICS_BASE *=.*$,'"EPICS_BASE=/dls_sw/epics/"""+epics_version+"""/base," -e 's,^ *SUPPORT *=.*$,'"SUPPORT=/dls_sw/prod/"""+epics_version+"""/support," -e 's,^ *WORK *=.*$,'"#WORK=commented out to prevent prod modules depending on work modules," configure/RELEASE.svn > configure/RELEASE""")
 		success = os.system("make &> build.log")
 		if success == 0:
 			os.chdir("..")
-			os.system("rm -rf "+module)
+			os.system("rm -rf "+module.split("/")[-1])
 			print "Test build successful, continuing with release"
 		else:
 			print >> sys.stderr, "***Error: module will not build. Please check module does not depend on work"
 			sys.exit(1)
-				
 		# copy the source to the release directory
 		dirs = rel_dir.split("/")
 		for i in range(1,len(dirs)+1):
@@ -132,16 +131,16 @@ source /dls_sw/etc/profile
 SVN_ROOT=http://serv0002.cs.diamond.ac.uk/repos/controls
 
 # Checkout module
-mkdir -p $build_dir                        || ( echo Can not mkdir $build_dir; exit 1 )
-cd $build_dir                              || ( echo Can not cd to $build_dir; exit 1 )
+mkdir -p $build_dir						|| ( echo Can not mkdir $build_dir; exit 1 )
+cd $build_dir							  || ( echo Can not cd to $build_dir; exit 1 )
 svn checkout $SVN_ROOT/$svn_dir/$version   || ( echo Can not check out  $svn_dir/$version; exit 1 )
 cd $version
 
 # Modify configure/RELEASE
 mv configure/RELEASE configure/RELEASE.svn || ( echo Can not rename configure/RELEASE; exit 1 )
 sed -e 's,^ *EPICS_BASE *=.*$,'"EPICS_BASE=/dls_sw/epics/$epics_version/base,"   \
-    -e 's,^ *SUPPORT *=.*$,'"SUPPORT=/dls_sw/prod/$epics_version/support," \
-    -e 's,^ *WORK *=.*$,'"#WORK=commented out to prevent prod modules depending on work modules," \
+	-e 's,^ *SUPPORT *=.*$,'"SUPPORT=/dls_sw/prod/$epics_version/support," \
+	-e 's,^ *WORK *=.*$,'"#WORK=commented out to prevent prod modules depending on work modules," \
 configure/RELEASE.svn > configure/RELEASE  || ( echo Can not edit configure/RELEASE; exit 1 )
 
 # Build
@@ -149,11 +148,11 @@ timestamp=$(date +%Y%m%d-%H%M%S)
 error_log=build_${timestamp}.err
 build_log=build_${timestamp}.log
 {
-    make 4>&1 1>&3 2>&4 |
-    tee $error_log
+	make 4>&1 1>&3 2>&4 |
+	tee $error_log
 } >$build_log 3>&1
 if [ $(stat -c%s $error_log) -ne 0 ] ; then
-    cat $error_log | mail -s "Build Errors: """+module+' '+release_number+'" '+user+"""@rl.ac.uk
+	cat $error_log | mail -s "Build Errors: """+module+' '+release_number+'" '+user+"""@rl.ac.uk
 fi """)
 	f.close()
 	print "Build request file created: "+os.path.join(out_dir,filename)
