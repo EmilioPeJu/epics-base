@@ -76,44 +76,6 @@ CONFIGS += RULES.Dls
 
 SCRIPTS += convertDlsRelease.pl
 
-# DLS private copy of svn_load_dirs 
-# (because it disappeared from the subversion distribution)
-
-SCRIPTS += dls-svn_load_dirs
-
-# Python scripts (new)
-
-SCRIPTS += dls-checkout-module.py
-SCRIPTS += dls-changes-since-release.py
-SCRIPTS += dls-dependency-checker.py
-SCRIPTS += lib-dependency-checker.ui
-SCRIPTS += dls-subst-to-csv.py
-SCRIPTS += dlsreleasetree.py
-SCRIPTS += dls-export-release.py
-SCRIPTS += dls-list-branches.py
-SCRIPTS += dls-list-modules.py
-SCRIPTS += dls-list-releases.py
-SCRIPTS += dlsPyLib.py
-SCRIPTS += dls-release.py
-SCRIPTS += dls-start-bugfix-branch.py
-SCRIPTS += dls-start-feature-branch.py
-SCRIPTS += dls-start-new-module.py
-SCRIPTS += dls-sync-from-trunk.py
-SCRIPTS += dls-vendor-import.py
-SCRIPTS += dls-vendor-update.py
-
-# Bash scripts (old)
-
-#SCRIPTS += dls-list-branches
-#SCRIPTS += dls-list-modules
-#SCRIPTS += dls-release
-#SCRIPTS += dls-start-bugfix-branch
-#SCRIPTS += dls-start-feature-branch
-#SCRIPTS += dls-start-new-module
-#SCRIPTS += dls-sync-from-trunk
-#SCRIPTS += dls-vendor-import
-#SCRIPTS += dls-vendor-update
-
 include $(TOP)/configure/RULES
 
 % : ../scripts/bash/%
