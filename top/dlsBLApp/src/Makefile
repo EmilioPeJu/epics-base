@@ -7,7 +7,6 @@ include $(TOP)/configure/CONFIG
 # In a Diamond IOC Application, build xml files from
 # database files like this
 #
-SCRIPTS=st_APPNAME_-gui
 
 # List database files required.
 USES_DB += $(MO)/db/_APPNAME_-MO-IOC-01.db
@@ -18,14 +17,10 @@ include $(TOP)/configure/RULES
 #----------------------------------------
 #  ADD RULES AFTER THIS LINE
 
-_APPNAME_ : $(USES_DB)
-	/home/diamond/common/python/diamond/parser/Rx_y/epicsparser.py $(USES_DB) -r _APPNAME_ > _APPNAME_
+parser-_APPNAME_ : $(USES_DB)
+	/dls_sw/tools/bin/epicsparser.py $(USES_DB) -r _APPNAME_ > $@
 	@echo "Installing postprocessor files"
-	@$(INSTALL_PRODUCT) -d -m 555 _APPNAME_-* $(INSTALL_DATA)
-
-
-st_APPNAME_-gui: $(TOP)/configure/RELEASE
-	$(BLSLSCRIPTS)/dls_edm_paths.py _APPNAME_ $(TOP)/configure/RELEASE > $@
+	@$(INSTALL_PRODUCT) -d -m 555 _APPNAME_* $(INSTALL_DATA)
 	
-buildInstall: _APPNAME_ st_APPNAME_-gui
+buildInstall: parser-_APPNAME_
 

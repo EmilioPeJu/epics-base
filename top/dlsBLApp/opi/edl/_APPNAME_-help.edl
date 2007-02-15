@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 293
-y 209
+x 298
+y 231
 w 670
 h 430
 font "arial-medium-r-18.0"
@@ -867,20 +867,22 @@ y 180
 w 40
 h 40
 file "symbols-slit-symbol"
-numStates 4
+numStates 5
 minValues {
   1 1
   2 2
   3 3
+  4 4
 }
 maxValues {
   0 1
   1 2
   2 3
   3 4
+  4 5
 }
 controlPvs {
-  0 "LOC\\sym1n1=i:1"
+  0 "LOC\\sym1n4=i:4"
 }
 numPvs 1
 useOriginalColors
