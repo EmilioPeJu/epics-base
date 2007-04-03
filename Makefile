@@ -77,6 +77,7 @@ CONFIGS += RULES.Dls
 # Perl scripts
 
 SCRIPTS += convertDlsRelease.pl
+SCRIPTS += dls-svn_load_dirs
 
 include $(TOP)/configure/RULES
 
