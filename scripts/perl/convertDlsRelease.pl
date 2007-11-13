@@ -90,6 +90,7 @@ for ($outfile) {
     /envPaths/  	 and do { &envPaths;		last; };
     /msiPaths/  	 and do { &msiPaths;		last; };
     /msiIncludes/	 and do { &msiIncludes;		last; };
+    /msiDataIncludes/	and do { &msiDataIncludes;	last; };
     /dataPaths/  	 and do { &dataPaths;		last; };
     /vdctPaths/  	 and do { &vdctPaths;		last; };
     /checkRelease/	 and do { &checkRelease;	last; };
@@ -349,6 +350,16 @@ sub msiIncludes {
     foreach my $app (grep !/^TOP$/, @includes) {
       if (-d "$macros{$app}/db") {
 	print " -I$macros{$app}/db";
+      }
+    }
+}
+
+sub msiDataIncludes {
+    my @includes = grep !/^TEMPLATE_TOP$/, @apps;
+
+    foreach my $app (grep !/^TOP$/, @includes) {
+      if (-d "$macros{$app}/data") {
+	print " -I$macros{$app}/data";
       }
     }
 }
