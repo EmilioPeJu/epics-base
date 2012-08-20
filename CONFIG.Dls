@@ -12,7 +12,7 @@ $(OS_CLASS)_ONLY=
 
 # Define a NULL file depending on the OS
 DEV_NULL=/dev/null
-ifeq ($(EPICS_HOST_ARCH),win32-x86)
+ifeq ($(OS_CLASS),WIN32)
 	DEV_NULL=NUL:
 endif
 
