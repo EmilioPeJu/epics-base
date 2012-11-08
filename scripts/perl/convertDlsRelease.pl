@@ -395,6 +395,23 @@ sub epicsRelease {
   return $epics;
 }
 
+sub checkPath {
+    my ($app,$path,$epicsRelease) = @_;
+    my $status=0;
+
+    foreach my $prefix ("/home/diamond","/dls_sw/prod","/dls_sw/work") {
+	if ( $path =~ m,^$prefix, && $path !~ m,^$prefix/$epicsRelease, ) {
+	  print "\n" if ($status);
+	  print "Definition of $path\n";
+	  print "in $app support conflicts with EPICS release of $epicsRelease.\n";
+	  $status = 1;
+	}
+    }
+
+    return $status;
+}
+
+           
 sub checkDLSRelease {
     my $status = 0;
     my $epicsRelease=&epicsRelease;
@@ -410,10 +427,7 @@ sub checkDLSRelease {
 	&expandRelease(\%check, \@order);
 	delete $check{TOP};
 
-	if ( $path =~ m,^/home/diamond, && $path !~ m,^/home/diamond/$epicsRelease, ) {
-	  print "\n" if ($status);
-	  print "Definition of $path\n";
-	  print "in $app support conflicts with EPICS release of $epicsRelease.\n";
+        if ( &checkPath( $app, $path, $epicsRelease ) ) {
 	  $status = 1;
 	}
 	
@@ -429,10 +443,7 @@ sub checkDLSRelease {
 		$status = 1;
 	    }
 
-	    if ( $ppath =~ m,^/home/diamond, && $ppath !~ m,^/home/diamond/$epicsRelease, ) {
-		print "\n" if ($status);
-		print "Definition of $ppath\n";
-		print "in $parent support conflicts with EPICS release of $epicsRelease.\n";
+            if ( &checkPath( $parent, $ppath, $epicsRelease ) ) {
 		$status = 1;
 	    }
 	}
