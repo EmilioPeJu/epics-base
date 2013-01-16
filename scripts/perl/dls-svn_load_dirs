@@ -1,9 +1,15 @@
 #!/usr/bin/perl -w
 
-# $HeadURL: http://svn.collab.net/repos/svn/branches/1.1.x/contrib/client-side/svn_load_dirs.pl.in $
-# $LastChangedDate: 2004-06-14 21:39:22 -0700 (Mon, 14 Jun 2004) $
-# $LastChangedBy: breser $
-# $LastChangedRevision: 10000 $
+# Copyright (c) 2002,2003,2004,2005,2006,2007,2009 Dolby.  All rights reserved.
+#
+# Licensed under the Academic Free License version 3.0.  See LICENSE_AFL3.txt
+# or http://www.opensource.org/licenses/academic.php for a copy of the license
+# text.
+
+# $HeadURL: http://svn.apache.org/repos/asf/subversion/branches/1.6.x/contrib/client-side/svn_load_dirs/svn_load_dirs.pl.in $
+# $LastChangedDate: 2009-10-12 12:57:16 +0000 (Mon, 12 Oct 2009) $
+# $LastChangedBy: hwright $
+# $LastChangedRevision: 880030 $
 
 $| = 1;
 
@@ -48,6 +54,10 @@ my $opt_import_tag_location;
 # Do not ask for any user input.  Just go ahead and do everything.
 my $opt_no_user_input;
 
+# Do not automatically set the svn:executable property based on the
+# file's exe bit.
+my $opt_no_auto_exe;
+
 # Username to use for commits.
 my $opt_svn_username;
 
@@ -60,6 +70,10 @@ my $opt_verbose;
 # Path to already checked-out working copy.
 my $opt_existing_wc_dir;
 
+# List of filename patterns to ignore (as in .subversion/config's
+# "global-ignores" option).
+my $opt_glob_ignores;
+
 # This is the character used to separate regular expressions occuring
 # in the tag directory path from the path itself.
 my $REGEX_SEP_CHAR = '@';
@@ -70,12 +84,14 @@ my $REGEX_SEP_CHAR = '@';
 my $property_config_filename;
 
 GetOptions('no_user_input'           => \$opt_no_user_input,
+           'no_auto_exe'             => \$opt_no_auto_exe,
            'property_cfg_filename=s' => \$property_config_filename,
            'svn_password=s'          => \$opt_svn_password,
            'svn_username=s'          => \$opt_svn_username,
            'tag_location=s'          => \$opt_import_tag_location,
            'verbose+'                => \$opt_verbose,
-           'wc=s'                    => \$opt_existing_wc_dir)
+           'wc=s'                    => \$opt_existing_wc_dir,
+           'glob_ignores=s'          => \$opt_glob_ignores)
   or &usage;
 &usage("$0: too few arguments") if @ARGV < 2;
 
@@ -159,6 +175,34 @@ if (defined $opt_existing_wc_dir)
 
     $opt_existing_wc_dir = Cwd::abs_path($opt_existing_wc_dir)
   }
+
+# If no glob_ignores specified, try to deduce from config file,
+# or use the default below.
+my $ignores_str =
+    '*.o *.lo *.la #*# .*.rej *.rej .*~ *~ .#* .DS_Store';
+
+if ( defined $opt_glob_ignores)
+  {
+    $ignores_str = $opt_glob_ignores;
+  }
+elsif ( -f "$ENV{HOME}/.subversion/config" )
+  {
+    open my $conf, "$ENV{HOME}/.subversion/config";
+    while (<$conf>)
+      {
+        if ( /^global-ignores\s*=\s*(.*?)\s*$/ )
+          {
+	    $ignores_str = $1;
+            last;
+          }
+      }
+  }
+
+my @glob_ignores = map
+                     {
+                       s/\./\\\./g; s/\*/\.\*/g; "^$_\$";
+                     } split(/\s+/, $ignores_str);
+unshift @glob_ignores, '\.svn$';
 
 # Convert the string URL into a URI object.
 $repos_base_url    =~ s|/*$||;
@@ -574,7 +618,9 @@ while (defined (my $load_dir = &get_next_load_dir))
                         "type for '$source_path'.\n";
                   }
 
-                if ($source_type ne 'f' and $source_type ne 'd')
+                if ($source_type ne 'd' and
+                    $source_type ne 'f' and
+                    $source_type ne 'l')
                   {
                     warn "$0: skipping loading file '$source_path' of type ",
                          "'$source_type'.\n";
@@ -603,7 +649,8 @@ while (defined (my $load_dir = &get_next_load_dir))
               or die "$0: cannot chdir '$load_dir': $!\n";
 
             find({no_chdir   => 1,
-                  preprocess => sub { sort { $b cmp $a } @_ },
+                  preprocess => sub { sort { $b cmp $a }
+                                      grep { $_ !~ /^[._]svn$/ } @_ },
                   wanted     => $wanted
                  }, '.');
 
@@ -654,7 +701,7 @@ while (defined (my $load_dir = &get_next_load_dir))
                     $print_rename_message = 0;
                     print "\n",
                       "The following table lists files and directories that\n",
-                      "exist in either the Subversion repository and the\n",
+                      "exist in either the Subversion repository or the\n",
                       "directory to be imported but not both.  You now have\n",
                       "the opportunity to match them up as renames instead\n",
                       "of deletes and adds.  This is a Good Thing as it'll\n",
@@ -898,7 +945,9 @@ while (defined (my $load_dir = &get_next_load_dir))
         my ($source_type, $source_is_exe) = &file_info($source_path);
         my ($dest_type)                   = &file_info($dest_path);
 
-        return if ($source_type ne 'd' and $source_type ne 'f');
+        return if ($source_type ne 'd' and
+                   $source_type ne 'f' and
+                   $source_type ne 'l');
 
         # Fail if the destination type exists but is of a different
         # type of file than the source type.
@@ -990,11 +1039,11 @@ while (defined (my $load_dir = &get_next_load_dir))
 
         # Add svn:executable to files that have their executable bit
         # set.
-        if ($source_is_exe)
+        if ($source_is_exe and !$opt_no_auto_exe)
           {
             print "Adding to '$source_path' property 'svn:executable' with ",
-                  "value ''.\n";
-            my $property = {name => 'svn:executable', value => ''};
+                  "value '*'.\n";
+            my $property = {name => 'svn:executable', value => '*'};
             push (@{$add_files{$source_path}{properties}},
                   $property);
           }
@@ -1008,6 +1057,21 @@ while (defined (my $load_dir = &get_next_load_dir))
                 mkdir($dest_path)
                   or die "$0: cannot mkdir '$dest_path': $!\n";
               }
+          }
+        elsif
+          ($source_type eq 'l') {
+            my $link_target = readlink($source_path)
+              or die "$0: cannot readlink '$source_path': $!\n";
+            if ($dest_type eq 'l')
+              {
+                my $old_target = readlink($dest_path)
+                  or die "$0: cannot readlink '$dest_path': $!\n";
+                return if ($old_target eq $link_target);
+                unlink($dest_path)
+                  or die "$0: unlink '$dest_path' failed: $!\n";
+              }
+            symlink($link_target, $dest_path)
+              or die "$0: cannot symlink '$dest_path' to '$link_target': $!\n";
           }
         elsif
           ($source_type eq 'f') {
@@ -1034,7 +1098,8 @@ while (defined (my $load_dir = &get_next_load_dir))
       or die "$0: cannot chdir '$load_dir': $!\n";
 
     find({no_chdir   => 1,
-          preprocess => sub { sort { $b cmp $a } @_ },
+          preprocess => sub { sort { $b cmp $a }
+                              grep { $_ !~ /^[._]svn$/ } @_ },
           wanted     => $wanted
          }, '.');
 
@@ -1162,7 +1227,18 @@ while (defined (my $load_dir = &get_next_load_dir))
                         keys %upd_files;
         foreach my $upd_file (@upd_files)
           {
-            my @command = ($svn, 'propget', 'svn:eol-style', $upd_file.'@HEAD');
+            # Always append @BASE to a filename in case they contain a
+            # @ character, in which case the Subversion command line
+            # client will attempt to parse the characters after the @
+            # as a revision and most likely fail, or if the characters
+            # after the @ are a valid revision, then it'll possibly
+            # get the incorrect information.  So always append @BASE
+            # and any preceding @'s will be treated normally and the
+            # correct information will be retrieved.
+            my @command = ($svn,
+                           'propget',
+                           'svn:eol-style',
+                           "$upd_file\@BASE");
             my @lines = read_from_process(@command);
             next unless @lines;
             if (@lines > 1)
@@ -1193,7 +1269,7 @@ while (defined (my $load_dir = &get_next_load_dir))
     # directory paths will have an older revisions associated with
     # them and any future commits will fail because they are out of
     # date.
-    read_from_process($svn, 'update');
+    read_from_process($svn, 'update', @svn_use_repos_cmd_opts);
 
     # Now remove any files and directories to be deleted in the
     # repository.
@@ -1256,13 +1332,16 @@ sub usage
       "  dir_v1 ..      list dirs to import otherwise read from stdin\n",
       "options are\n",
       "  -no_user_input don't ask yes/no questions and assume yes answer\n",
+      "  -no_auto_exe   don't set svn:executable for executable files\n",
       "  -p filename    table listing properties to apply to matching files\n",
       "  -svn_username  username to perform commits as\n",
       "  -svn_password  password to supply to svn commit\n",
       "  -t tag_dir     create a tag copy in tag_dir, relative to svn_url\n",
       "  -v             increase program verbosity, multiple -v's allowed\n",
       "  -wc path       use the already checked-out working copy at path\n",
-      "                 instead of checkout out a fresh working copy\n";
+      "                 instead of checkout out a fresh working copy\n",
+      "  -glob_ignores  List of filename patterns to ignore (as in svn's\n",
+      "                 global-ignores config option)\n";
 }
 
 # Get the next directory to load, either from the command line or from
@@ -1349,7 +1428,7 @@ sub set_svn_use_repos_cmd_opts
   my $username = shift;
   my $password = shift;
 
-  @svn_use_repos_cmd_opts = ();
+  @svn_use_repos_cmd_opts = ('--non-interactive');
   if (defined $username and length $username)
     {
       push(@svn_use_repos_cmd_opts, '--username', $username);
@@ -1413,7 +1492,6 @@ sub file_info
 }
 
 # Start a child process safely without using /bin/sh.
-my $openfork_available = "MSWin32" ne $OSNAME;
 sub safe_read_from_pipe
 {
   unless (@_)
@@ -1421,6 +1499,7 @@ sub safe_read_from_pipe
       croak "$0: safe_read_from_pipe $INCORRECT_NUMBER_OF_ARGS";
     }
 
+  my $openfork_available = "MSWin32" ne $OSNAME;
   if ($openfork_available)
     {
       print "Running @_\n";
@@ -1569,7 +1648,18 @@ sub recursive_ls_and_hash
                     digest => $file_digest};
     };
   find({no_chdir   => 1,
-        preprocess => sub { grep { $_ !~ /\.svn$/ } @_ },
+        preprocess => sub
+	  {
+            grep
+              {
+                my $ok=1;
+                foreach my $x (@glob_ignores)
+                  {
+                    if ( $_ =~ /$x/ ) {$ok=0;last;}
+                  }
+                $ok
+              } @_
+          },
         wanted     => $wanted
        }, '.');
 
