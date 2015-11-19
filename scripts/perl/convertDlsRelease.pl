@@ -63,10 +63,13 @@ unless (@ARGV == 1) {
     print "\tcdCommands - generate cd path strings for vxWorks IOCs\n";
     print "\tenvPaths - generate epicsEnvSet commands for other IOCs\n";
     print "\tmsiPaths - send msi substitutions from RELEASE macros to stdout\n";
+    print "\tmsiIncludes - missing docs\n";
+    print "\tmsiDataIncludes - missing docs\n";
     print "\tvdctPaths - send vdct paths from RELEASE macros to stdout\n";
     print "\tdataPaths - send data paths from RELEASE macros to stdout\n";
     print "\tCONFIG_APP_INCLUDE - additional build variables\n";
     print "\tRULES_INCLUDE - supports installable build rules\n";
+    print "\tcheckDLSRelease - missing docs\n";
     exit 2;
 }
 $outfile = $ARGV[0];
@@ -107,7 +110,7 @@ sub readReleaseFiles {
     return unless (-r $relfile);
     &readRelease($relfile, $Rmacros, $Rapps);
     if ($hostarch) {
-	my ($hrelfile) = "$relfile.$hostarch";
+	my ($hrelfile) = "$relfile.$hostarch.Common";
 	&readRelease($hrelfile, $Rmacros, $Rapps) if (-r $hrelfile);
     }
     if ($arch) {
@@ -140,11 +143,11 @@ sub readRelease {
 	next if /^\s*$/;	# Skip blank lines
 	
 	# Expand all already-defined macros in the line:
-	while (my ($pre,$var,$post) = /(.*)\$\((\w+)\)(.*)/) {
-	    last unless (exists $Rmacros->{$var});
-	    $_ = $pre . $Rmacros->{$var} . $post;
-	}
-	
+	# while (my ($pre,$var,$post) = /(.*)\$\((\w+)\)(.*)/) {
+	#     last unless (exists $Rmacros->{$var});
+	#     $_ = $pre . $Rmacros->{$var} . $post;
+	# }
+
 	# Handle "<macro> = <path>"
 	my ($macro, $path) = /^\s*(\w+)\s*=\s*(.*)/;
 	if ($macro ne "") {
