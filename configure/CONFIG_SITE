@@ -114,6 +114,7 @@
 #
 CROSS_COMPILER_TARGET_ARCHS=
 #CROSS_COMPILER_TARGET_ARCHS=vxWorks-ppc32
+CROSS_COMPILER_TARGET_ARCHS += linux-arm_el
 
 #  If only a subset of the host architectures perform
 #  the build for the CROSS_COMPILER_TARGET_ARCHS
