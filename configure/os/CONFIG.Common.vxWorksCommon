@@ -118,7 +118,7 @@ GNU_TARGET_INCLUDE_DIR = $(VX_INCLUDE_DIRS_$(VXWORKS_MAJOR_VERSION))
 # vxWorks GNU directories
 
 GNU_DIR_5 = $(WIND_BASE)/host/$(WIND_HOST_TYPE)
-GNU_DIR_5 = /dls_sw/prod/tools/RHEL6-x86_64/vxworks-gcc/2-96aps2012/prefix
+GNU_DIR_5 = /dls_sw/prod/tools/RHEL7-x86_64/vxworks-gcc/2-96aps2012/prefix
 GNU_DIR_6 = $(WIND_BASE)/gnu/$(VX_GNU_VERSION)-vxworks-$(VXWORKS_VERSION)/$(WIND_HOST_TYPE)
 GNU_DIR = $(GNU_DIR_$(VXWORKS_MAJOR_VERSION))
 
