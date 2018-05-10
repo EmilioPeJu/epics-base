@@ -31,6 +31,8 @@ PERL_SCRIPTS += munch.pl
 PERL_SCRIPTS += replaceVAR.pl
 PERL_SCRIPTS += tap-to-junit-xml.pl
 PERL_SCRIPTS += useManifestTool.pl
+PERL_SCRIPTS += dls-svn_load_dirs
+PERL_SCRIPTS += convertDlsRelease.pl
 
 include $(TOP)/configure/RULES
  
