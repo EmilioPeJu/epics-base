@@ -1,0 +1,905 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 0
+y 0
+w 1270
+h 940
+font "arial-medium-r-18.0"
+ctlFont "arial-medium-r-18.0"
+btnFont "arial-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+title "Synoptic - $(dom)"
+showGrid
+snapToGrid
+gridSize 5
+disableScroll
+endScreenProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 680
+w 1269
+h 259
+
+beginGroup
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 840
+w 130
+h 40
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 50
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Hardware and Process Status"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 790
+w 130
+h 40
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 50
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Backup and Restore tool"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 740
+w 130
+h 40
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 50
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Alarm Statuses and Manager"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 690
+w 130
+h 40
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 50
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Front End Summary"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1
+y 681
+w 1268
+h 258
+lineColor index 0
+fill
+fillColor index 5
+lineWidth 2
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 0
+y 680
+w 1269
+h 259
+lineColor index 14
+fillColor index 0
+lineWidth 2
+numPoints 3
+xPoints {
+  0 0
+  1 1269
+  2 1269
+}
+yPoints {
+  0 939
+  1 939
+  2 680
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 790
+w 130
+h 40
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 50
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Interlock Summary"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 890
+w 130
+h 40
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 45
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Help Screen"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 740
+w 130
+h 40
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 50
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Water Flow Summary"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 690
+w 130
+h 40
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 50
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Temperature Summary"
+}
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1130
+y 890
+w 130
+h 40
+fgColor index 46
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+label "EXIT"
+font "arial-bold-r-16.0"
+3d
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 690
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Temperatures"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-temp"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 740
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Water Flows"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-flow"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 890
+w 130
+h 40
+fgColor index 0
+bgColor index 9
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Help"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-help"
+}
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 690
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Front End"
+numCmds 1
+command {
+  0 "$(bin)/st$(dom)-fe"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1130
+y 790
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Interlocks"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-interlocks"
+}
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 740
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Alarm Handler"
+numCmds 1
+command {
+  0 "$(bin)/st$(dom)-alh"
+}
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 790
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-14.0"
+buttonLabel "Backup/Restore"
+numCmds 1
+command {
+  0 "$(bin)/st$(dom)-burt"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 10
+y 840
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-14.0"
+buttonLabel "Hardware Status"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "$(dom)-hardware-status"
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Embedded Window)
+object activePipClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 150
+y 690
+w 970
+h 240
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+displaySource "file"
+file "$(dom)-status"
+center
+setSize
+sizeOfs 5
+numDsps 1
+displayFileName {
+  0 "$(dom)-status.edl"
+}
+endObjectProperties
+
+# (Embedded Window)
+object activePipClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 80
+w 1250
+h 600
+fgColor index 14
+bgColor index 0
+topShadowColor index 1
+botShadowColor index 11
+displaySource "menu"
+filePv "LOC\\overview$(!W)=e:0,Left to Right,Right to Left"
+center
+sizeOfs 5
+numDsps 2
+displayFileName {
+  0 "$(dom)-overview"
+  1 "$(dom)-overview-flipped"
+}
+noScroll
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 5
+w 1270
+h 80
+
+beginGroup
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 10
+w 1270
+h 60
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 0
+y 10
+w 1270
+h 60
+font "arial-bold-r-28.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Synoptic"
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 0
+y 10
+w 1270
+h 0
+lineColor index 1
+fillColor index 0
+lineWidth 2
+numPoints 2
+xPoints {
+  0 0
+  1 1270
+}
+yPoints {
+  0 10
+  1 10
+}
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 0
+y 70
+w 1270
+h 0
+lineColor index 11
+fillColor index 0
+lineWidth 2
+numPoints 2
+xPoints {
+  0 0
+  1 1270
+}
+yPoints {
+  0 70
+  1 70
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1135
+y 20
+w 130
+h 45
+lineColor index 14
+fill
+fillColor index 5
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1140
+y 30
+w 120
+h 30
+fgColor index 14
+bgColor index 0
+topShadowColor index 0
+botShadowColor index 14
+font "arial-medium-r-12.0"
+xPosOffset -35
+yPosOffset 40
+button3Popup
+invisible
+buttonLabel "tooltip"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "symbols-tooltip-symbol"
+}
+setPosition {
+  0 "button"
+}
+symbols {
+  0 "text=Swap Beam Direction"
+}
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 5
+w 130
+h 80
+
+beginGroup
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 7
+y 7
+w 120
+h 70
+lineColor index 11
+fillColor index 63
+lineWidth 4
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 3
+y 3
+w 120
+h 70
+lineColor index 1
+fillColor index 63
+lineWidth 4
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 5
+w 120
+h 70
+lineColor index 8
+fill
+fillColor index 6
+lineWidth 3
+endObjectProperties
+
+# (Circle)
+object activeCircleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 30
+y 15
+w 10
+h 6
+lineColor index 1
+fill
+fillColor index 0
+lineWidth 2
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 10
+w 120
+h 60
+font "arial-bold-r-28.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "$(dom)"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 130
+h 80
+lineColor index 14
+fillColor index 0
+lineWidth 2
+invisible
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1140
+y 30
+w 120
+h 30
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "LOC\\overview$(!W)"
+font "arial-bold-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 1135
+y 15
+w 40
+h 12
+font "arial-medium-r-10.0"
+fgColor index 14
+bgColor index 8
+value {
+  "  Beam  "
+}
+autoSize
+border
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+

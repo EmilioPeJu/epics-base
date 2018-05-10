@@ -1,0 +1,1048 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 298
+y 231
+w 670
+h 430
+font "arial-medium-r-18.0"
+ctlFont "arial-medium-r-18.0"
+btnFont "arial-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+title "Help - $(dom)"
+showGrid
+snapToGrid
+endScreenProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 0
+y 0
+w 662
+h 40
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 0
+bgColor index 9
+value {
+  "Help - $(dom)"
+}
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 540
+y 390
+w 120
+h 30
+fgColor index 46
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+label "EXIT"
+font "arial-medium-r-18.0"
+3d
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 160
+y 80
+w 40
+h 40
+file "symbols-slit-symbol"
+numStates 4
+minValues {
+  1 1
+  2 2
+  3 3
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+}
+controlPvs {
+  0 "LOC\\sym1n0=i:0"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 50
+w 35
+h 16
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "State"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 80
+w 120
+h 40
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Invalid/"
+  "Disconnected"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 180
+w 120
+h 40
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Busy/"
+  "Moving"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 230
+w 120
+h 40
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Minor Alarm/"
+  "Init Mode"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 280
+w 120
+h 40
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Major Alarm/"
+  "Error Mode"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 120
+y 50
+w 137
+h 16
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Motion Component"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 280
+y 50
+w 147
+h 16
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Vacuum Component"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 450
+y 50
+w 94
+h 16
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Vacuum Pipe"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 570
+y 50
+w 84
+h 16
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Status Light"
+}
+autoSize
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 70
+w 660
+h 1
+lineColor index 14
+fillColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 460
+y 95
+w 80
+h 10
+file "symbols-vacuum-symbol"
+numStates 2
+controlPvs {
+  0 "LOC\\vp1n0=i:0"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 160
+y 230
+w 40
+h 40
+file "symbols-slit-symbol"
+numStates 4
+minValues {
+  1 1
+  2 2
+  3 3
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+}
+controlPvs {
+  0 "LOC\\sym1n2=i:2"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 160
+y 280
+w 40
+h 40
+file "symbols-slit-symbol"
+numStates 4
+minValues {
+  1 1
+  2 2
+  3 3
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+}
+controlPvs {
+  0 "LOC\\sym1n3=i:3"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 340
+y 85
+w 30
+h 30
+file "symbols-IMG-small-symbol"
+numStates 4
+minValues {
+  1 1
+  2 2
+  3 3
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+}
+controlPvs {
+  0 "LOC\\sym1n0=i:0"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 340
+y 235
+w 30
+h 30
+file "symbols-IMG-small-symbol"
+numStates 6
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+  5 6
+}
+controlPvs {
+  0 "LOC\\sym1n3=i:3"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 340
+y 285
+w 30
+h 30
+file "symbols-IMG-small-symbol"
+numStates 6
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+  5 6
+}
+controlPvs {
+  0 "LOC\\sym1n5=i:5"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 460
+y 295
+w 80
+h 10
+file "symbols-vacuum-symbol"
+numStates 3
+minValues {
+  1 1
+  2 2
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+}
+controlPvs {
+  0 "LOC\\vp1n2=i:2"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 130
+w 120
+h 40
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "OK/"
+  "Ready"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 160
+y 130
+w 40
+h 40
+file "symbols-slit-symbol"
+numStates 4
+minValues {
+  1 1
+  2 2
+  3 3
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+}
+controlPvs {
+  0 "LOC\\sym1n1=i:1"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 340
+y 135
+w 30
+h 30
+file "symbols-IMG-small-symbol"
+numStates 4
+minValues {
+  1 1
+  2 2
+  3 3
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+}
+controlPvs {
+  0 "LOC\\sym1n1=i:1"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 460
+y 145
+w 80
+h 10
+file "symbols-vacuum-symbol"
+numStates 3
+minValues {
+  1 1
+  2 2
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+}
+controlPvs {
+  0 "LOC\\vp1n1=i:1"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 600
+y 90
+w 20
+h 20
+file "symbols-traffic-light-symbol"
+numStates 5
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+}
+controlPvs {
+  0 "LOC\\tf1n0=i:0"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 600
+y 140
+w 20
+h 20
+file "symbols-traffic-light-symbol"
+numStates 5
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+}
+controlPvs {
+  0 "LOC\\tf1n4=i:4"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 580
+y 190
+w 20
+h 20
+file "symbols-traffic-light-symbol"
+numStates 5
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+}
+controlPvs {
+  0 "LOC\\tf1n1=i:1"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 600
+y 240
+w 20
+h 20
+file "symbols-traffic-light-symbol"
+numStates 5
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+}
+controlPvs {
+  0 "LOC\\tf1n2=i:2"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 600
+y 290
+w 20
+h 20
+file "symbols-traffic-light-symbol"
+numStates 5
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+}
+controlPvs {
+  0 "LOC\\tf1n3=i:3"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 340
+y 190
+w 30
+h 20
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "N/A"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 460
+y 190
+w 80
+h 20
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "N/A"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 460
+y 240
+w 80
+h 20
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "N/A"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 160
+y 180
+w 40
+h 40
+file "symbols-slit-symbol"
+numStates 5
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+}
+controlPvs {
+  0 "LOC\\sym1n4=i:4"
+}
+numPvs 1
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 330
+w 660
+h 1
+lineColor index 14
+fillColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 40
+w 660
+h 1
+lineColor index 14
+fillColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 40
+w 1
+h 290
+lineColor index 14
+fillColor index 0
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 660
+y 40
+w 1
+h 290
+lineColor index 14
+fillColor index 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 340
+w 650
+h 20
+font "arial-medium-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "If something is red or yellow and flashing then there is an error. Click on it for more details"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 370
+w 650
+h 50
+font "arial-medium-r-14.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "For help on any sub-screen:"
+  "Right click and hold any titlebar for controls help"
+  "Click on the shortname to the left of the titlebar for an engineering drawing"
+}
+endObjectProperties
+
+# (Symbol)
+object activeSymbolClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 620
+y 190
+w 20
+h 20
+file "symbols-traffic-light-symbol"
+numStates 6
+minValues {
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+}
+maxValues {
+  0 1
+  1 2
+  2 3
+  3 4
+  4 5
+  5 6
+}
+controlPvs {
+  0 "LOC\\tf1n6=i:5"
+}
+numPvs 1
+useOriginalSize
+useOriginalColors
+fgColor index 14
+bgColor index 0
+endObjectProperties
+
+# (Lines)
+object activeLineClass
+beginObjectProperties
+major 4
+minor 0
+release 1
+x 600
+y 180
+w 20
+h 40
+lineColor index 14
+fillColor index 0
+numPoints 2
+xPoints {
+  0 600
+  1 620
+}
+yPoints {
+  0 220
+  1 180
+}
+endObjectProperties
+

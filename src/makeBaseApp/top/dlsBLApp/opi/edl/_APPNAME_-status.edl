@@ -1,0 +1,706 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 243
+y 386
+w 965
+h 235
+font "arial-medium-r-18.0"
+ctlFont "arial-medium-r-18.0"
+btnFont "arial-medium-r-18.0"
+fgColor index 14
+bgColor index 3
+textColor index 14
+ctlFgColor1 index 14
+ctlFgColor2 index 0
+ctlBgColor1 index 0
+ctlBgColor2 index 14
+topShadowColor index 0
+botShadowColor index 14
+title "Summary - $(dom)"
+showGrid
+snapToGrid
+disableScroll
+endScreenProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 820
+y 10
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Scan"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "generic-scan"
+}
+symbols {
+  0 "P=$(dom)-MO-IOC-01,S=:SCAN"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 260
+y 0
+w 130
+h 40
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Optics Hutch"
+  "Shutter"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 0
+y 110
+w 130
+h 30
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Ring Energy"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 5
+release 0
+x 10
+y 150
+w 110
+h 30
+controlPv "CALC\\\{A*0.0023092\}(SR-PC-DIPOL-01:I)"
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 83
+bgColor index 10
+limitsFromDb
+nullColor index 0
+colorPv "CALC\\\{A*0.0023092<1\}(SR-PC-DIPOL-01:I)"
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 130
+y 110
+w 130
+h 30
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Ring Current"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 5
+release 0
+x 140
+y 150
+w 110
+h 30
+controlPv "SR21C-DI-DCCT-01:SIGNAL"
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 10
+precision 1
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 0
+y 0
+w 130
+h 40
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Port"
+  "Shutter"
+}
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 270
+y 50
+w 110
+h 40
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "FE18I-PS-SHTR-02:BLCON"
+indicatorPv "FE18I-PS-SHTR-02:LASTCON"
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 0
+y 190
+w 120
+h 40
+font "arial-bold-r-18.0"
+fgColor index 14
+bgColor index 6
+useDisplayBg
+value {
+  "  Messages:"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 5
+release 0
+x 120
+y 190
+w 820
+h 40
+controlPv "CS-CS-MSTAT-01:MESS1:1"
+font "arial-medium-r-24.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 140
+y 50
+w 110
+h 40
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "FE18I-RS-ABSB-02:BLCON"
+indicatorPv "FE18I-RS-ABSB-02:LASTCON"
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 130
+y 0
+w 130
+h 40
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "FE"
+  "Absorber"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 260
+y 110
+w 130
+h 30
+font "arial-bold-r-18.0"
+fgColor index 14
+bgColor index 6
+value {
+  "   ID Gap"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 5
+release 0
+x 270
+y 150
+w 110
+h 30
+controlPv "SR18I-MO-SERVC-01:CURRGAPD"
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 390
+y 110
+w 130
+h 30
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Fill"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 5
+release 0
+x 400
+y 150
+w 110
+h 30
+controlPv "LI-TI-MTGEN-01:MODE"
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 520
+y 110
+w 130
+h 30
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Lifetime"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 5
+release 0
+x 530
+y 150
+w 110
+h 30
+controlPv "SR21C-DI-DCCT-01:LIFETIME"
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+showUnits
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 650
+y 110
+w 130
+h 30
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Mode"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 5
+release 0
+x 660
+y 150
+w 110
+h 30
+controlPv "CS-CS-MSTAT-01:MODE"
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 5
+release 0
+x 10
+y 50
+w 110
+h 40
+controlPv "FE18I-PS-SHTR-01:STA"
+font "arial-medium-r-18.0"
+fontAlign "center"
+fgColor index 16
+bgColor index 10
+limitsFromDb
+nullColor index 0
+useHexPrefix
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 390
+y 0
+w 130
+h 40
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Experiment"
+  "Shutter"
+}
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 400
+y 50
+w 110
+h 40
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(dom)-PS-SHTR-01:CON"
+indicatorPv "$(dom)-PS-SHTR-01:LASTCON"
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 520
+y 0
+w 130
+h 40
+font "arial-bold-r-18.0"
+fontAlign "center"
+fgColor index 14
+bgColor index 6
+value {
+  "Sample"
+  "Shutter"
+}
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 530
+y 50
+w 110
+h 40
+fgColor index 25
+bgColor index 3
+inconsistentColor index 0
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(dom)-EA-SHTR-01:CON"
+indicatorPv "$(dom)-EA-SHTR-01:LASTCON"
+font "arial-medium-r-16.0"
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 820
+y 150
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Graph"
+numCmds 1
+command {
+  0 "strip.sh"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 820
+y 50
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "2D Scan"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "generic-2d-scan"
+}
+symbols {
+  0 "P=$(dom)-MO-IOC-01,S=:SCAN2D"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 690
+y 10
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Scaler 1"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "sis3820.edl"
+}
+symbols {
+  0 "scaler=$(dom)-EA-COUNT-01"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 340
+y 110
+w 40
+h 30
+fgColor index 14
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-medium-r-18.0"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "ID_BL.edl"
+}
+symbols {
+  0 "prefix=SR18I-MO-,suff1=0,idname=Undulator"
+}
+icon
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 690
+y 50
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Scaler 2"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "sis3820.edl"
+}
+symbols {
+  0 "scaler=$(dom)-EA-COUNT-02"
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 2
+release 0
+x 820
+y 100
+w 130
+h 40
+fgColor index 43
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-16.0"
+buttonLabel "Asyn"
+numPvs 4
+numDsps 1
+displayFileName {
+  0 "asynRecord"
+}
+symbols {
+  0 "P=$(dom)-MO-IOC-01:,R=ASYN"
+}
+endObjectProperties
+
