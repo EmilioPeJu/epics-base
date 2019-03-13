@@ -3,15 +3,6 @@ dist: trusty
 language: c
 compiler:
   - gcc
-env:
-  - CMPLR=gcc
-  - CMPLR=gcc EXTRA=CMD_CXXFLAGS=-std=c++11
-  - CMPLR=gcc STATIC=YES
-  - CMPLR=clang
-  - CMPLR=clang STATIC=YES
-  - WINE=32 TEST=NO STATIC=YES
-  - RTEMS=4.10 TEST=NO
-  - RTEMS=4.9 TEST=NO
 addons:
   apt:
     packages:
@@ -20,12 +11,17 @@ addons:
     - perl
     - clang
     - g++-mingw-w64-i686
-    - bison
-    - flex
-    - texinfo
-    - install-info
-cache:
-  directories:
-   - $HOME/.cache
-install: sh ci/travis-prepare.sh </dev/null
-script: sh ci/travis-build.sh </dev/null
+    - qemu-system-x86
+script:
+  - .ci/travis-build.sh
+env:
+  - CMPLR=gcc
+  - CMPLR=clang
+  - CMPLR=gcc   STATIC=YES
+  - CMPLR=clang STATIC=YES
+  - CMPLR=gcc   EXTRA=CMD_CXXFLAGS=-std=c++11
+  - CMPLR=clang EXTRA=CMD_CXXFLAGS=-std=c++11
+  - WINE=32 TEST=NO STATIC=YES
+  - WINE=32 TEST=NO STATIC=NO
+  - RTEMS=4.10 TEST=YES
+  - RTEMS=4.9  TEST=YES

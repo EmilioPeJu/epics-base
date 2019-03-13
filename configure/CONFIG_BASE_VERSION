@@ -15,20 +15,44 @@
 # EPICS_SITE_VERSION is defined in CONFIG_SITE for sites that want a local
 # version number to be included in the reported version string.
 
-BASE_3_14=YES
+# We define convenience macros for our release series to be NO or YES, so
+# Makefiles can detect 'Series X or later', or 'Series X only' like this:
+#
+#   ifdef BASE_3_14
+#       true for 3.14 or later
+#   ifdef BASE_3_15
+#       true for 3.15 or later
+#   ifdef BASE_3_16
+#       true for 3.16 or later
+#   ifdef BASE_7_0
+#       true for 7.0 or later
+#
+#   ifeq ($(BASE_3_14),YES)
+#       true for 3.14.x only
+#   ifeq ($(BASE_3_15),YES)
+#       true for 3.15.x only
+#   ifeq ($(BASE_3_16),YES)
+#       true for 3.16.x only.
+#   ifeq ($(BASE_7_0),YES)
+#       true for 7.0.x only.
+
+BASE_3_14 = NO
+BASE_3_15 = NO
+BASE_3_16 = NO
+BASE_7_0  = YES
 
 # EPICS_VERSION must be a number >0 and <256
-EPICS_VERSION = 3
+EPICS_VERSION = 7
 
 # EPICS_REVISION must be a number >=0 and <256
-EPICS_REVISION = 14
+EPICS_REVISION = 0
 
 # EPICS_MODIFICATION must be a number >=0 and <256
-EPICS_MODIFICATION = 12
+EPICS_MODIFICATION = 2
 
 # EPICS_PATCH_LEVEL must be a number (win32 resource file requirement)
 # Not included if zero
-EPICS_PATCH_LEVEL = 7
+EPICS_PATCH_LEVEL = 0
 
 # This will end in -DEV between official releases
 #EPICS_DEV_SNAPSHOT=-DEV
@@ -56,9 +80,5 @@ EPICS_SHORT_VERSION=$(EPICS_VERSION).$(EPICS_REVISION).$(EPICS_MODIFICATION)$(EP
 EPICS_VERSION_NUMBER=$(EPICS_SHORT_VERSION)$(EPICS_DEV_SNAPSHOT)$(EPICS_SITE_VSTRING)
 EPICS_VERSION_STRING="EPICS Version $(EPICS_VERSION_NUMBER)"
 
-
-# Provide these in case anyone is still using the old names
-EPICS_CVS_SNAPSHOT=$(EPICS_DEV_SNAPSHOT)
+# Provide this in case anyone is still using the old name
 COMMIT_DATE="-no-date-"
-CVS_DATE=$(COMMIT_DATE)
-CVS_TAG="-no-tags-"

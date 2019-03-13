@@ -33,33 +33,30 @@
 <h1>EPICS Base Release Procedures &amp; Checklist</h1>
 
 <p>This document describes the procedures and provides a checklist of tasks
-that should be performed when creating new releases of EPICS Base.</p>
+that should be performed when creating production releases of EPICS Base.</p>
 
 <h3>The Release Process</h3>
 
 <p>The version released on the Feature Freeze date is designated the first
-pre-release, <tt>-pre1</tt>. The first Release Candidate <tt>-rc1</tt> is the
-first version that has undergone widespread testing and which has no known
-problems in it that are slated to be fixed in this release. New versions should
-be made at about weekly intervals during the testing and debugging period, and
-will be designated as either pre-release versions or Release Candidates by the
-Release Manager.  A Release Candidate that has received widespread testing for a
-week without any additional problems being discovered or significant changes
-being committed can be designated as the final release version.</p>
+pre-release, <tt>-pre1</tt>. The first release candidate <tt>-rc1</tt> is the
+first version that has undergone testing by the developers and has shown no
+problems that must be fixed before release. New versions should be made at about
+2-weekly intervals after the <tt>-pre1</tt> release, and designated as either
+pre-release or release candidate versions by the Release Manager. Release
+candidates are announced to the whole community via the tech-talk mailing list,
+pre-releases are announced to to the developers via the core-talk list. After a
+release candidate has been available for 2 weeks without any new problems being
+reported or major changes having to be committed, the final release can be
+made.</p>
 
 <h3>Roles</h3>
 
-<p>The following roles are required. The individuals named here have have been
-responsible for these tasks in the past and are expected to continue in the
-relevent roles unless the Release Manager designates otherwise:</p>
+<p>The following roles are used below:</p>
 
 <dl>
-  <dt><strong>Release Manager</strong> (Andrew Johnson)</dt>
-    <dd>Responsible for the release</dd>
-  <dt><strong>Configuration Manager</strong> (Janet Anderson)</dt>
-    <dd>Responsible for committing version number updates and for
-      creating tarfiles</dd>
-  <dt><strong>Platform Developers</strong></dt>
+  <dt><strong>Release Manager</strong> ()</dt>
+    <dd>Responsible for managing and tagging the release</dd>
+  <dt><strong>Platform Developers</strong> (optional)</dt>
     <dd>Responsible for individual operating system platforms</dd>
   <dt><strong>Application Developers</strong></dt>
     <dd>Responsible for support modules that depend on EPICS Base.</dd>
@@ -81,7 +78,7 @@ relevent roles unless the Release Manager designates otherwise:</p>
       <td>&nbsp;</td>
       <td>Release Manager</td>
       <td>Email all developers about the upcoming release and ask for a list
-        of remaining jobs that must be finished.</td>
+        of remaining tasks that must be finished.</td>
       </tr>
     <tr>
       <td>&nbsp;</td>
@@ -93,7 +90,7 @@ relevent roles unless the Release Manager designates otherwise:</p>
     <tr>
       <td>&nbsp;</td>
       <td>Release Manager</td>
-      <td>Set the Feature Freeze date, by which time all Bazaar commits for
+      <td>Set the Feature Freeze date, by which time all Git commits for
         enhancements and new functionality should have been completed. After
         this date, commits should only be made to fix problems that show up
         during testing.</td>
@@ -114,7 +111,7 @@ relevent roles unless the Release Manager designates otherwise:</p>
     <tr>
       <td>&nbsp;</td>
       <td>Release Manager</td>
-      <td>Review and update this document for the upcoming release.</td>
+      <td>Review and update this checklist for the upcoming release.</td>
       </tr>
     <tr>
       <td>&nbsp;</td>
@@ -128,57 +125,61 @@ relevent roles unless the Release Manager designates otherwise:</p>
       </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>Configuration Manager</td>
+      <td>Release Manager</td>
+      <!-- Submodules... -->
       <td>Edit and commit changes to the EPICS version number file
         configure/CONFIG_BASE_VERSION.</td>
       </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>Configuration Manager</td>
-      <td>Tag the module in Bazaar, using these tag conventions:
+      <td>Release Manager</td>
+      <td>Tag the module in Git, using these tag conventions:
         <ul>
           <li>
-            <tt>R3.14.12-pre<i>n</i></tt>
+            <tt>R7.0.2-pre<i>n</i></tt>
             &mdash; pre-release tag
             </li>
           <li>
-            <tt>R3.14.12-rc<i>n</i></tt>
-            &mdash; release candidate tag, note the <tt>rc</tt> is now
-            lower-case</li>
-        </ul>
+            <tt>R7.0.2-rc<i>n</i></tt>
+            &mdash; release candidate tag
+            </li>
+          </ul>
         <blockquote><tt>
-          cd ~/base/mirror-3.14<br />
-          bzr tag R3.14.12-rc<i>n</i>
+          cd base-7.0<br />
+          git tag -m 'ANJ: Tagged for 7.0.2-rc1' R7.0.2-rc1
+          </tt></blockquote>
+        Note that submodules must <em>not</em> be tagged with the version used
+        for the top-level, they each have their own separate version numbers
+        that are only tagged at the final release.</td>
+      </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Release Manager</td>
+      <td>Export the tagged version into a tarfile. The <tt>make-tar.sh</tt>
+        script generates a gzipped tarfile directly from the tag, excluding the
+        files and directories that are only used for continuous integration:
+        <blockquote><tt>
+          cd base-7.0<br />
+          ./.tools/make-tar.sh R7.0.2-rc1 base-7.0.2-rc1.tar.gz base-7.0.2-rc1/
+          </tt></blockquote>
+        Create a GPG signature file of the tarfile as follows:
+        <blockquote><tt>
+          gpg --armor --sign --detach-sig base-7.0.2-rc1.tar.gz
           </tt></blockquote>
         </td>
       </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>Configuration Manager</td>
-      <td>Export the tagged version into a tarfile. Note that this command
-        generates a gzipped tarfile directly from the repository:
-        <blockquote><tt>
-          cd ~/base<br />
-          bzr export --keywords=publish
-          --root=base-3.14.12-rc<i>n</i>
-          -r tag:R3.14.12-rc<i>n</i>
-          baseR3.14.12-rc<i>n</i>.tar.gz
-          mirror-3.14
-          </tt></blockquote>
-        This requires that the Bazaar keywords plugin is installed and
-        configured properly.
-        </td>
-      </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>Configuration Manager</td>
+      <td>Release Manager</td>
       <td>Test the tarfile by extracting its contents and building it on at
         least one supported platform.</td>
       </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>Configuration Manager</td>
-      <td>Copy the tar file to the Base download area of the website.</td>
+      <td>Website Manager</td>
+      <td>Copy the tarfile and its signature to the Base download area of the
+        website and add the new files to the website Base download index
+        page.</td>
       </tr>
     <tr>
       <td>&nbsp;</td>
@@ -194,11 +195,6 @@ relevent roles unless the Release Manager designates otherwise:</p>
         release documents and tar file. Pre-release and release-candidate
         versions should use the page and URL for the final release version
         number.</td>
-      </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>Website Manager</td>
-      <td>Add the new tar file to the website Base download index page.</td>
       </tr>
     <tr>
       <th colspan="3">Testing</th>
@@ -220,13 +216,6 @@ relevent roles unless the Release Manager designates otherwise:</p>
     <tr>
       <td>&nbsp;</td>
       <td>Platform Developers</td>
-      <td>Build and run the
-        <a href="https://launchpad.net/epics-base-tests">epics-base-tests</a>
-        suite on all available platforms.</td>
-      </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>Platform Developers</td>
       <td>Check that all makeBaseApp templates build and run properly, all
         <i>xxxApp</i> and <i>xxxBoot</i> types and any internal options, e.g.
         setting <tt>STATIC_BUILD=YES</tt> or using a different
@@ -242,7 +231,7 @@ relevent roles unless the Release Manager designates otherwise:</p>
       <td>&nbsp;</td>
       <td>Application Developers</td>
       <td>Build external applications against this version of Base on all
-        available platforms and test as appropriate.  Application code changes
+        available platforms and test as appropriate. Application code changes
         may be necessary where the EPICS Base APIs have been modified.</td>
       </tr>
     <tr>
@@ -258,6 +247,7 @@ relevent roles unless the Release Manager designates otherwise:</p>
           </ul>
         </td>
       </tr>
+
     <tr>
       <th colspan="3">Release Approval</th>
     </tr>
@@ -265,58 +255,93 @@ relevent roles unless the Release Manager designates otherwise:</p>
       <td>&nbsp;</td>
       <td>Release Manager</td>
       <td>Obtain a positive <q>Ok to release</q> from all platform developers
-        once a Release Candidate version has gone a whole week without any
-        issues being reported.</td>
+        once a release candidate version has gone for 2 weeks without any major
+        new issues being reported.</td>
       </tr>
     <tr>
       <th colspan="3">Creating the final release version</th>
       </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>Configuration Manager</td>
-      <td>Edit and commit changes to the EPICS version number file
-        configure/CONFIG_BASE_VERSION.</td>
+      <td>Release Manager</td>
+      <td>
+        <p>For each external submodule, check if the module's release version
+          number (and SHRLIB_VERSION setting) has been updated if appropriate,
+          and that its Release Notes have been updated to cover any changes.
+          Commit any fixes and tag the module if that hasn't already been
+          done.</p>
+        <p>Update all external submodules on the Base-7.0 branch and
+          commit.</p></td>
       </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>Configuration Manager</td>
-      <td>Tag the module in Bazaar:
+      <td>Release Manager</td>
+      <td>Edit and commit changes to the EPICS Base version number file and
+        the embedded module version files:
+        <ul>
+          <li>configure/CONFIG_BASE_VERSION </li>
+          <li>modules/libcom/configure/CONFIG_LIBCOM_VERSION</li>
+          <li>modules/ca/configure/CONFIG_CA_VERSION</li>
+          <li>modules/database/configure/CONFIG_DATABASE_VERSION</li>
+          </ul></td>
+      </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Release Manager</td>
+      <td>Tag the epics-base module in Git:
         <blockquote><tt>
-          cd ~/base/mirror-3.14<br />
-          bzr tag R3.14.12</i>
+          cd base-7.0<br />
+          git tag -m 'ANJ: Tagged for 7.0.2' R7.0.2</i>
+          </tt></blockquote>
+        Don't push the new tag to the Launchpad repository yet.</td>
+      </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Release Manager</td>
+      <td>Export the tagged version into a tarfile. The <tt>make-tar.sh</tt>
+        script generates a gzipped tarfile directly from the tag, excluding the
+        files and directories that are only used for continuous integration:
+        <blockquote><tt>
+          cd base-7.0<br />
+          ./.tools/make-tar.sh R7.0.2 base-7.0.2.tar.gz base-7.0.2/
+          </tt></blockquote>
+        Create a GPG signature file of the tarfile as follows:
+        <blockquote><tt>
+          gpg --armor --sign --detach-sig base-7.0.2.tar.gz
           </tt></blockquote>
         </td>
       </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>Configuration Manager</td>
-      <td>Export the tagged version into a tarfile. Note that this command
-        generates a gzipped tarfile directly from the repository:
-        <blockquote><tt>
-          cd ~/base<br />
-          bzr export --keywords=publish
-          --root=base-3.14.12
-          -r tag:R3.14.12
-          baseR3.14.12.tar.gz
-          mirror-3.14
-          </tt></blockquote>
-        This requires that the Bazaar keywords plugin is installed and
-        configured properly.
-        </td>
-      </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>Configuration Manager</td>
+      <td>Release Manager</td>
       <td>Test the tar file by extracting its contents and building it on at
-        least one supported platform</td>
+        least one supported platform. When this succeeds the new git tag can be
+        pushed to the Launchpad repository:
+        <blockquote><tt>
+          git push --follow-tags upstream 7.0
+          </tt></blockquote>
+        </td>
+      </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Release Manager</td>
+      <td>Copy the tarfile and its signature to the Base download area of the
+        website.</td>
+      </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>Release Manager</td>
+      <td>Find all Launchpad bug reports with the status Fix Committed which
+        have been fixed in this release and mark them Fix Released.</td>
       </tr>
     <tr>
       <th colspan="3">Publish and Announce it</th>
       </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>Configuration Manager</td>
-      <td>Copy the tar file to the Base download area of the website</td>
+      <td>Website Manager</td>
+      <td>Upload the tar file and its <tt>.asc</tt> signature file to the
+        Launchpad milestone for this release version.</td>
       </tr>
     <tr>
       <td>&nbsp;</td>
@@ -346,29 +371,13 @@ relevent roles unless the Release Manager designates otherwise:</p>
     <tr>
       <td>&nbsp;</td>
       <td>Website Manager</td>
-      <td>Upload the release tar file to the Launchpad download area.</td>
-      </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>Website Manager</td>
-      <td>Add the new Version number to the Launchpad bug tracker.</td>
-      </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>Website Manager</td>
-      <td>Find all Launchpad bug reports with the status Fix Committed which
-        have been fixed in this release and mark them Fix Released.</td>
+      <td>Add an entry to the website News page, linking to the new version
+        webpage.</td>
       </tr>
     <tr>
       <td>&nbsp;</td>
       <td>Release Manager</td>
-      <td>Email tech-talk</td>
-      </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>Website Manager</td>
-      <td>Add an entry to the website News page, linking to the new version
-      webpage.</td>
+      <td>Announce the release on the tech-talk mailing list.</td>
       </tr>
     </tbody>
   </table>

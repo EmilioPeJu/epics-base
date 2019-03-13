@@ -20,10 +20,10 @@ use EPICS::Copy;
 # Process command line options
 our ($opt_a, $opt_d, @opt_D, $opt_h, $opt_t);
 getopts('a:dD@ht:')
-    or &HELP_MESSAGE;
+    or HELP_MESSAGE();
 
 # Handle the -h command
-&HELP_MESSAGE if $opt_h;
+HELP_MESSAGE() if $opt_h;
 
 die "Path to TOP not set, use -t option\n"
     unless $opt_t;
@@ -47,9 +47,9 @@ expandRelease(\%vars);
 $vars{'ARCH'} = $opt_a if $opt_a;
 
 while ($_ = shift @opt_D) {
-    my ($var, $val) = split /=/;
-    $vars{$var} = $val;
-    print "$var = $val\n" if $opt_d;
+    m/^ (\w+) \s* = \s* (.*) $/x;
+    $vars{$1} = $2;
+    print "$1 = $2\n" if $opt_d;
 }
 
 # Do it!

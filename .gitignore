@@ -6,6 +6,9 @@
 /html/
 /include/
 /templates/
+/configure/*.local
+/modules/RELEASE.*.local
+/modules/Makefile.local
 O.*/
 /QtC-*
 *.orig

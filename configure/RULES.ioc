@@ -4,9 +4,10 @@
 # Copyright (c) 2002 The Regents of the University of California, as
 #     Operator of Los Alamos National Laboratory.
 # EPICS BASE is distributed subject to a Software License Agreement found
-# in file LICENSE that is included with this distribution.
+# in the file LICENSE that is included with this distribution.
 #*************************************************************************
-#RULES.ioc
+
+# RULES.ioc
 
 include $(CONFIG)/RULES_DIRS
 
@@ -24,10 +25,14 @@ else
     clean$(DIVIDER)$(ARCH) clean:
 endif
 
-cdCommands envPaths dllPath.bat relPaths.sh: \
+cdCommands dllPath.bat relPaths.sh: \
     $(wildcard $(TOP)/configure/RELEASE*) \
-    $(wildcard $(TOP)/configure/CONFIG_SITE*) $(INSTALL_BIN)
+    $(wildcard $(TOP)/configure/CONFIG_SITE*) | $(INSTALL_BIN)
 	$(CONVERTRELEASE) -a $(ARCH) -t $(IOCS_APPL_TOP) $@
+
+envPaths: $(wildcard $(TOP)/configure/RELEASE*) \
+    $(wildcard $(TOP)/configure/CONFIG_SITE*) | $(INSTALL_BIN)
+	$(CONVERTRELEASE) -t $(IOCS_APPL_TOP) $@
 
 realclean:
 	$(RM) cdCommands envPaths dllPath.bat relPaths.sh

@@ -12,21 +12,22 @@
 #
 
 use strict;
+use warnings;
+
+use Cwd qw(cwd);
+use Getopt::Std;
+$Getopt::Std::STANDARD_HELP_VERSION = 1;
 
 use FindBin qw($Bin);
 use lib ("$Bin/../../lib/perl", $Bin);
 
-use Cwd qw(cwd);
-use Getopt::Std;
 use EPICS::Path;
 use EPICS::Release;
 
-use vars qw($arch $top $iocroot $root);
-
+our ($arch, $top, $iocroot, $root);
 our ($opt_a, $opt_t, $opt_T);
 
-$Getopt::Std::OUTPUT_HELP_VERSION = 1;
-getopts('a:t:T:') or &HELP_MESSAGE;
+getopts('a:t:T:') or HELP_MESSAGE();
 
 my $cwd = UnixPath(cwd());
 
@@ -61,7 +62,7 @@ if ($opt_t) {
     }
 }
 
-&HELP_MESSAGE unless @ARGV == 1;
+HELP_MESSAGE() unless @ARGV == 1;
 
 my $outfile = $ARGV[0];
 
@@ -73,17 +74,18 @@ my @apps   = ('TOP');   # Records the order of definitions in RELEASE file
 my $relfile = "$top/configure/RELEASE";
 die "Can't find $relfile" unless (-f $relfile);
 readReleaseFiles($relfile, \%macros, \@apps, $arch);
-expandRelease(\%macros, \@apps);
+expandRelease(\%macros);
 
 
 # This is a perl switch statement:
 for ($outfile) {
-    m/releaseTops/       and do { &releaseTops;         last; };
-    m/dllPath\.bat/      and do { &dllPath;             last; };
-    m/relPaths\.sh/      and do { &relPaths;            last; };
-    m/cdCommands/        and do { &cdCommands;          last; };
-    m/envPaths/          and do { &envPaths;            last; };
-    m/checkRelease/      and do { &checkRelease;        last; };
+    m/releaseTops/       and do { releaseTops();         last; };
+    m/dllPath\.bat/      and do { dllPath();             last; };
+    m/relPaths\.sh/      and do { relPaths();            last; };
+    m/ModuleDirs\.pm/    and do { moduleDirs();          last; };
+    m/cdCommands/        and do { cdCommands();          last; };
+    m/envPaths/          and do { envPaths();            last; };
+    m/checkRelease/      and do { checkRelease();        last; };
     die "Output file type \'$outfile\' not supported";
 }
 
@@ -97,6 +99,7 @@ Usage: convertRelease.pl [-a arch] [-T top] [-t ioctop] outfile
         releaseTops - lists the module names defined in RELEASE*s
         dllPath.bat - path changes for cmd.exe to find Windows DLLs
         relPaths.sh - path changes for bash to add RELEASE bin dir's
+        *ModuleDirs.pm - generate a perl module adding lib/perl paths
         cdCommands - generate cd path strings for vxWorks IOCs
         envPaths - generate epicsEnvSet commands for other IOCs
         checkRelease - checks consistency with support modules
@@ -133,6 +136,7 @@ sub relPaths {
 }
 
 sub binDirs {
+    die "Architecture not set (use -a option)\n" unless ($arch);
     my @includes = grep !m/^ (RULES | TEMPLATE_TOP) $/x, @apps;
     my @path;
     foreach my $app (@includes) {
@@ -142,6 +146,19 @@ sub binDirs {
         push @path, LocalPath($path);
     }
     return @path;
+}
+
+sub moduleDirs {
+    my @deps = grep !m/^ (TOP | RULES | TEMPLATE_TOP) $/x, @apps;
+    my @dirs = grep {-d $_}
+        map { AbsPath("$macros{$_}/lib/perl") } @deps;
+    unlink $outfile;
+    open(OUT, ">$outfile") or die "$! creating $outfile";
+    print OUT "# This is a generated file, do not edit!\n\n",
+        "use lib qw(\n",
+        map { "    $_\n"; } @dirs;
+    print OUT ");\n\n1;\n";
+    close OUT;
 }
 
 #
@@ -157,20 +174,19 @@ sub cdCommands {
 
     my $startup = $cwd;
     $startup =~ s/^$root/$iocroot/o if ($opt_t);
-    $startup =~ s/([\\"])/\\\1/g; # escape back-slashes and double-quotes
+    $startup =~ s/([\\"])/\\$1/g; # escape back-slashes and double-quotes
 
     print OUT "startup = \"$startup\"\n";
 
     my $ioc = $cwd;
     $ioc =~ s/^.*\///;  # iocname is last component of directory name
 
-    print OUT "putenv(\"ARCH=$arch\")\n";
     print OUT "putenv(\"IOC=$ioc\")\n";
 
     foreach my $app (@includes) {
         my $iocpath = my $path = $macros{$app};
         $iocpath =~ s/^$root/$iocroot/o if ($opt_t);
-        $iocpath =~ s/([\\"])/\\\1/g; # escape back-slashes and double-quotes
+        $iocpath =~ s/([\\"])/\\$1/g; # escape back-slashes and double-quotes
         my $app_lc = lc($app);
         print OUT "$app_lc = \"$iocpath\"\n"
             if (-d $path);
@@ -187,7 +203,6 @@ sub cdCommands {
 # Include parentheses anyway in case CEXP users want to use this.
 #
 sub envPaths {
-    die "Architecture not set (use -a option)" unless ($arch);
     my @includes = grep !m/^ (RULES | TEMPLATE_TOP) $/x, @apps;
 
     unlink($outfile);
@@ -196,13 +211,12 @@ sub envPaths {
     my $ioc = $cwd;
     $ioc =~ s/^.*\///;  # iocname is last component of directory name
 
-    print OUT "epicsEnvSet(\"ARCH\",\"$arch\")\n";
     print OUT "epicsEnvSet(\"IOC\",\"$ioc\")\n";
 
     foreach my $app (@includes) {
         my $iocpath = my $path = $macros{$app};
         $iocpath =~ s/^$root/$iocroot/o if ($opt_t);
-        $iocpath =~ s/([\\"])/\\\1/g; # escape back-slashes and double-quotes
+        $iocpath =~ s/([\\"])/\\$1/g; # escape back-slashes and double-quotes
         print OUT "epicsEnvSet(\"$app\",\"$iocpath\")\n" if (-d $path);
     }
     close OUT;
@@ -222,7 +236,7 @@ sub checkRelease {
         my @order = ();
         my $relfile = "$path/configure/RELEASE";
         readReleaseFiles($relfile, \%check, \@order, $arch);
-        expandRelease(\%check, \@order);
+        expandRelease(\%check, "while checking module\n\t$app = $path");
         delete $check{TOP};
         delete $check{EPICS_HOST_ARCH};
 
@@ -231,10 +245,10 @@ sub checkRelease {
                 AbsPath($macros{$parent}) ne AbsPath($ppath)) {
                 print "\n" unless ($status);
                 print "Definition of $parent conflicts with $app support.\n";
-                print "In this application a RELEASE file defines\n";
-                print "\t$parent = $macros{$parent}\n";
-                print "but $app at $path defines\n";
-                print "\t$parent = $ppath\n";
+                print "In this application or module, a RELEASE file\n";
+                print "conflicts with $app at $path\n";
+                print "  Here: $parent = $macros{$parent}\n";
+                print "  $app: $parent = $ppath\n";
                 $status = 1;
             }
         }

@@ -1,13 +1,12 @@
 # CONFIG_SITE.Common.vxWorksCommon
 #
 # Site specific definitions for vxWorks target builds.
-# Only the local epics system manager should modify this file
 
 # Compiler options can vary with the vxWorks version number, so we
-# need to know that.  However don't include any third-level digits
-# (the .2 in 5.4.2) because we don't currently need them.
+# need to know that.  Do not include any third-level digits.
 
-# Note: vxWorks 5.3 (Tornado 1.x) is not supported
+# Note: vxWorks 5.4.x and 5.5.x (Tornado 2.x) are not supported.
+# VxWorks 6.0 through 6.5 use older, untested versions of GCC.
 
 #VXWORKS_VERSION = 5.4
 VXWORKS_VERSION = 5.5
@@ -28,9 +27,7 @@ VXWORKS_VERSION = 5.5
 # CONFIG_SITE.$(EPICS_HOST_ARCH).vxWorksCommon file.
 
 # WIND_BASE is where you installed the Wind River software.
-# Under vxWorks 6.x this is *not* the same as the old VX_DIR setting
 
-#WIND_BASE = /usr/local/vw/tornado202p1
 #WIND_BASE = /usr/local/vw/tornado22-$(ARCH_CLASS)
 #WIND_BASE = /usr/local/vw/vxWorks-$(VXWORKS_VERSION)
 #WIND_BASE = /ade/vxWorks/$(VXWORKS_VERSION)
