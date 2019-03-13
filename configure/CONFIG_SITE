@@ -108,8 +108,7 @@
 # configure/os/CONFIG_SITE.<host>.Common files will
 # override 
 #
-#CROSS_COMPILER_TARGET_ARCHS=
-CROSS_COMPILER_TARGET_ARCHS += vxWorks-ppc604_long
+CROSS_COMPILER_TARGET_ARCHS=
 # The following targets are built manually for base only
 # CROSS_COMPILER_TARGET_ARCHS += linux-arm_el
 
@@ -117,7 +116,7 @@ CROSS_COMPILER_TARGET_ARCHS += vxWorks-ppc604_long
 #  the build for the CROSS_COMPILER_TARGET_ARCHS
 #  uncomment the following line and specify them.
 #
-CROSS_COMPILER_HOST_ARCHS = linux-x86_64
+CROSS_COMPILER_HOST_ARCHS=
 
 #  The 'runtests', 'tapfiles' and 'junitfiles' make targets normally only run
 #  self-tests for the EPICS_HOST_ARCH architecture. If the host can execute
