@@ -1,0 +1,16 @@
+# CONFIG_SITE.window-x64.Common
+#
+# Revision-Id:
+#
+# Site specific definitions for windows-x64 host
+# Only the local epics system manager should modify this file
+
+# DLS configuration (Martin Gaughran 03 Apr 2019)
+CROSS_COMPILER_TARGET_ARCHS=windows-x64-debug
+CROSS_COMPILER_HOST_ARCHS=windows-x64
+
+SHARED_LIBRARIES=NO
+#  Build client objects statically ?
+#        must be either YES or NO
+#
+STATIC_BUILD=YES
