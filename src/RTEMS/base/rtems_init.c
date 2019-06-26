@@ -24,6 +24,7 @@
 #include <arpa/inet.h>
 #include <rtems.h>
 #include <rtems/malloc.h>
+#include <rtems/libcsupport.h>
 #include <rtems/error.h>
 #include <rtems/stackchk.h>
 #include <rtems/rtems_bsdnet.h>
@@ -398,11 +399,9 @@ static void netStatCallFunc(const iocshArgBuf *args)
 static const iocshFuncDef heapSpaceFuncDef = {"heapSpace",0,NULL};
 static void heapSpaceCallFunc(const iocshArgBuf *args)
 {
-    rtems_malloc_statistics_t s;
-    double x;
-
-    malloc_get_statistics(&s);
-    x = s.space_available - (unsigned long)(s.lifetime_allocated - s.lifetime_freed);
+    Heap_Information_block info;
+    malloc_info(&info);
+    double x = info.Stats.free_size;
     if (x >= 1024*1024)
         printf("Heap space: %.1f MB\n", x / (1024 * 1024));
     else
