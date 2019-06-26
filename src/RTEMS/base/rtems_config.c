@@ -26,6 +26,7 @@
 #  define CONFIGURE_EXECUTIVE_RAM_SIZE (2000*1024)
 #endif
 
+#define CONFIGURE_ENABLE_CLASSIC_API_NOTEPADS 1
 #define CONFIGURE_MAXIMUM_TASKS             rtems_resource_unlimited(30)
 #define CONFIGURE_MAXIMUM_SEMAPHORES        rtems_resource_unlimited(500)
 #define CONFIGURE_MAXIMUM_TIMERS            rtems_resource_unlimited(20)
