@@ -15,7 +15,7 @@
  * We want to access information which is
  * normally hidden from application programs.
  */
-#define __RTEMS_VIOLATE_KERNEL_VISIBILITY__ 1
+//#define __RTEMS_VIOLATE_KERNEL_VISIBILITY__ 1
 
 #include <assert.h>
 #include <stdio.h>
@@ -29,7 +29,7 @@
 #include "epicsEvent.h"
 #include "errlog.h"
 
-#define RTEMS_FAST_MUTEX
+//#define RTEMS_FAST_MUTEX
 /* #define EPICS_RTEMS_SEMAPHORE_STATS */
 /*
  * Some performance tuning instrumentation

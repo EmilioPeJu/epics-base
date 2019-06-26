@@ -15,7 +15,7 @@
  * We want to print out some task information which is
  * normally hidden from application programs.
  */
-#define __RTEMS_VIOLATE_KERNEL_VISIBILITY__ 1
+//#define __RTEMS_VIOLATE_KERNEL_VISIBILITY__ 1
 
 #include <stddef.h>
 #include <string.h>
