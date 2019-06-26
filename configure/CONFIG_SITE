@@ -113,7 +113,7 @@
 # override 
 #
 #CROSS_COMPILER_TARGET_ARCHS=
-CROSS_COMPILER_TARGET_ARCHS += vxWorks-ppc604_long
+CROSS_COMPILER_TARGET_ARCHS += RTEMS-mvme5500
 # The following targets are built manually for base only
 # CROSS_COMPILER_TARGET_ARCHS += linux-arm_el
 
