@@ -417,35 +417,8 @@ void epicsThreadGetName (epicsThreadId id, char *name, size_t size)
         }
     }
     taskVarUnlock ();
-    if (!haveName) {
-#if (__RTEMS_MAJOR__>4 || (__RTEMS_MAJOR__==4 && __RTEMS_MINOR__>8) || (__RTEMS_MAJOR__==4 && __RTEMS_MINOR__==8 && __RTEMS_REVISION__>=99))
-        if (_Objects_Get_name_as_string((rtems_id)id, size, name) != NULL)
-            haveName = 1;
-#else
-        /*
-         * Try to get the RTEMS task name
-         */
-        Thread_Control *thr;
-        Objects_Locations l;
-        if ((thr=_Thread_Get(tid, &l)) != NULL) {
-            if (OBJECTS_LOCAL == l) {
-                int length;
-                Objects_Information *oi = _Objects_Get_information(tid);
-                if (oi->name_length >= size)
-                    length = size - 1;
-                else
-                    length = oi->name_length;
-                 if (oi->is_string)
-                     strncpy(name, thr->Object.name, length);
-                else
-                    _Objects_Copy_name_raw( &thr->Object.name, name, length);
-                name[length] = '\0';
-                haveName = 1;
-            }
-            _Thread_Enable_dispatch();
-        }
-#endif
-    }
+    if (!haveName && _Objects_Get_name_as_string((rtems_id)id, size, name) != NULL)
+        haveName = 1;
     if (!haveName)
         snprintf(name, size, "0x%lx", (long)tid);
     name[size-1] = '\0';
