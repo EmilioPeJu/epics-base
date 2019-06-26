@@ -466,7 +466,7 @@ initConsole (void)
  * Ensure that the configuration object files
  * get pulled in from the library
  */
-extern rtems_configuration_table Configuration;
+extern const rtems_configuration_table Configuration;
 extern struct rtems_bsdnet_config rtems_bsdnet_config;
 const void *rtemsConfigArray[] = {
     &Configuration,
