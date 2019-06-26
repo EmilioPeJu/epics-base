@@ -199,6 +199,12 @@ static int
     return FALSE;
 }
 
+static void __attribute__((noinline))  *_noinline_memcpy(void *dest,
+                                                         const void *src,
+                                                         size_t n)
+{
+    return memcpy(dest, src, n);
+}
 
 /* postfix
  *
@@ -252,7 +258,7 @@ epicsShareFunc long
                 lit_i = (epicsInt32) lit_d;
                 if (lit_d != (double) lit_i) {
                     *pout++ = pel->code;
-                    memcpy(pout, &lit_d, sizeof(double));
+                    _noinline_memcpy(pout, &lit_d, sizeof(double));
                     pout += sizeof(double);
                 } else {
                     *pout++ = LITERAL_INT;
