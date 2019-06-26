@@ -195,9 +195,9 @@ epicsEventShow(epicsEventId id, unsigned int level)
     else {
         if (_CORE_mutex_Is_locked(&semaphore.Core_control.mutex)) {
             char name[30];
-            epicsThreadGetName ((epicsThreadId)semaphore.Core_control.mutex.holder_id, name, sizeof name);
+            epicsThreadGetName ((epicsThreadId)semaphore.Core_control.mutex.holder->Object.id, name, sizeof name);
             printf ("Held by:%8.8x (%s)  Nest count:%d",
-                                    (unsigned int)semaphore.Core_control.mutex.holder_id,
+                                    (unsigned int)semaphore.Core_control.mutex.holder->Object.id,
                                     name,
                                     (int)semaphore.Core_control.mutex.nest_count);
         }
