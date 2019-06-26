@@ -16,15 +16,7 @@
 #include <bsp.h>
 #include <rtems/rtems_bsdnet.h>
 
-extern void rtems_bsdnet_loopattach();
-static struct rtems_bsdnet_ifconfig loopback_config = {
-    "lo0",                          /* name */
-    (int (*)(struct rtems_bsdnet_ifconfig *, int))rtems_bsdnet_loopattach, /* attach function */
-    NULL,                           /* link to next interface */
-    "127.0.0.1",                    /* IP address */
-    "255.0.0.0",                    /* IP net mask */
-};
-
+#define LAST_DRIVER_CONFIG NULL
 /*
  * The following conditionals select the network interface card.
  *
@@ -40,7 +32,7 @@ extern int rtems_fxp_attach (struct rtems_bsdnet_ifconfig *, int);
 static struct rtems_bsdnet_ifconfig fxp_driver_config = {
     "fxp1",                             /* name */
     rtems_fxp_attach,                   /* attach function */
-    &loopback_config,                   /* link to next interface */
+    LAST_DRIVER_CONFIG,                   /* link to next interface */
 };
 extern int rtems_3c509_driver_attach (struct rtems_bsdnet_ifconfig *);
 static struct rtems_bsdnet_ifconfig e3c509_driver_config = {
@@ -67,7 +59,7 @@ static struct rtems_bsdnet_ifconfig e3c509_driver_config = {
 static struct rtems_bsdnet_ifconfig bsp_driver_config = {
     RTEMS_BSP_NETWORK_DRIVER_NAME,      /* name */
     RTEMS_BSP_NETWORK_DRIVER_ATTACH,    /* attach function */
-    &loopback_config,                   /* link to next interface */
+    LAST_DRIVER_CONFIG,                   /* link to next interface */
 };
 #define FIRST_DRIVER_CONFIG &bsp_driver_config
 
