@@ -88,8 +88,10 @@ static rtems_status_code rtems_message_queue_send_timeout(
   Message_queue_Control    *the_message_queue;
   Objects_Locations         location;
   CORE_message_queue_Status msg_status;
-    
-  the_message_queue = _Message_queue_Get( id, &location );
+  ISR_lock_Context lock_context;
+
+  the_message_queue = _Message_queue_Get_interrupt_disable(id, &location,
+                                                           &lock_context);
   switch ( location )
   {
     case OBJECTS_ERROR:
@@ -103,10 +105,9 @@ static rtems_status_code rtems_message_queue_send_timeout(
         id,
         NULL,
         1,
-        timeout
+        timeout,
+        &lock_context
       );
-
-      _Thread_Enable_dispatch();
 
       /*
        *  If we had to block, then this is where the task returns
