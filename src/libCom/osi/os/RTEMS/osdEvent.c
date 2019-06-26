@@ -21,6 +21,11 @@
 #include <stdio.h>
 #include <rtems.h>
 #include <rtems/error.h>
+#include <rtems/score/object.h>
+#include <rtems/score/objectimpl.h>
+#include <rtems/score/thread.h>
+#include <rtems/rtems/semimpl.h>
+#include <rtems/rtems/attrimpl.h>
 
 #include "epicsEvent.h"
 #include "epicsThread.h"

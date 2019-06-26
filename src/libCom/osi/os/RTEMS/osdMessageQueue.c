@@ -25,6 +25,12 @@
 #include <string.h>
 #include <rtems.h>
 #include <rtems/error.h>
+#include <rtems/score/object.h>
+#include <rtems/score/objectimpl.h>
+#include <rtems/score/coremsg.h>
+#include <rtems/score/coremsgimpl.h>
+#include <rtems/rtems/message.h>
+#include <rtems/rtems/messageimpl.h>
 #include <cantProceed.h>
 #include "epicsMessageQueue.h"
 #include "errlog.h"

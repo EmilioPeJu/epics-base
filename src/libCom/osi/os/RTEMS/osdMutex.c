@@ -21,6 +21,8 @@
 #include <stdio.h>
 #include <rtems.h>
 #include <rtems/error.h>
+#include <rtems/score/percpu.h>
+#include <rtems/score/coremuteximpl.h>
 
 #include "epicsStdioRedirect.h"
 #include "epicsMutex.h"

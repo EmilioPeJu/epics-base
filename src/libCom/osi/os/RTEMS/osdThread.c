@@ -28,6 +28,10 @@
 
 #include <rtems.h>
 #include <rtems/error.h>
+#include <rtems/rtems/semimpl.h>
+#include <rtems/score/statesimpl.h>
+#include <rtems/score/threadimpl.h>
+#include <rtems/score/objectimpl.h>
 
 #include "epicsStdio.h"
 #include "errlog.h"
