@@ -42,7 +42,7 @@ static struct rtems_bsdnet_ifconfig fxp_driver_config = {
     rtems_fxp_attach,                   /* attach function */
     &loopback_config,                   /* link to next interface */
 };
-extern int rtems_3c509_driver_attach (struct rtems_bsdnet_ifconfig *, int);
+extern int rtems_3c509_driver_attach (struct rtems_bsdnet_ifconfig *);
 static struct rtems_bsdnet_ifconfig e3c509_driver_config = {
     "ep0",                              /* name */
     rtems_3c509_driver_attach,          /* attach function */
