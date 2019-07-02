@@ -16,7 +16,6 @@
 #include <bsp.h>
 #include <rtems/rtems_bsdnet.h>
 
-#define LAST_DRIVER_CONFIG NULL
 /*
  * The following conditionals select the network interface card.
  *
@@ -32,7 +31,7 @@ extern int rtems_fxp_attach (struct rtems_bsdnet_ifconfig *, int);
 static struct rtems_bsdnet_ifconfig fxp_driver_config = {
     "fxp1",                             /* name */
     rtems_fxp_attach,                   /* attach function */
-    LAST_DRIVER_CONFIG,                   /* link to next interface */
+    NULL,                   /* link to next interface */
 };
 extern int rtems_3c509_driver_attach (struct rtems_bsdnet_ifconfig *);
 static struct rtems_bsdnet_ifconfig e3c509_driver_config = {
@@ -59,7 +58,7 @@ static struct rtems_bsdnet_ifconfig e3c509_driver_config = {
 static struct rtems_bsdnet_ifconfig bsp_driver_config = {
     RTEMS_BSP_NETWORK_DRIVER_NAME,      /* name */
     RTEMS_BSP_NETWORK_DRIVER_ATTACH,    /* attach function */
-    LAST_DRIVER_CONFIG,                   /* link to next interface */
+    NULL,                   /* link to next interface */
 };
 #define FIRST_DRIVER_CONFIG &bsp_driver_config
 
