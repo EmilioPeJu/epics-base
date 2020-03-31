@@ -24,3 +24,7 @@ SYS_BOOT_FLAGS += -MRTEMS_ONLY=$(RTEMS_ONLY)
 SYS_MSI_INCLUDES += $(shell $(PERL) $(EPICS_BASE_HOST_BIN)/convertDlsRelease.pl -T$(TOP) msiIncludes)
 SYS_MSI_DATA_INCLUDES += $(shell $(PERL) $(EPICS_BASE_HOST_BIN)/convertDlsRelease.pl -T$(TOP) msiDataIncludes)
 SYS_EDM_PATHS +=  .:$(shell $(PERL) $(EPICS_BASE_HOST_BIN)/convertDlsRelease.pl -T$(TOP) dataPaths)
+
+ifndef MSI
+MSI = msi
+endif
