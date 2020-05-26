@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-#define epicsExportSharedSymbols
+#include "epicsAtomic.h"
 #include "timerPrivate.h"
 #include "errlog.h"
 
@@ -35,18 +35,18 @@ epicsTimerQueueActive::~epicsTimerQueueActive () {}
 
 epicsTimerQueueActive & epicsTimerQueueActive::allocate ( bool okToShare, unsigned threadPriority )
 {
-    epicsSingleton < timerQueueActiveMgr >::reference pMgr = 
+    epicsSingleton < timerQueueActiveMgr >::reference pMgr =
         timerQueueMgrEPICS.getReference ();
     return pMgr->allocate ( pMgr, okToShare, threadPriority );
 }
 
 timerQueueActive ::
-    timerQueueActive ( RefMgr & refMgr, 
+    timerQueueActive ( RefMgr & refMgr,
         bool okToShareIn, unsigned priority ) :
-    _refMgr ( refMgr ), queue ( *this ), thread ( *this, "timerQueue", 
+    _refMgr ( refMgr ), queue ( *this ), thread ( *this, "timerQueue",
         epicsThreadGetStackSize ( epicsThreadStackMedium ), priority ),
-    sleepQuantum ( epicsThreadSleepQuantum() ), okToShare ( okToShareIn ), 
-    exitFlag ( false ), terminateFlag ( false )
+    sleepQuantum ( epicsThreadSleepQuantum() ), okToShare ( okToShareIn ),
+    exitFlag ( 0 ), terminateFlag ( false )
 {
 }
 
@@ -59,17 +59,17 @@ timerQueueActive::~timerQueueActive ()
 {
     this->terminateFlag = true;
     this->rescheduleEvent.signal ();
-    while ( ! this->exitFlag ) {
+    while ( !  epics::atomic::get(this->exitFlag) ) {
         this->exitEvent.wait ( 1.0 );
     }
     // in case other threads are waiting here also
     this->exitEvent.signal ();
 }
 
-void timerQueueActive :: _printLastChanceExceptionMessage ( 
+void timerQueueActive :: _printLastChanceExceptionMessage (
     const char * pExceptionTypeName,
     const char * pExceptionContext )
-{ 
+{
     char date[64];
     try {
         epicsTime cur = epicsTime :: getCurrent ();
@@ -78,7 +78,7 @@ void timerQueueActive :: _printLastChanceExceptionMessage (
     catch ( ... ) {
         strcpy ( date, "<UKN DATE>" );
     }
-    errlogPrintf ( 
+    errlogPrintf (
         "timerQueueActive: Unexpected C++ exception \"%s\" with type \"%s\" "
         "while processing timer queue, at %s\n",
         pExceptionContext, pExceptionTypeName, date );
@@ -87,7 +87,7 @@ void timerQueueActive :: _printLastChanceExceptionMessage (
 
 void timerQueueActive :: run ()
 {
-    this->exitFlag = false;
+    epics::atomic::set(this->exitFlag, 0);
     while ( ! this->terminateFlag ) {
         try {
             double delay = this->queue.process ( epicsTime::getCurrent() );
@@ -105,7 +105,7 @@ void timerQueueActive :: run ()
             epicsThreadSleep ( 10.0 );
         }
     }
-    this->exitFlag = true; 
+    epics::atomic::set(this->exitFlag, 1);
     this->exitEvent.signal (); // no access to queue after exitEvent signal
 }
 
@@ -131,10 +131,10 @@ double timerQueueActive::quantum ()
 
 void timerQueueActive::show ( unsigned int level ) const
 {
-    printf ( "EPICS threaded timer queue at %p\n", 
+    printf ( "EPICS threaded timer queue at %p\n",
         static_cast <const void *> ( this ) );
     if ( level > 0u ) {
-        // specifying level one here avoids recursive 
+        // specifying level one here avoids recursive
         // show callback
         this->thread.show ( 1u );
         this->queue.show ( level - 1u );
@@ -143,12 +143,12 @@ void timerQueueActive::show ( unsigned int level ) const
         printf ( "exit event\n" );
         this->exitEvent.show ( level - 1u );
         printf ( "exitFlag = %c, terminateFlag = %c\n",
-            this->exitFlag ? 'T' : 'F',
+            epics::atomic::get(this->exitFlag) ? 'T' : 'F',
             this->terminateFlag ? 'T' : 'F' );
     }
 }
 
-epicsTimerQueue & timerQueueActive::getEpicsTimerQueue () 
+epicsTimerQueue & timerQueueActive::getEpicsTimerQueue ()
 {
     return static_cast < epicsTimerQueue &> ( * this );
 }

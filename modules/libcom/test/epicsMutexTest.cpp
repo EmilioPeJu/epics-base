@@ -8,8 +8,8 @@
 \*************************************************************************/
 /* epicsMutexTest.c */
 
-/* 
- * Author:  Marty Kraimer Date:    26JAN2000 
+/*
+ * Author:  Marty Kraimer Date:    26JAN2000
  *          Jeff Hill (added mutex performance test )
  */
 
@@ -165,35 +165,35 @@ inline void tenQuadRecursiveLockPairsSquared ( epicsMutex & mutex )
 void epicsMutexPerformance ()
 {
     epicsMutex mutex;
-	unsigned i;
+    unsigned i;
 
     // test a single lock pair
-    epicsTime begin = epicsTime::getCurrent ();
+    epicsTime begin = epicsTime::getMonotonic ();
     static const unsigned N = 1000;
     for ( i = 0; i < N; i++ ) {
         tenLockPairsSquared ( mutex );
     }
-    double delay = epicsTime::getCurrent () -  begin;
+    double delay = epicsTime::getMonotonic () -  begin;
     delay /= N * 100u; // convert to delay per lock pair
     delay *= 1e6; // convert to micro seconds
     testDiag("lock()*1/unlock()*1 takes %f microseconds", delay);
 
     // test a two times recursive lock pair
-    begin = epicsTime::getCurrent ();
+    begin = epicsTime::getMonotonic ();
     for ( i = 0; i < N; i++ ) {
         tenDoubleRecursiveLockPairsSquared ( mutex );
     }
-    delay = epicsTime::getCurrent () -  begin;
+    delay = epicsTime::getMonotonic () -  begin;
     delay /= N * 100u; // convert to delay per lock pair
     delay *= 1e6; // convert to micro seconds
     testDiag("lock()*2/unlock()*2 takes %f microseconds", delay);
 
     // test a four times recursive lock pair
-    begin = epicsTime::getCurrent ();
+    begin = epicsTime::getMonotonic ();
     for ( i = 0; i < N; i++ ) {
         tenQuadRecursiveLockPairsSquared ( mutex );
     }
-    delay = epicsTime::getCurrent () -  begin;
+    delay = epicsTime::getMonotonic () -  begin;
     delay /= N * 100u; // convert to delay per lock pair
     delay *= 1e6; // convert to micro seconds
     testDiag("lock()*4/unlock()*4 takes %f microseconds", delay);
@@ -206,7 +206,7 @@ struct verifyTryLock {
 
 extern "C" void verifyTryLockThread ( void *pArg )
 {
-    struct verifyTryLock *pVerify = 
+    struct verifyTryLock *pVerify =
         ( struct verifyTryLock * ) pArg;
 
     testOk1(epicsMutexTryLock(pVerify->mutex) == epicsMutexLockTimeout);
@@ -222,7 +222,7 @@ void verifyTryLock ()
 
     testOk1(epicsMutexTryLock(verify.mutex) == epicsMutexLockOK);
 
-    epicsThreadCreate ( "verifyTryLockThread", 40, 
+    epicsThreadCreate ( "verifyTryLockThread", 40,
         epicsThreadGetStackSize(epicsThreadStackSmall),
         verifyTryLockThread, &verify );
 

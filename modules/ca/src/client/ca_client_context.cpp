@@ -17,9 +17,9 @@
  *  Copyright, 1986, The Regents of the University of California.
  *
  *
- *	Author Jeffrey O. Hill
- *	johill@lanl.gov
- *	505 665 1831
+ *  Author Jeffrey O. Hill
+ *  johill@lanl.gov
+ *  505 665 1831
  */
 
 #ifdef _MSC_VER
@@ -34,23 +34,15 @@
 #include "errlog.h"
 #include "locationException.h"
 
-#define epicsExportSharedSymbols
 #include "iocinf.h"
 #include "oldAccess.h"
 #include "cac.h"
 
-epicsShareDef epicsThreadPrivateId caClientCallbackThreadId;
+epicsThreadPrivateId caClientCallbackThreadId;
 
 static epicsThreadOnceId cacOnce = EPICS_THREAD_ONCE_INIT;
 
 const unsigned ca_client_context :: flushBlockThreshold = 0x58000;
-
-extern "C" void cacExitHandler ( void *)
-{
-    epicsThreadPrivateDelete ( caClientCallbackThreadId );
-    caClientCallbackThreadId = 0;
-    delete ca_client_context::pDefaultServiceInstallMutex;
-}
 
 // runs once only for each process
 extern "C" void cacOnceFunc ( void * )
@@ -58,7 +50,6 @@ extern "C" void cacOnceFunc ( void * )
     caClientCallbackThreadId = epicsThreadPrivateCreate ();
     assert ( caClientCallbackThreadId );
     ca_client_context::pDefaultServiceInstallMutex = newEpicsMutex;
-    epicsAtExit ( cacExitHandler,0 );
 }
 
 extern epicsThreadPrivateId caClientContextId;
@@ -67,6 +58,8 @@ cacService * ca_client_context::pDefaultService = 0;
 epicsMutex * ca_client_context::pDefaultServiceInstallMutex;
 
 ca_client_context::ca_client_context ( bool enablePreemptiveCallback ) :
+    mutex(__FILE__, __LINE__),
+    cbMutex(__FILE__, __LINE__),
     createdByThread ( epicsThreadGetIdSelf () ),
     ca_exception_func ( 0 ), ca_exception_arg ( 0 ),
     pVPrintfFunc ( errlogVprintf ), fdRegFunc ( 0 ), fdRegArg ( 0 ),
@@ -742,12 +735,12 @@ void ca_client_context::installDefaultService ( cacService & service )
     ca_client_context::pDefaultService = & service;
 }
 
-void epicsShareAPI caInstallDefaultService ( cacService & service )
+void epicsStdCall caInstallDefaultService ( cacService & service )
 {
     ca_client_context::installDefaultService ( service );
 }
 
-epicsShareFunc int epicsShareAPI ca_clear_subscription ( evid pMon )
+LIBCA_API int epicsStdCall ca_clear_subscription ( evid pMon )
 {
     oldChannelNotify & chan = pMon->channel ();
     ca_client_context & cac = chan.getClientCtx ();

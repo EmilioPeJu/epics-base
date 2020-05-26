@@ -46,7 +46,7 @@ int sysClkRateGet(void);
 #endif
 
 typedef int                     SOCKET;
-#define INVALID_SOCKET		(-1)
+#define INVALID_SOCKET          (-1)
 #define SOCKERRNO               errno
 #ifndef SHUT_RD
 #   define SHUT_RD 0
@@ -65,7 +65,7 @@ typedef int                     SOCKET;
 #define socket_ioctl(A,B,C)     ioctl(A,B,(int)C)
 typedef int osiSockIoctl_t;
 typedef int osiSocklen_t;
-typedef int osiSockOptMcastLoop_t;
+typedef char osiSockOptMcastLoop_t;
 typedef char osiSockOptMcastTTL_t;
 
 #define FD_IN_FDSET(FD) ((FD)<FD_SETSIZE&&(FD)>=0)

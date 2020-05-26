@@ -2,7 +2,7 @@
 * Copyright (c) 2007 UChicago Argonne LLC, as Operator of Argonne
 *     National Laboratory.
 * EPICS BASE is distributed subject to a Software License Agreement found
-* in file LICENSE that is included with this distribution. 
+* in file LICENSE that is included with this distribution.
 \*************************************************************************/
 
 #include "iocsh.h"
@@ -22,7 +22,7 @@ static const iocshFuncDef dbLoadTemplateFuncDef =
     {"dbLoadTemplate", 2, dbLoadTemplateArgs};
 static void dbLoadTemplateCallFunc(const iocshArgBuf *args)
 {
-    dbLoadTemplate(args[0].sval, args[1].sval);
+    iocshSetError(dbLoadTemplate(args[0].sval, args[1].sval));
 }
 
 

@@ -5,13 +5,13 @@
 *     Operator of Los Alamos National Laboratory.
 * Copyright (c) 2013 ITER Organization.
 * EPICS BASE is distributed subject to a Software License Agreement found
-* in file LICENSE that is included with this distribution. 
+* in file LICENSE that is included with this distribution.
 \*************************************************************************/
 
-/* includes for general purpose callback tasks		*/
+/* includes for general purpose callback tasks          */
 /*
  *      Original Author:        Marty Kraimer
- *      Date:   	        07-18-91
+ *      Date:                   07-18-91
 */
 
 #ifndef INCcallbackh
@@ -26,10 +26,10 @@ extern "C" {
 /*
  * WINDOWS also has a "CALLBACK" type def
  */
-#ifdef _WIN32
-#	ifdef CALLBACK
-#		undef CALLBACK
-#	endif /*CALLBACK*/
+#if defined(_WIN32) && !defined(EPICS_NO_CALLBACK)
+#       ifdef CALLBACK
+#               undef CALLBACK
+#       endif /*CALLBACK*/
 #endif /*_WIN32*/
 
 #define NUM_CALLBACK_PRIORITIES 3
@@ -38,13 +38,15 @@ extern "C" {
 #define priorityHigh    2
 
 typedef struct callbackPvt {
-	void (*callback)(struct callbackPvt*);
-	int		priority;
-	void		*user; /*for use by callback user*/
+        void (*callback)(struct callbackPvt*);
+        int             priority;
+        void            *user; /*for use by callback user*/
         void            *timer; /*for use by callback itself*/
 }epicsCallback;
 
+#if !defined(EPICS_NO_CALLBACK)
 typedef epicsCallback CALLBACK;
+#endif
 
 typedef void    (*CALLBACKFUNC)(struct callbackPvt*);
 
@@ -69,16 +71,16 @@ typedef struct callbackQueueStats {
 epicsShareFunc void callbackInit(void);
 epicsShareFunc void callbackStop(void);
 epicsShareFunc void callbackCleanup(void);
-epicsShareFunc int callbackRequest(CALLBACK *pCallback);
+epicsShareFunc int callbackRequest(epicsCallback *pCallback);
 epicsShareFunc void callbackSetProcess(
-    CALLBACK *pcallback, int Priority, void *pRec);
+    epicsCallback *pcallback, int Priority, void *pRec);
 epicsShareFunc int callbackRequestProcessCallback(
-    CALLBACK *pCallback,int Priority, void *pRec);
+    epicsCallback *pCallback,int Priority, void *pRec);
 epicsShareFunc void callbackRequestDelayed(
-    CALLBACK *pCallback,double seconds);
-epicsShareFunc void callbackCancelDelayed(CALLBACK *pcallback);
+    epicsCallback *pCallback,double seconds);
+epicsShareFunc void callbackCancelDelayed(epicsCallback *pcallback);
 epicsShareFunc void callbackRequestProcessCallbackDelayed(
-    CALLBACK *pCallback, int Priority, void *pRec, double seconds);
+    epicsCallback *pCallback, int Priority, void *pRec, double seconds);
 epicsShareFunc int callbackSetQueueSize(int size);
 epicsShareFunc int callbackQueueStatus(const int reset, callbackQueueStats *result);
 epicsShareFunc void callbackQueueShow(const int reset);

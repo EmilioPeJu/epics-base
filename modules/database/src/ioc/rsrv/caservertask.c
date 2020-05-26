@@ -68,17 +68,6 @@ static void req_server (void *pParm)
 
     IOC_sock = conf->tcp;
 
-    /* listen and accept new connections */
-    if ( listen ( IOC_sock, 20 ) < 0 ) {
-        char sockErrBuf[64];
-        epicsSocketConvertErrnoToString (
-            sockErrBuf, sizeof ( sockErrBuf ) );
-        errlogPrintf ( "CAS: Listen error: %s\n",
-            sockErrBuf );
-        epicsSocketDestroy (IOC_sock);
-        epicsThreadSuspendSelf ();
-    }
-
     epicsEventSignal(castcp_startStopEvent);
 
     while (TRUE) {
@@ -198,7 +187,7 @@ SOCKET* rsrv_grab_tcp(unsigned short *port)
 
             epicsSocketEnableAddressReuseDuringTimeWaitState ( tcpsock );
 
-            if(bind(tcpsock, &scratch.sa, sizeof(scratch))==0) {
+            if(bind(tcpsock, &scratch.sa, sizeof(scratch))==0 && listen(tcpsock, 20)==0) {
                 if(scratch.ia.sin_port==0) {
                     /* use first socket to pick a random port */
                     osiSocklen_t alen = sizeof(ifaceAddr);
@@ -335,7 +324,7 @@ void rsrv_build_addr_lists(void)
             char sockErrBuf[64];
             epicsSocketConvertErrnoToString (
                 sockErrBuf, sizeof ( sockErrBuf ) );
-            errlogPrintf("rsrv: failed to set mcast ttl %d\n", ttl);
+            errlogPrintf("rsrv: failed to set mcast ttl %d\n", (int)ttl);
         }
     }
 #endif
@@ -1343,10 +1332,13 @@ void casExpandBuffer ( struct message_buffer *buf, ca_uint32_t size, int sendbuf
         // round up to multiple of 4K
         size = ((size-1)|0xfff)+1;
 
-        if (buf->type==mbtLargeTCP)
+        if (buf->type==mbtLargeTCP) {
             newbuf = realloc (buf->buf, size);
-        else
+            if(newbuf)
+                buf->buf = newbuf;
+        } else {
             newbuf = malloc (size);
+        }
         newtype = mbtLargeTCP;
         newsize = size;
 
@@ -1421,6 +1413,20 @@ struct client *create_tcp_client (SOCKET sock , const osiSockAddr *peerAddr)
     }
 
     client->addr = peerAddr->ia;
+    if(asCheckClientIP) {
+        epicsUInt32 ip = ntohl(client->addr.sin_addr.s_addr);
+        client->pHostName = malloc(24);
+        if(!client->pHostName) {
+            destroy_client ( client );
+            return NULL;
+        }
+        epicsSnprintf(client->pHostName, 24,
+                      "%u.%u.%u.%u",
+                      (ip>>24)&0xff,
+                      (ip>>16)&0xff,
+                      (ip>>8)&0xff,
+                      (ip>>0)&0xff);
+    }
 
     /*
      * see TCP(4P) this seems to make unsolicited single events much

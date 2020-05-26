@@ -49,7 +49,13 @@
 #include "link.h"
 #include "special.h"
 
-#define EVENTSPERQUE    32
+/* Queue size based on Ethernet MTU of 1500 bytes.
+ * Assume <=66 bytes of ethernet+IP+TCP overhead
+ * and 40 byte CA messages (DBF_TIME_DOUBLE).
+ *
+ * (1500-66)/40 -> 35
+ */
+#define EVENTSPERQUE    36
 #define EVENTENTRIES    4      /* the number of que entries for each event */
 #define EVENTQUESIZE    (EVENTENTRIES  * EVENTSPERQUE)
 #define EVENTQEMPTY     ((struct evSubscrip *)NULL)
@@ -78,7 +84,6 @@ struct event_user {
     epicsMutexId        lock;
     epicsEventId        ppendsem;       /* Wait while empty */
     epicsEventId        pflush_sem;     /* wait for flush */
-    epicsEventId        pexitsem;       /* wait for event task to join */
 
     EXTRALABORFUNC      *extralabor_sub;/* off load to event task */
     void                *extralabor_arg;/* parameter to above */
@@ -117,8 +122,6 @@ static char *EVENT_PEND_NAME = "eventTask";
 
 static struct evSubscrip canceledEvent;
 
-static epicsMutexId stopSync;
-
 static unsigned short ringSpace ( const struct event_que *pevq )
 {
     if ( pevq->evque[pevq->putix] == EVENTQEMPTY ) {
@@ -153,7 +156,7 @@ int dbel ( const char *pname, unsigned level )
     if ( ! pname ) return DB_EVENT_OK;
     status = dbNameToAddr ( pname, &addr );
     if ( status != 0 ) {
-	    errMessage ( status, " dbNameToAddr failed" );
+        errMessage ( status, " dbNameToAddr failed" );
         return DB_EVENT_ERROR;
     }
 
@@ -162,7 +165,7 @@ int dbel ( const char *pname, unsigned level )
     pevent = (struct evSubscrip *) ellFirst ( &addr.precord->mlis );
 
     if ( ! pevent ) {
-	    printf ( "\"%s\": No PV event subscriptions ( monitors ).\n", pname );
+        printf ( "\"%s\": No PV event subscriptions ( monitors ).\n", pname );
         UNLOCKREC (addr.precord);
         return DB_EVENT_OK;
     }
@@ -174,14 +177,14 @@ int dbel ( const char *pname, unsigned level )
         pdbFldDes = dbChannelFldDes(pevent->chan);
 
         if ( level > 0 ) {
-	        printf ( "%4.4s", pdbFldDes->name );
+            printf ( "%4.4s", pdbFldDes->name );
 
-	        printf ( " { " );
-                if ( pevent->select & DBE_VALUE ) printf( "VALUE " );
-                if ( pevent->select & DBE_LOG ) printf( "LOG " );
-                if ( pevent->select & DBE_ALARM ) printf( "ALARM " );
-                if ( pevent->select & DBE_PROPERTY ) printf( "PROPERTY " );
-	        printf ( "}" );
+            printf ( " { " );
+            if ( pevent->select & DBE_VALUE ) printf( "VALUE " );
+            if ( pevent->select & DBE_LOG ) printf( "LOG " );
+            if ( pevent->select & DBE_ALARM ) printf( "ALARM " );
+            if ( pevent->select & DBE_PROPERTY ) printf( "PROPERTY " );
+            printf ( "}" );
 
             if ( pevent->npend ) {
                 printf ( " undelivered=%ld", pevent->npend );
@@ -236,7 +239,7 @@ int dbel ( const char *pname, unsigned level )
                     ( void * ) pevent->ev_que->evUser );
             }
 
-	        printf( "\n" );
+            printf( "\n" );
         }
 
             pevent = (struct evSubscrip *) ellNext ( &pevent->node );
@@ -259,10 +262,6 @@ int dbel ( const char *pname, unsigned level )
 dbEventCtx db_init_events (void)
 {
     struct event_user * evUser;
-
-    if (!stopSync) {
-        stopSync = epicsMutexMustCreate();
-    }
 
     if (!dbevEventUserFreeList) {
         freeListInitPvt(&dbevEventUserFreeList,
@@ -287,9 +286,6 @@ dbEventCtx db_init_events (void)
         return NULL;
     }
 
-    /* Flag will be cleared when event task starts */
-    evUser->pendexit = TRUE;
-
     evUser->firstque.evUser = evUser;
     evUser->firstque.writelock = epicsMutexCreate();
     if (!evUser->firstque.writelock)
@@ -303,9 +299,6 @@ dbEventCtx db_init_events (void)
         goto fail;
     evUser->lock = epicsMutexCreate();
     if (!evUser->lock)
-        goto fail;
-    evUser->pexitsem = epicsEventCreate(epicsEventEmpty);
-    if (!evUser->pexitsem)
         goto fail;
 
     evUser->flowCtrlMode = FALSE;
@@ -321,8 +314,6 @@ fail:
         epicsEventDestroy (evUser->ppendsem);
     if(evUser->pflush_sem)
         epicsEventDestroy (evUser->pflush_sem);
-    if(evUser->pexitsem)
-        epicsEventDestroy (evUser->pexitsem);
     freeListFree(dbevEventUserFreeList,evUser);
     return NULL;
 }
@@ -343,7 +334,6 @@ epicsShareFunc void db_cleanup_events(void)
     dbevFieldLogFreeList = NULL;
 }
 
-    /* intentionally leak stopSync to avoid possible shutdown races */
 /*
  *  DB_CLOSE_EVENTS()
  *
@@ -365,30 +355,15 @@ void db_close_events (dbEventCtx ctx)
      * hazardous to the system's health.
      */
     epicsMutexMustLock ( evUser->lock );
-    if(!evUser->pendexit) { /* event task running */
-        evUser->pendexit = TRUE;
-        epicsMutexUnlock ( evUser->lock );
-
-        /* notify the waiting task */
-        epicsEventSignal(evUser->ppendsem);
-        /* wait for task to exit */
-        epicsEventMustWait(evUser->pexitsem);
-
-        epicsMutexMustLock ( evUser->lock );
-    }
-
+    evUser->pendexit = TRUE;
     epicsMutexUnlock ( evUser->lock );
 
-    epicsMutexMustLock (stopSync);
+    /* notify the waiting task */
+    epicsEventSignal(evUser->ppendsem);
 
-    epicsEventDestroy(evUser->pexitsem);
-    epicsEventDestroy(evUser->ppendsem);
-    epicsEventDestroy(evUser->pflush_sem);
-    epicsMutexDestroy(evUser->lock);
-
-    epicsMutexUnlock (stopSync);
-
-    freeListFree(dbevEventUserFreeList, evUser);
+    if(evUser->taskid)
+        epicsThreadMustJoin(evUser->taskid);
+    /* evUser has been deleted by the worker */
 }
 
 /*
@@ -396,7 +371,7 @@ void db_close_events (dbEventCtx ctx)
  */
 static struct event_que * create_ev_que ( struct event_user * const evUser )
 {
-    struct event_que * const ev_que = (struct event_que *) 
+    struct event_que * const ev_que = (struct event_que *)
         freeListCalloc ( dbevEventQueueFreeList );
     if ( ! ev_que ) {
         return NULL;
@@ -440,7 +415,7 @@ dbEventSubscription db_add_event (
     while ( TRUE ) {
         int success = 0;
         LOCKEVQUE ( ev_que );
-        success = ( ev_que->quota + ev_que->nCanceled < 
+        success = ( ev_que->quota + ev_que->nCanceled <
                                 EVENTQUESIZE - EVENTENTRIES );
         if ( success ) {
             ev_que->quota += EVENTENTRIES;
@@ -1068,16 +1043,13 @@ static void event_task (void *pParm)
         }
     }
 
+    epicsEventDestroy(evUser->ppendsem);
+    epicsEventDestroy(evUser->pflush_sem);
+    epicsMutexDestroy(evUser->lock);
+
+    freeListFree(dbevEventUserFreeList, evUser);
+
     taskwdRemove(epicsThreadGetIdSelf());
-
-    /* use stopSync to ensure pexitsem is not destroy'd
-     * until epicsEventSignal() has returned.
-     */
-    epicsMutexMustLock (stopSync);
-
-    epicsEventSignal(evUser->pexitsem);
-
-    epicsMutexUnlock(stopSync);
 
     return;
 }
@@ -1090,6 +1062,11 @@ int db_start_events (
     void *init_func_arg, unsigned osiPriority )
 {
      struct event_user * const evUser = (struct event_user *) ctx;
+     epicsThreadOpts opts = EPICS_THREAD_OPTS_INIT;
+
+     opts.stackSize = epicsThreadGetStackSize(epicsThreadStackMedium);
+     opts.priority = osiPriority;
+     opts.joinable = 1;
 
      epicsMutexMustLock ( evUser->lock );
 
@@ -1107,15 +1084,12 @@ int db_start_events (
      if (!taskname) {
          taskname = EVENT_PEND_NAME;
      }
-     evUser->taskid = epicsThreadCreate (
-         taskname, osiPriority, 
-         epicsThreadGetStackSize(epicsThreadStackMedium),
-         event_task, (void *)evUser);
+     evUser->taskid = epicsThreadCreateOpt (
+         taskname, event_task, (void *)evUser, &opts);
      if (!evUser->taskid) {
          epicsMutexUnlock ( evUser->lock );
          return DB_EVENT_ERROR;
      }
-     evUser->pendexit = FALSE;
      epicsMutexUnlock ( evUser->lock );
      return DB_EVENT_OK;
 }
@@ -1123,7 +1097,7 @@ int db_start_events (
 /*
  * db_event_change_priority()
  */
-void db_event_change_priority ( dbEventCtx ctx, 
+void db_event_change_priority ( dbEventCtx ctx,
                                         unsigned epicsPriority )
 {
     struct event_user * const evUser = ( struct event_user * ) ctx;
@@ -1179,4 +1153,9 @@ void db_delete_field_log (db_field_log *pfl)
         /* Free the field log chunk */
         freeListFree(dbevFieldLogFreeList, pfl);
     }
+}
+
+int db_available_logs(void)
+{
+    return (int) freeListItemsAvail(dbevFieldLogFreeList);
 }

@@ -2,7 +2,7 @@
 * Copyright (c) 2008 UChicago Argonne LLC, as Operator of Argonne
 *     National Laboratory.
 * EPICS BASE is distributed subject to a Software License Agreement found
-* in file LICENSE that is included with this distribution. 
+* in file LICENSE that is included with this distribution.
 \*************************************************************************/
 
 #include <stddef.h>
@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define epicsExportSharedSymbols
 #include "epicsEvent.h"
 #include "epicsExit.h"
 #include "epicsMutex.h"
@@ -23,7 +22,8 @@
 #include "taskwd.h"
 
 #define NSEC_PER_SEC 1000000000
-#define ClockTimeSyncInterval_value 60.0
+#define ClockTimeSyncInterval_initial 1.0
+#define ClockTimeSyncInterval_normal 60.0
 
 
 static struct {
@@ -40,7 +40,7 @@ static struct {
 static epicsThreadOnceId onceId = EPICS_THREAD_ONCE_INIT;
 
 
-#if defined(CLOCK_REALTIME) && !defined(_WIN32)
+#if defined(CLOCK_REALTIME) && !defined(_WIN32) && !defined(__APPLE__)
 /* This code is not used on systems without Posix CLOCK_REALTIME,
  * but the only way to detect that is from the OS headers, so the
  * Makefile can't exclude compiling this file on those systems.
@@ -48,7 +48,7 @@ static epicsThreadOnceId onceId = EPICS_THREAD_ONCE_INIT;
 
 /* Forward references */
 
-static int ClockTimeGetCurrent(epicsTimeStamp *pDest);
+int osdTimeGetCurrent(epicsTimeStamp *pDest);
 
 #if defined(vxWorks) || defined(__rtems__)
 static void ClockTimeSync(void *dummy);
@@ -79,7 +79,7 @@ static void ClockTime_InitOnce(void *pfirst)
 
     ClockTimePvt.loopEvent   = epicsEventMustCreate(epicsEventEmpty);
     ClockTimePvt.lock        = epicsMutexCreate();
-    ClockTimePvt.ClockTimeSyncInterval = 1.0;   /* First sync */
+    ClockTimePvt.ClockTimeSyncInterval = ClockTimeSyncInterval_initial;
 
     epicsAtExit(ClockTime_Shutdown, NULL);
 
@@ -89,7 +89,7 @@ static void ClockTime_InitOnce(void *pfirst)
 
     /* Register as a time provider */
     generalTimeRegisterCurrentProvider("OS Clock", LAST_RESORT_PRIORITY,
-        ClockTimeGetCurrent);
+        osdTimeGetCurrent);
 }
 
 void ClockTime_Init(int synchronize)
@@ -100,7 +100,7 @@ void ClockTime_Init(int synchronize)
 
     if (synchronize == CLOCKTIME_SYNC) {
         if (ClockTimePvt.synchronize == CLOCKTIME_NOSYNC) {
-            
+
 #if defined(vxWorks) || defined(__rtems__)
             /* Start synchronizing */
             ClockTimePvt.synchronize = synchronize;
@@ -125,7 +125,7 @@ void ClockTime_Init(int synchronize)
         else {
             /* No synchronization thread */
             if (firstTime)
-                ClockTimeGetCurrent(&ClockTimePvt.startTime);
+                osdTimeGetCurrent(&ClockTimePvt.startTime);
         }
     }
 }
@@ -148,6 +148,8 @@ void ClockTime_GetProgramStart(epicsTimeStamp *pDest)
 /* Synchronization thread */
 
 #if defined(vxWorks) || defined(__rtems__)
+CLOCKTIME_SYNCHOOK ClockTime_syncHook = NULL;
+
 static void ClockTimeSync(void *dummy)
 {
     taskwdInsert(0, NULL, NULL);
@@ -179,11 +181,16 @@ static void ClockTimeSync(void *dummy)
             ClockTimePvt.syncTime         = timeNow;
             epicsMutexUnlock(ClockTimePvt.lock);
 
-            ClockTimePvt.ClockTimeSyncInterval = ClockTimeSyncInterval_value;
+            if (ClockTime_syncHook)
+                ClockTime_syncHook(1);
+
+            ClockTimePvt.ClockTimeSyncInterval = ClockTimeSyncInterval_normal;
         }
     }
 
     ClockTimePvt.synchronized = 0;
+    if (ClockTime_syncHook)
+        ClockTime_syncHook(0);
     taskwdRemove(0);
 }
 #endif
@@ -191,7 +198,7 @@ static void ClockTimeSync(void *dummy)
 
 /* Time Provider Routine */
 
-static int ClockTimeGetCurrent(epicsTimeStamp *pDest)
+int osdTimeGetCurrent(epicsTimeStamp *pDest)
 {
     struct timespec clockNow;
 
@@ -221,7 +228,11 @@ static int ClockTimeGetCurrent(epicsTimeStamp *pDest)
     return 0;
 }
 
-#endif /* CLOCK_REALTIME */
+/* Used in Report function below: */
+#define UNINIT_ERROR "initialized"
+#else
+#define UNINIT_ERROR "available"
+#endif /* CLOCK_REALTIME && !WIN32 */
 
 /* Allow the following report routine to be compiled anyway
  * to avoid getting a build warning from ranlib.
@@ -234,13 +245,7 @@ int ClockTime_Report(int level)
     char timebuf[32];
 
     if (onceId == EPICS_THREAD_ONCE_INIT) {
-        printf("OS Clock driver not %s.\n",
-#ifdef CLOCK_REALTIME
-            "initialized"
-#else
-            "available"
-#endif /* CLOCK_REALTIME */
-            );
+        puts("OS Clock driver not " UNINIT_ERROR);
     }
     else if (ClockTimePvt.synchronize == CLOCKTIME_SYNC) {
         int synchronized, syncFromPriority;

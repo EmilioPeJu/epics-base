@@ -2,7 +2,7 @@
 * Copyright (c) 2002 The University of Saskatchewan
 * EPICS BASE Versions 3.13.7
 * and higher are distributed subject to a Software License Agreement found
-* in file LICENSE that is included with this distribution. 
+* in file LICENSE that is included with this distribution.
 \*************************************************************************/
 /*
  * RTEMS configuration for EPICS
@@ -27,6 +27,7 @@
 #endif
 
 #define CONFIGURE_MAXIMUM_TASKS             rtems_resource_unlimited(30)
+#define CONFIGURE_MAXIMUM_BARRIERS          rtems_resource_unlimited(30)
 #define CONFIGURE_MAXIMUM_SEMAPHORES        rtems_resource_unlimited(500)
 #define CONFIGURE_MAXIMUM_TIMERS            rtems_resource_unlimited(20)
 #define CONFIGURE_MAXIMUM_MESSAGE_QUEUES    rtems_resource_unlimited(5)

@@ -51,7 +51,7 @@ static long special(DBADDR *, int);
 #define get_array_info NULL
 #define put_array_info NULL
 #define get_units NULL
-#define get_precision NULL
+static long get_precision(const DBADDR *, long *);
 #define get_enum_str NULL
 #define get_enum_strs NULL
 #define put_enum_str NULL
@@ -81,16 +81,6 @@ rset mbboDirectRSET = {
 };
 epicsExportAddress(rset, mbboDirectRSET);
 
-struct mbbodset { /* multi bit binary output dset */
-    long number;
-    DEVSUPFUN dev_report;
-    DEVSUPFUN init;
-    DEVSUPFUN init_record;  /*returns: (0, 2)=>(success, success no convert)*/
-    DEVSUPFUN get_ioint_info;
-    DEVSUPFUN write_mbbo;   /*returns: (0, 2)=>(success, success no convert)*/
-};
-
-
 static void convert(mbboDirectRecord *);
 static void monitor(mbboDirectRecord *);
 static long writeValue(mbboDirectRecord *);
@@ -100,7 +90,7 @@ static long writeValue(mbboDirectRecord *);
 static long init_record(struct dbCommon *pcommon, int pass)
 {
     struct mbboDirectRecord *prec = (struct mbboDirectRecord *)pcommon;
-    struct mbbodset *pdset = (struct mbbodset *) prec->dset;
+    mbbodirectdset *pdset = (mbbodirectdset *) prec->dset;
     long status = 0;
 
     if (pass == 0) return 0;
@@ -110,7 +100,7 @@ static long init_record(struct dbCommon *pcommon, int pass)
         return S_dev_noDSET;
     }
 
-    if ((pdset->number < 5) || (pdset->write_mbbo == NULL)) {
+    if ((pdset->common.number < 5) || (pdset->write_mbbo == NULL)) {
         recGblRecordError(S_dev_missingSup, prec, "mbboDirect: init_record");
         return S_dev_missingSup;
     }
@@ -124,8 +114,8 @@ static long init_record(struct dbCommon *pcommon, int pass)
     if (prec->mask == 0 && prec->nobt <= 32)
         prec->mask = ((epicsUInt64) 1u << prec->nobt) - 1;
 
-    if (pdset->init_record) {
-        status = pdset->init_record(prec);
+    if (pdset->common.init_record) {
+        status = pdset->common.init_record(pcommon);
         if (status == 0) {
             /* Convert initial read-back */
             epicsUInt32 rval = prec->rval;
@@ -162,7 +152,7 @@ static long init_record(struct dbCommon *pcommon, int pass)
 static long process(struct dbCommon *pcommon)
 {
     struct mbboDirectRecord *prec = (struct mbboDirectRecord *)pcommon;
-    struct mbbodset *pdset = (struct mbbodset *)(prec->dset);
+    mbbodirectdset *pdset = (mbbodirectdset *)(prec->dset);
     long status = 0;
     int pact = prec->pact;
 
@@ -313,6 +303,16 @@ static long special(DBADDR *paddr, int after)
     return 0;
 }
 
+static long get_precision(const DBADDR *paddr,long *precision)
+{
+    mbboDirectRecord    *prec=(mbboDirectRecord *)paddr->precord;
+    if(dbGetFieldIndex(paddr)==mbboDirectRecordVAL)
+        *precision = prec->nobt;
+    else
+        recGblGetPrec(paddr,precision);
+    return 0;
+}
+
 static void monitor(mbboDirectRecord *prec)
 {
     epicsUInt16 events = recGblResetAlarms(prec);
@@ -346,7 +346,7 @@ static void convert(mbboDirectRecord *prec)
 
 static long writeValue(mbboDirectRecord *prec)
 {
-    struct mbbodset *pdset = (struct mbbodset *) prec->dset;
+    mbbodirectdset *pdset = (mbbodirectdset *) prec->dset;
     long status = 0;
 
     if (!prec->pact) {
@@ -365,9 +365,9 @@ static long writeValue(mbboDirectRecord *prec)
             status = dbPutLink(&prec->siol, DBR_ULONG, &prec->val, 1);
             prec->pact = FALSE;
         } else { /* !prec->pact && delay >= 0. */
-            CALLBACK *pvt = prec->simpvt;
+            epicsCallback *pvt = prec->simpvt;
             if (!pvt) {
-                pvt = calloc(1, sizeof(CALLBACK)); /* very lazy allocation of callback structure */
+                pvt = calloc(1, sizeof(epicsCallback)); /* very lazy allocation of callback structure */
                 prec->simpvt = pvt;
             }
             if (pvt) callbackRequestProcessCallbackDelayed(pvt, prec->prio, prec, prec->sdly);

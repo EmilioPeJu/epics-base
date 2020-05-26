@@ -21,6 +21,7 @@
 #include "epicsStdlib.h"
 #include "epicsString.h"
 #include "errlog.h"
+#include "epicsEvent.h"
 
 #define epicsExportSharedSymbols
 #include "db_access_routines.h"
@@ -29,7 +30,7 @@
 #include "dbNotify.h"
 #include "db_test.h"
 
-#define		MAX_ELEMS	10
+#define MAX_ELEMS   10
 
 int gft(const char *pname)
 {

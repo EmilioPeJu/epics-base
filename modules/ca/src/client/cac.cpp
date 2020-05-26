@@ -34,7 +34,6 @@
 #include "errlog.h"
 #include "epicsExport.h"
 
-#define epicsExportSharedSymbols
 #include "addrList.h"
 #include "iocinf.h"
 #include "cac.h"
@@ -53,7 +52,7 @@
 
 static const char pVersionCAC[] =
     "@(#) " EPICS_VERSION_STRING
-    ", CA Client Library " __DATE__;
+    ", CA Client Library";
 
 // TCP response dispatch table
 const cac::pProtoStubTCP cac::tcpJumpTableCAC [] =
@@ -155,7 +154,7 @@ cac::cac (
     }
 
     try {
-	    long status;
+        long status;
 
         /*
          * Certain os, such as HPUX, do not unblock a socket system call

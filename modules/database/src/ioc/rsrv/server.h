@@ -86,7 +86,7 @@ typedef struct client {
   ELLLIST               chanList;
   ELLLIST               chanPendingUpdateARList;
   ELLLIST               putNotifyQue;
-  struct sockaddr_in    addr;
+  struct sockaddr_in    addr; /* peer address, TCP only */
   epicsTimeStamp        time_at_last_send;
   epicsTimeStamp        time_at_last_recv;
   void                  *evuser;
@@ -223,6 +223,10 @@ GLBLTYPE unsigned int       threadPrios[5];
 #define LOCK_CLIENTQ    epicsMutexMustLock (clientQlock);
 #define UNLOCK_CLIENTQ  epicsMutexUnlock (clientQlock);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void camsgtask (void *client);
 void cas_send_bs_msg ( struct client *pclient, int lock_needed );
 void cas_send_dg_msg ( struct client *pclient );
@@ -258,5 +262,9 @@ int cas_copy_in_header (
 void cas_set_header_cid ( struct client *pClient, ca_uint32_t );
 void cas_set_header_count (struct client *pClient, ca_uint32_t count);
 void cas_commit_msg ( struct client *pClient, ca_uint32_t size );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /*INCLserverh*/
