@@ -1,4 +1,4 @@
-# EPICS 7.0 Release Notes
+# EPICS 7.0 Release Notes    {#releasenotes}
 
 These release notes describe changes that have been made since the previous
 release of this series of EPICS Base. **Note that changes which were merged up
@@ -8,31 +8,113 @@ which they were originally committed.** Thus it is important to read more than
 just the first section to understand everything that has changed in each
 release.
 
-The external PVA submodules each have their own separate set of release notes
-which should also be read to understand what has changed since an earlier
-release.
+The PVA submodules each have their own individual sets of release notes which
+should also be read to understand what has changed since earlier releases.
 
-## EPICS Release 7.0.3.2
+**This version of EPICS has not been released yet.**
 
-### \*_API macros in headers
+## Changes made on the 7.0 branch since 7.0.4.1
+
+<!-- Insert new items immediately below here ... -->
+
+## EPICS Release 7.0.4.1
+
+### ARM Architecture Changes
+
+Build configuration files for a new cross-build architecture `linux-aarch64`
+have been added, and the targets `linux-arm_el` and `linux-arm_eb` removed.
+The 64-bit ARM architecture target doesn't have build files for self-hosting
+yet but they should be relatively easy to add, contributions welcome!
+
+### Bug fixes
+
+The following bugs/issues have fixes included in this release:
+
+- [lp: 1884339](https://bugs.launchpad.net/epics-base/+bug/1884339),
+  Inaccessible CA servers on Windows
+- [github: 83](https://github.com/epics-base/epics-base/issues/83)
+  osdTimeGetCurrent doesn't work for subprocess on macOS
+- Recent Cygwin build problem with a missing `TCP_NODELAY` declaration.
+
+### Perl CA Bindings under Conda
+
+Builds of the Perl CA bindings weren't working properly when the Perl
+installation was from Conda. This release also fixed the capr.pl script
+to handle the INT64 data types, and to be able to properly handle missing
+fields, as happens if the IOC is running an older EPICS version for example.
+
+### epicsMessageQueue implementation on RTEMS
+
+The implementation of the `epicsMessageQueue` used on RTEMS has switched from
+the native RTEMS-specific one to the EPICS generic version, avoiding a bug
+in the RTEMS Kernel message queue code.
+
+### Record Name Validation
+
+Historically, there have been very few restrictions on which characters
+may be present in record and alias names.  Base 3.14.12.3 added a warning
+for names containing space, single or double quote, period/dot, or
+dollar sign.
+
+```
+Bad character ' ' in record name "bad practice"
+```
+
+7.0.4.1 Turns this warning into an error, and adds a new warning
+if a record name begins with a minus, plus, left square bracket,
+or left curly bracket.
+
+## EPICS Release 7.0.4
+
+### Bug fixes
+
+The following launchpad bugs have fixes included in this release:
+
+- [lp: 1812084](https://bugs.launchpad.net/bugs/1812084), Build failure on
+  RTEMS 4.10.2
+- [lp: 1829919](https://bugs.launchpad.net/bugs/1829919), IOC segfaults when
+  calling dbLoadRecords after iocInit
+- [lp: 1838792](https://bugs.launchpad.net/bugs/1838792), epicsCalc bit-wise
+  operators on aarch64
+- [lp: 1853148](https://bugs.launchpad.net/bugs/1853148), mingw compiler
+  problem with printf/scanf formats
+- [lp: 1852653](https://bugs.launchpad.net/bugs/1852653), USE_TYPED_DSET
+  incompatible with C++
+- [lp: 1862328](https://bugs.launchpad.net/bugs/1862328), Race condition on
+  IOC start leaves rsrv unresponsive
+- [lp: 1866651](https://bugs.launchpad.net/bugs/1866651), thread joinable race
+- [lp: 1868486](https://bugs.launchpad.net/bugs/1868486), epicsMessageQueue
+  lost messages
+- [lp: 1868680](https://bugs.launchpad.net/bugs/1868680), Access Security file
+  reload (asInit) fails
+
+### \*_API macros in EPICS headers
 
 Internally, the Com and ca libraries now express dllimport/export (Windows)
-and symbol visibility (GCC) with individual macros (eg. LIBCOM_API)
-instead of using epicsShare\*.  This change may effect user code which uses
-epicsShare\* macros without explicitly including the shareLib.h header.
-Such code should be changed to include shareLib.h directly.
+and symbol visibility (GCC) using library-specific macros (eg. `LIBCOM_API`)
+instead of the macros `epicsShareFunc`, `epicsShareClass`, `epicsShareDef` etc.
+that are defined in the `shareLib.h` header.
+This change may affect some user code which uses the `epicsShare*` macros
+without having explicitly included the `shareLib.h` header themselves.
+Such code should be changed to include `shareLib.h` directly.
 
-A new helper script makeAPIheader.pl and rules to generate \*API.h headers
-has been added.  Run 'makeAPIheader.pl -h' for application information.
+A new helper script `makeAPIheader.pl` and build rules to generate a
+library-specific `*API.h` header file has been added. Run `makeAPIheader.pl -h`
+for information on how to use this in your own applications, but note that the
+resulting sources will not be able to be compiled using earlier versions of
+EPICS Base.
 
 ### IOCsh usage messages
 
-`help <cmd>` now prints a descriptive usage message
-for many internal IOCsh commands.  Try `help *` to
-see them all.
+At the iocShell prompt `help <cmd>` now prints a descriptive usage message
+for many internal IOCsh commands in addition to the command parameters.
+Try `help *` to see all commands, or a glob pattern such as `help db*` to see
+a subset.
 
-External code which wishes to provide a usage message
-should do so through the new `iocshFuncDef::usage` member.
+External code may provide usage messages when registering commands using a
+new `const char *usage` member of the `iocshFuncDef` structure.
+The `iocsh.h` header also now defines a macro `IOCSHFUNCDEF_HAS_USAGE` which
+can be used to detect Base versions that support this feature at compile-time.
 
 ### Variable names in RELEASE files
 
@@ -62,7 +144,7 @@ the stdin/out of a process, like caget, which has spawned it in the
 background.  This has been known to cause problems in some cases when
 caget is itself being run from a shell script.
 
-caRepeater will now understand the '-v' argument to retain stdin/out/err
+caRepeater will now understand the `-v` argument to retain stdin/out/err
 which may be necessary to see any error messages it may emit.
 
 ### `state` record deprecated
@@ -1293,6 +1375,15 @@ header and removed the need for dbScan.c to reach into the internals of its
 # Changes incorporated from the 3.15 branch
 
 
+## Changes made on the 3.15 branch since 3.15.8
+
+### Change to the `junitfiles` self-test build target
+
+The names of the generated junit xml test output files have been changed
+from `<testname>.xml` to `<testname>-results.xml`, to allow better
+distinction from other xml files. (I.e., for easy wildcard matching.)
+
+
 ## Changes made between 3.15.7 and 3.15.8
 
 ### Bug fixes
@@ -1316,7 +1407,6 @@ The following launchpad bugs have fixes included in this release:
 - [lp: 1868486](https://bugs.launchpad.net/epics-base/+bug/1868486),
   epicsMessageQueue lost messages
 
-
 ### Improvements to the self-test build targets
 
 This release contains changes that make it possible to integrate another test
@@ -1332,7 +1422,7 @@ results; previously the `-k` flag to make was needed and even that didn't always
 work.
 
 Continuous Integration systems are recommended to run `make tapfiles` (or if
-they can read junittest output instead of TAP `make junitests`) followed by
+they can read junittest output instead of TAP `make junitfiles`) followed by
 `make -s test-results` to display the results of the tests. If multiple CPUs are
 available the `-j` flag can be used to run tests in parallel, giving the maximum
 jobs that should be allowed so `make -j4 tapfiles` for a system with 4 CPUs say.
@@ -1580,8 +1670,8 @@ cases. This fixes
 Some documentation has been added to the `dbdToHtml.pl` script
 explaining how Perl POD (Plain Old Documentation) markup can be added to
 `.dbd` files to generate HTML documentation for the record types. To see
-these instructions, run `perl bin/<host>/dbdToHtml.pl -H`
-or `perldoc bin/<host>/dbdToHtml.pl`.
+these instructions, run `perl bin/<host>/dbdToHtml.pl -H`
+or `perldoc bin/<host>/dbdToHtml.pl`.
 
 ### Fix problem with numeric soft events
 

@@ -3,6 +3,7 @@
 *     National Laboratory.
 * Copyright (c) 2002 The Regents of the University of California, as
 *     Operator of Los Alamos National Laboratory.
+* SPDX-License-Identifier: EPICS
 * EPICS BASE is distributed subject to a Software License Agreement found
 * in file LICENSE that is included with this distribution.
 \*************************************************************************/
@@ -69,7 +70,7 @@ void recGblDbaddrError(long status, const struct dbAddr *paddr,
     errPrintf(status,0,0,
         "PV: %s.%s "
         "error detected in routine: %s\n",
-        (paddr ? precord->name : "Unknown"),
+        (precord ? precord->name : "Unknown"),
         (pdbFldDes ? pdbFldDes->name : ""),
         (pmessage ? pmessage : "Unknown"));
     return;
@@ -106,7 +107,7 @@ void recGblRecSupError(long status, const struct dbAddr *paddr,
         " %s\n",
         (psupport_name ? psupport_name : "Unknown"),
         (pdbRecordType ? pdbRecordType->name : "Unknown"),
-        (paddr ? precord->name : "Unknown"),
+        (precord ? precord->name : "Unknown"),
         (pdbFldDes ? pdbFldDes->name : ""),
         (pmessage ? pmessage : ""));
     return;

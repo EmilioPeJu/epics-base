@@ -3,8 +3,8 @@
 *     National Laboratory.
 * Copyright (c) 2002 The Regents of the University of California, as
 *     Operator of Los Alamos National Laboratory.
-* EPICS BASE Versions 3.13.7
-* and higher are distributed subject to a Software License Agreement found
+* SPDX-License-Identifier: EPICS
+* EPICS Base is distributed subject to a Software License Agreement found
 * in file LICENSE that is included with this distribution.
 \*************************************************************************/
 
@@ -211,7 +211,7 @@ LIBCOM_API void epicsStdCall osiSockDiscoverBroadcastAddresses
                 pNewNode->addr.sa = pIfreqList->ifr_broadaddr;
                 ifDepenDebugPrintf ( ( "found broadcast addr = %x\n", ntohl ( baddr.ia.sin_addr.s_addr ) ) );
             } else {
-                ifDepenDebugPrintf ( ( "Ignoring broadcast addr = \n", ntohl ( baddr.ia.sin_addr.s_addr ) ) );
+                ifDepenDebugPrintf ( ( "Ignoring broadcast addr = %x\n", ntohl ( baddr.ia.sin_addr.s_addr ) ) );
                 free ( pNewNode );
                 continue;
             }

@@ -6,6 +6,7 @@
 *     National Laboratory.
 * Copyright (c) 2002 The Regents of the University of California, as
 *     Operator of Los Alamos National Laboratory.
+* SPDX-License-Identifier: EPICS
 * EPICS BASE is distributed subject to a Software License Agreement found
 * in file LICENSE that is included with this distribution.
 \*************************************************************************/
@@ -736,6 +737,8 @@ long dbValueSize(short dbr_type)
         sizeof(epicsFloat64),        /* DOUBLE       */
         sizeof(epicsEnum16)};        /* ENUM         */
 
+    if(dbr_type>=NELEMENTS(size))
+        return 0;
     return(size[dbr_type]);
 }
 
@@ -796,15 +799,12 @@ int dbLoadRecords(const char* file, const char* subs)
 static long getLinkValue(DBADDR *paddr, short dbrType,
     char *pbuf, long *nRequest)
 {
-    dbCommon *precord = paddr->precord;
-    dbFldDes *pfldDes = paddr->pfldDes;
     /* size of pbuf storage in bytes, including space for trailing nil */
     int maxlen;
     DBENTRY dbEntry;
-    long status;
     long nReq = nRequest ? *nRequest : 1;
 
-    /* dbFindRecord() below will always succeed as we have a
+    /* below will always succeed as we have a
      * valid DBADDR, so no point to check again.
      * Request for zero elements always succeeds
      */
@@ -830,10 +830,8 @@ static long getLinkValue(DBADDR *paddr, short dbrType,
         return S_db_badDbrtype;
     }
 
-    dbInitEntry(pdbbase, &dbEntry);
-    status = dbFindRecord(&dbEntry, precord->name);
-    if (!status) status = dbFindField(&dbEntry, pfldDes->name);
-    if (!status) {
+    dbInitEntryFromAddr(paddr, &dbEntry);
+    {
         const char *rtnString = dbGetString(&dbEntry);
 
         strncpy(pbuf, rtnString, maxlen-1);
@@ -843,7 +841,7 @@ static long getLinkValue(DBADDR *paddr, short dbrType,
         if(nRequest) *nRequest = nReq;
     }
     dbFinishEntry(&dbEntry);
-    return status;
+    return 0;
 }
 
 static long getAttrValue(DBADDR *paddr, short dbrType,

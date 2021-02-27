@@ -13,6 +13,7 @@ env:
   global:
     - SETUP_PATH=.ci-local:.ci
     - BASE=SELF
+    - EPICS_TEST_IMPRECISE_TIMING=YES
 
 addons:
   apt:
@@ -35,10 +36,13 @@ addons:
     update: true
 
 install:
-  - ./.ci/travis/prepare.sh
+  - ./.ci-local/travis-fixup.sh
+  - python .ci/cue.py prepare
 
 script:
-  - ./.ci/travis/build.sh
+  - python .ci/cue.py build
+  - python .ci/cue.py test
+  - python .ci/cue.py test-results
 
 # Define build jobs
 
@@ -51,10 +55,10 @@ jobs:
   - dist: xenial
 
   - dist: bionic
-    env: EXTRA="CMD_CXXFLAGS=-std=c++11"
+    env: BCFG=static EXTRA="CMD_CXXFLAGS=-std=c++11"
 
   - dist: trusty
-    env: STATIC=YES EXTRA="CMD_CXXFLAGS=-std=c++11"
+    env: EXTRA="CMD_CXXFLAGS=-std=c++11"
 
   - dist: bionic
     compiler: clang
@@ -63,15 +67,13 @@ jobs:
 
   - dist: trusty
     compiler: clang
-    env: STATIC=YES
+    env: BCFG=static
 
 # Cross-compilations to Windows using MinGW and WINE
 
-  - env: WINE=32 TEST=NO STATIC=YES
-    compiler: mingw
+  - env: WINE=32 TEST=NO BCFG=static
 
-  - env: WINE=32 TEST=NO STATIC=NO
-    compiler: mingw
+  - env: WINE=32 TEST=NO
 
 # Cross-compilation to RTEMS
 

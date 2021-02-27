@@ -37,6 +37,8 @@ skip_commits:
 #   build matrix configuration    #
 #---------------------------------#
 
+image: Visual Studio 2015
+
 # Build Configurations: dll/static, regular/debug
 configuration:
   - dynamic
@@ -49,6 +51,7 @@ environment:
   # common / default variables for all jobs
   SETUP_PATH: .ci-local:.ci
   BASE: SELF
+  EPICS_TEST_IMPRECISE_TIMING: YES
 
   matrix:
   - CMP: vs2019
@@ -59,7 +62,7 @@ environment:
   - CMP: vs2013
   - CMP: vs2012
   - CMP: vs2010
-  - CMP: mingw
+  - CMP: gcc
 
 # Platform: processor architecture
 platform:
@@ -89,17 +92,17 @@ matrix:
 
 install:
   - cmd: git submodule update --init --recursive
-  - cmd: python .ci/appveyor/do.py prepare
+  - cmd: python .ci/cue.py prepare
 
 build_script:
-  - cmd: python .ci/appveyor/do.py build
+  - cmd: python .ci/cue.py build
 
 test_script:
-  - cmd: python .ci/appveyor/do.py test
+  - cmd: python .ci/cue.py test
 
 on_finish:
   - ps: Get-ChildItem *.tap -Recurse -Force | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
-  - cmd: python .ci/appveyor/do.py build test-results -s
+  - cmd: python .ci/cue.py build test-results -s
 
 #---------------------------------#
 #         debugging               #
