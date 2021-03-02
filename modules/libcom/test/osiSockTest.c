@@ -214,16 +214,16 @@ void udpSockFanoutTestRx(void* raw)
 {
     struct TInfo *info = raw;
     epicsTimeStamp start, now;
+    unsigned nremain = nrepeat;
 #ifdef _WIN32
     /* ms */
     DWORD timeout = 10000;
 #else
     struct timeval timeout;
     memset(&timeout, 0, sizeof(struct timeval));
-    timeout.tv_sec = 10;
+    timeout.tv_sec = 5;
     timeout.tv_usec = 0;
 #endif
-    unsigned nremain = nrepeat;
 
     (void)epicsTimeGetCurrent(&start);
     now = start;
@@ -234,7 +234,7 @@ void udpSockFanoutTestRx(void* raw)
         return;
     }
 
-    while(epicsTimeDiffInSeconds(&now, &start)<=5.0) {
+    while(!epicsTimeGetCurrent(&now) && epicsTimeDiffInSeconds(&now, &start)<=5.0) {
         union CASearchU buf;
         osiSockAddr src;
         osiSocklen_t srclen = sizeof(src);
@@ -259,7 +259,9 @@ void udpSockFanoutTestRx(void* raw)
             if(0==--nremain)
                 break;
         } else {
-            testDiag("RX ignore");
+            testDiag("RX ignore n=%d cmd=%d size=%d dtype=%d dcnt=%d body=%s",
+                     n, ntohs(buf.msg.cmd), ntohs(buf.msg.size),
+                     ntohs(buf.msg.dtype), ntohs(buf.msg.dcnt), buf.msg.body);
         }
     }
     testDiag("RX%u end", info->id);
@@ -277,6 +279,7 @@ void udpSockFanoutTestIface(const osiSockAddr* addr)
     osiSockAddr any;
     epicsUInt32 key = 0xdeadbeef ^ ntohl(addr->ia.sin_addr.s_addr);
     union CASearchU buf;
+    int ret;
 
     topts.joinable = 1;
 
@@ -319,12 +322,17 @@ void udpSockFanoutTestIface(const osiSockAddr* addr)
     if(bind(rx2.sock, &any.sa, sizeof(any)))
         testFail("Can't bind test socket rx2 %d", (int)SOCKERRNO);
 
+    /* test to see if send is possible (not EPERM) */
+    ret = sendto(sender, buf.bytes, sizeof(buf.bytes), 0, &addr->sa, sizeof(*addr));
+    if(ret!=(int)sizeof(buf.bytes)) {
+        testDiag("test sendto() error %d (%d)", ret, (int)SOCKERRNO);
+        goto cleanup;
+    }
+
     trx1 = epicsThreadCreateOpt("rx1", &udpSockFanoutTestRx, &rx1, &topts);
     trx2 = epicsThreadCreateOpt("rx2", &udpSockFanoutTestRx, &rx2, &topts);
 
     for(i=0; i<nrepeat; i++) {
-        int ret;
-
         /* don't spam */
         epicsThreadSleep(0.5);
 
@@ -343,6 +351,7 @@ void udpSockFanoutTestIface(const osiSockAddr* addr)
     if(rx1.rxmask & rx2.rxmask)
         nsuccess++;
 
+cleanup:
     epicsSocketDestroy(sender);
     epicsSocketDestroy(rx1.sock);
     epicsSocketDestroy(rx2.sock);

@@ -49,6 +49,28 @@ if( $TA =~ /^win32-x86/ && $HA !~ /^win/ ) {
   $exec = "./$exe";
 }
 
+# Ensure that Windows interactive error handling is disabled.
+# This setting is inherited by the test process.
+# Set SEM_FAILCRITICALERRORS (1) Disable critical-error-handler dialog
+# Clear SEM_NOGPFAULTERRORBOX (2) Enabled WER to allow automatic post mortem debugging (AeDebug)
+# Clear SEM_NOALIGNMENTFAULTEXCEPT (4) Allow alignment fixups
+# Set SEM_NOOPENFILEERRORBOX (0x8000) Prevent dialog on some I/O errors
+# https://docs.microsoft.com/en-us/windows/win32/api/errhandlingapi/nf-errhandlingapi-seterrormode?redirectedfrom=MSDN
+my $sem = $^O ne 'MSWin32' ? '' : <<ENDBEGIN;
+BEGIN {
+  my \$sem = 'SetErrorMode';
+  eval {
+    require Win32::ErrorMode;
+    Win32::ErrorMode->import(\$sem);
+  };
+  eval {
+    require Win32API::File;
+    Win32API::File->import(\$sem);
+  } if \$@;
+  SetErrorMode(0x8001) unless \$@;
+}
+ENDBEGIN
+
 open(my $OUT, '>', $target) or die "Can't create $target: $!\n";
 
 print $OUT <<EOF;
@@ -56,11 +78,21 @@ print $OUT <<EOF;
 
 use strict;
 use Cwd 'abs_path';
+$sem
 
 \$ENV{HARNESS_ACTIVE} = 1 if scalar \@ARGV && shift eq '-tap';
 \$ENV{TOP} = abs_path(\$ENV{TOP}) if exists \$ENV{TOP};
 
-system('$exec') == 0 or die "Can't run $exec: \$!\\n";
+if (\$^O eq 'MSWin32') {
+    # Use system on Windows, exec doesn't work the same there and
+    # GNUmake thinks the test has finished too soon.
+    my \$status = system('$exec');
+    die "Can't run $exec: \$!\\n" if \$status == -1;
+    exit \$status >> 8;
+}
+else {
+    exec '$exec' or die "Can't run $exec: \$!\\n";
+}
 EOF
 
 close $OUT or die "Can't close $target: $!\n";

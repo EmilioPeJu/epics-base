@@ -31,6 +31,9 @@ my @path = map { split /[:;]/ } @opt_I; # FIXME: Broken on Win32?
 
 my ($file, $subname, $bldTop) = @ARGV;
 
+# Auto-declaration of record types is needed to build loadable modules
+$DBD::Parser::allowAutoDeclarations = 1;
+
 my $dbd = DBD->new();
 ParseDBD($dbd, Readfile($file, "", \@path));
 
@@ -258,7 +261,7 @@ print $out (<< 'END') if %links;
 END
 
 print $out (<< "END") for @registrars;
-    pvar_func_$_();
+    runRegistrarOnce(pvar_func_$_);
 END
 
 print $out (<< 'END') if %variables;

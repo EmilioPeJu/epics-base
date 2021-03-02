@@ -7,13 +7,22 @@
 * EPICS Base is distributed subject to a Software License Agreement found
 * in file LICENSE that is included with this distribution.
 \*************************************************************************/
-/*
- * osiFileName.h
- * Author: Jeff Hill
- */
-#ifndef osiFileNameH
-#define osiFileNameH
 
-#include "unixFileName.h"
+#ifndef osdPosixMutexPrivh
+#define osdPosixMutexPrivh
 
-#endif /* osiFileNameH */
+#include <pthread.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Returns ENOTSUP if requested mutextype is not supported */
+/* At the moment, only 0 (default non recursive mutex) and PTHREAD_MUTEX_RECURSIVE are supported */
+int osdPosixMutexInit(pthread_mutex_t *,int mutextype);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* osdPosixMutexPrivh */

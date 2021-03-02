@@ -227,6 +227,7 @@ static long process(struct dbCommon *pcommon)
         return 0;
 
     prec->pact = TRUE;
+    recGblGetTimeStamp(prec);
 
     /* Push the output link values */
     if (!status) {
@@ -237,7 +238,6 @@ static long process(struct dbCommon *pcommon)
                 (&prec->neva)[i]);
     }
 
-    recGblGetTimeStamp(prec);
     monitor(prec);
     recGblFwdLink(prec);
     prec->pact = FALSE;
@@ -278,10 +278,9 @@ static long fetch_values(aSubRecord *prec)
         long nRequest = (&prec->noa)[i];
         status = dbGetLink(&(&prec->inpa)[i], (&prec->fta)[i], (&prec->a)[i], 0,
             &nRequest);
-        if (nRequest > 0)
-            (&prec->nea)[i] = nRequest;
         if (status)
             return status;
+        (&prec->nea)[i] = nRequest;
     }
     return 0;
 }
